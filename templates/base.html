@@ -1,0 +1,94 @@
+<!doctype html>
+<!--[if lt IE 7 ]> <html lang="en" class="no-js ie6"> <![endif]-->
+<!--[if IE 7 ]>    <html lang="en" class="no-js ie7"> <![endif]-->
+<!--[if IE 8 ]>    <html lang="en" class="no-js ie8"> <![endif]-->
+<!--[if IE 9 ]>    <html lang="en" class="no-js ie9"> <![endif]-->
+<!--[if (gt IE 9)|!(IE)]><!--> 
+<html lang="en" class="no-js"> <!--<![endif]-->
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+
+	<title>gearspotting: {% block title %}{% endblock %}</title>	
+	<meta name="description" content="">
+	<meta name="author" content="">
+	
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	
+	<link rel="shortcut icon" href="/site_media/img/favicon.ico">
+	<link rel="apple-touch-icon" href="/site_media/img/apple-touch-icon.png">
+
+	<link rel="stylesheet" href="/site_media/css/960.css">
+	<link rel="stylesheet" href="/site_media/css/main.css">
+	<link rel="stylesheet" media="handheld" href="/site_media/css/handheld.css?v=2">
+	<script src="/site_media/js/libs/modernizr-1.7.min.js"></script></head>
+
+	<link rel="shortcut icon" href="/site_media/img/favicon.ico" type="image/x-icon" />
+	{% block css %}{% endblock %}
+	{% block js %}{% endblock %}
+	{% block feeds %}{% endblock %}
+</head>
+<body>
+	<div id="container">
+
+<div class="header">
+  <div class="container_12 usermenu">
+    <div class="grid_3 prefix_9">
+      {% if request.user.is_anonymous %}
+      <a href="/accounts/login/">login</a> or signup
+      {% else %}
+      logged in as <b>{{ request.user.first_name }} {{ request.user.last_name }}</b>
+      [<a href="/accounts/logout/">logout</a>]
+      {% endif %}
+    </div>
+  </div>
+
+  <div class="container_12 mainheader">
+    <h1 class="grid_6">Gearspotting.com</h1>
+  </div>
+
+  <div class="container_12 mainmenu">
+    <div class="grid_9">
+      <a href="/">home</a>
+      <a href="/gear/">gear</a>
+      <a href="/musician/">musicians</a>
+      <a href="/tag/">tags</a>
+    </div>
+    <div class="grid_3 searchbar">
+      <form action="/search/" method="get"><input type="text"
+      value="search" /></form>
+    </div>
+  </div>
+
+</div>
+
+		<div id="main" role="main" class="container_12">
+<div class="grid_1"></div>
+<div class="grid_10">
+<h2>{% block subhead %}{% endblock %}</h2>
+{% block content %}{% endblock %}
+</div>
+<div class="grid_1"></div>
+		</div>
+
+		<footer class="container_12">
+		  <p class="grid_12">Like trainspotting, but for gear.</p>
+		</footer>
+	</div>
+
+	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.5.1/jquery.min.js"></script>
+	<script>!window.jQuery && document.write(unescape('%3Cscript src="/site_media/js/libs/jquery-1.5.1.min.js"%3E%3C/script%3E'))</script>
+	<script src="/site_media/js/plugins.js"></script>
+	<script src="/site_media/js/script.js"></script>
+	<!--[if lt IE 7 ]>
+	<script src="js/libs/dd_belatedpng.js"></script>
+	<script> DD_belatedPNG.fix('img, .png_bg');</script>
+	<![endif]-->
+	<script>
+		var _gaq=[['_setAccount','UA-XXXXX-X'],['_trackPageview']]; // Change UA-XXXXX-X to be your site's ID
+		(function(d,t){var g=d.createElement(t),s=d.getElementsByTagName(t)[0];g.async=1;
+		g.src=('https:'==location.protocol?'//ssl':'//www')+'.google-analytics.com/ga.js';
+		s.parentNode.insertBefore(g,s)}(document,'script'));
+	</script>
+</body>
+</html>

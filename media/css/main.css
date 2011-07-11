@@ -1,0 +1,10 @@
+body { background-color: #ddd;}
+.mainheader {background-color: #666; color: #fff; font-family: verdana; border-left: #000 solid 1px; border-right: #000 solid 1px;}
+.mainmenu {background-color: #eee; border-left: #000 solid 1px; border-right: #000 solid 1px;}
+#main {background-color: #fff; border-left: #000 solid 1px; border-right: #000 solid 1px;}
+footer {background-color: #eee; font-size: .8em; color: #999; border-left: #000 solid 1px; border-right: #000 solid 1px;}
+.usermenu { font-size: .8em; align: right;}
+.searchbar input {font-size: .8em; border: #000 solid 1px;}
+.searchbar { align: right;}
+.mainmenu a {margin-right: 1em; color: #000; font-weight: bold;}
+.mainmenu a:hover {background-color: #fff;}
