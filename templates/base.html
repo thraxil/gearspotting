@@ -32,8 +32,9 @@
 	<div id="container">
 
 <div class="header">
-  <div class="container_12 usermenu">
-    <div class="grid_3 prefix_9">
+  <div class="container_12 mainheader">
+    <h1 class="grid_6">Gearspotting.com</h1>
+    <div class="grid_3 prefix_3 usermenu">
       {% if request.user.is_anonymous %}
       <a href="/accounts/login/">login</a> or signup
       {% else %}
@@ -41,10 +42,6 @@
       [<a href="/accounts/logout/">logout</a>]
       {% endif %}
     </div>
-  </div>
-
-  <div class="container_12 mainheader">
-    <h1 class="grid_6">Gearspotting.com</h1>
   </div>
 
   <div class="container_12 mainmenu">
