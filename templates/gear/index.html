@@ -1,0 +1,34 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<h2>Gear</h2>
+
+<p>The gear is organized by manufacturer</p>
+
+{% if request.user.is_authenticated %}
+<p><a href="#add-manufacturer-form"
+   onclick="jQuery('#add-manufacturer-form').toggle();return false">add</a></p>
+
+<form action="add_manufacturer/" method="post" id="add-manufacturer-form">
+{{ add_manufacturer_form.as_p }}
+<input type="submit" value="add manufacturer" />
+</form>
+{% endif %}
+<table>
+{% for manufacturer in manufacturers %}
+<tr>
+<th>
+<a href="/gear/{{manufacturer.slug}}/">{{manufacturer.name}}</a>
+</th>
+<td>[gear count]</td>
+</tr>
+{% endfor %}
+</table>
+
+<script>
+jQuery(function() {
+jQuery('#add-manufacturer-form').hide();
+});
+</script>
+{% endblock %}

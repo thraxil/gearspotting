@@ -14,6 +14,7 @@ urlpatterns = patterns('',
                        (r'^accounts/', include('registration.backends.default.urls')),
                        (r'^admin/(.*)', include(admin.site.urls)),
                        (r'^munin/',include('munin.urls')),
+                       (r'^gear/',include('gear.urls')),
                        (r'^site_media/(?P<path>.*)$', 'django.views.static.serve', {'document_root': site_media_root}),
                        (r'^uploads/(?P<path>.*)$','django.views.static.serve',{'document_root' : settings.MEDIA_ROOT}),
 ) + staticmedia.serve()
