@@ -1,10 +1,8 @@
-{% extends "profiles/base.html" %}
+{% extends "base.html" %}
 
-{% load i18n %}
+{% block title %}Musiciangear{% endblock %}
 
-{% block head_title %}Musiciangear{% endblock %}
-
-{% block body %}
+{% block content %}
 
     {% if user.is_authenticated %}
 

@@ -1,10 +1,8 @@
-{% extends "profiles/base.html" %}
+{% extends "base.html" %}
 
-{% load i18n %}
+{% block title %}Musiciangear{% endblock %}
 
-{% block head_title %}Musiciangear{% endblock %}
-
-{% block body %}
+{% block content %}
 
     <h1>Musiciangear {% if user.is_authenticated %}
     (<a href="create/">+</a>)

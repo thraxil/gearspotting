@@ -1,10 +1,8 @@
-{% extends "profiles/base.html" %}
+{% extends "base.html" %}
 
-{% load i18n %}
+{% block title %}Gear{% endblock %}
 
-{% block head_title %}Gear{% endblock %}
-
-{% block body %}
+{% block content %}
 
     <h1>Gear {% if user.is_authenticated %}
     (<a href="create/">+</a>)
