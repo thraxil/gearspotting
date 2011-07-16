@@ -9,4 +9,7 @@ footer {background-color: #eee; font-size: .8em; color: #999; border-left: #000 
 .searchbar { align: right;}
 .mainmenu a {margin-right: 1em; color: #000; font-weight: bold;}
 .mainmenu a:hover {background-color: #fff;}
-body {background-image: url('/site_media/img/flybg2000.jpg');}
+body {background-image: url('/site_media/img/flybg2000.jpg');
+background-repeat:no-repeat;
+background-attachment:fixed;
+}
