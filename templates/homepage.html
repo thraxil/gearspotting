@@ -4,14 +4,25 @@
 
 {% block content %}
 
-<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. In interdum justo a nunc ultricies dignissim. Nunc tincidunt dictum tristique. Aliquam ornare, metus non viverra adipiscing, nunc mi rutrum lorem, ac mollis justo quam nec elit. Quisque ac molestie enim. Quisque ut enim enim. Quisque quis enim vel augue iaculis convallis eget nec orci. Nulla sollicitudin libero vitae mauris cursus fermentum quis non nunc. Duis rutrum neque eget odio suscipit bibendum. Nam pulvinar, nisi non ornare rhoncus, turpis libero fringilla libero, at bibendum eros arcu ut diam. Suspendisse id venenatis augue. Praesent et justo et felis pretium lobortis sed a eros. Phasellus blandit pellentesque mauris, et dictum enim vulputate a. Nulla vel purus nunc. Nunc et leo mi, et cursus ligula. Vestibulum interdum, nibh in pretium fringilla, felis dui bibendum lectus, quis pellentesque leo eros ac leo. Nulla adipiscing, massa quis pharetra viverra, sem ante rhoncus massa, facilisis scelerisque libero lacus et augue. Nunc dictum elit sed urna lobortis ullamcorper.</p>
+<p>Gearspotting.com is a community website for tracking music gear and
+  the musicians that use that gear.</p>
 
-<p>Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Morbi dictum sapien sed purus fringilla fringilla. Nulla tempus, tortor sit amet feugiat ornare, tellus arcu sagittis nibh, eget blandit quam enim in tortor. Mauris vestibulum egestas est a pretium. Curabitur ut mollis purus. Quisque fringilla turpis ut tortor rutrum pharetra. Duis tellus odio, porttitor sit amet cursus eget, consectetur non justo. Aenean porta nibh sed augue dignissim vel aliquet justo mollis. Maecenas in eleifend leo. Etiam scelerisque libero eget est interdum nec placerat nisi porttitor. Aliquam nibh velit, volutpat quis semper sit amet, euismod vitae ante. Nullam sagittis, odio eget fermentum porta, lorem diam sagittis purus, non commodo libero velit eu ipsum. Donec a erat eget tellus porta varius quis vel ipsum.</p>
+<h3>Latest Gear</h3>
 
-<p>Aenean dignissim erat feugiat nulla rhoncus eleifend. Pellentesque felis urna, congue ut pulvinar eu, condimentum ut urna. Nullam ligula odio, auctor ut porta eget, suscipit non diam. Aliquam at orci mi. Pellentesque et est lorem, ut tincidunt urna. Integer sollicitudin feugiat orci et fermentum. Nam tempus hendrerit ipsum non scelerisque. Aliquam ornare interdum enim at scelerisque. Cras a elit ipsum. Pellentesque tempus sapien non enim congue at tristique felis accumsan. Sed volutpat dictum libero ut porttitor. Mauris in dui nibh, in bibendum ipsum.</p>
+<ul>
+  {% for gear in newest_gear %}
+<li><a href="{{gear.manufacturer.get_absolute_url}}">{{gear.manufacturer.name}}</a> <a href="{{ gear.get_absolute_url }}">{{ gear.name }}</a></li>
+  {% endfor %}
+</ul>
 
-<p>Vestibulum aliquam mi et tortor tristique id aliquet lacus consectetur. Aliquam convallis nibh ac nulla consectetur pulvinar. Donec iaculis adipiscing fermentum. Quisque at ipsum non mauris aliquam vulputate. Fusce viverra justo et quam faucibus eu luctus leo mollis. Praesent sodales dictum dictum. Fusce scelerisque lorem a sem molestie id tempor augue tincidunt. Ut felis nisi, tincidunt quis tristique vel, ornare non dui. Integer consectetur imperdiet enim, ac auctor mauris scelerisque non. In tincidunt, libero eu ultrices fermentum, felis nulla cursus ipsum, sit amet ornare sem metus in ipsum. Donec aliquam faucibus lectus non eleifend.</p>
 
-<p>Vestibulum ac lacus ante. Aenean mollis purus eu arcu imperdiet id auctor neque tempus. In non eros vitae neque vehicula luctus ut ut lorem. Etiam eget mi libero. Maecenas non est justo. Aliquam vulputate tristique diam nec lacinia. Fusce laoreet turpis nec sapien consectetur nec pharetra purus lacinia. Vestibulum accumsan volutpat ante vitae ultricies. Praesent vitae ultricies leo. Maecenas pharetra nisi sit amet mi tincidunt consequat. Curabitur ac volutpat felis. Aliquam odio erat, feugiat eu elementum vel, cursus nec ante.</p>
+<h3>Latest Musicians</h3>
+
+   <ul>
+    {% for musician in newest_musicians %}
+<li><a href="{{ musician.get_absolute_url }}">{{ musician.name }}</a></li>
+    {% endfor %}
+    </ul>
+
 
 {% endblock %}

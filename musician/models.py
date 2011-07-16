@@ -81,7 +81,4 @@ class MusicianForm(ModelForm):
     class Meta:
         model = Musician
 
-class MusicianAdmin(admin.ModelAdmin):
-    prepopulated_fields = {"slug": ("name",)}
-    inlines = [LinkInline,PhotoInline]
-admin.site.register(Musician, MusicianAdmin)
+
