@@ -1,0 +1,46 @@
+{% extends "base.html" %}
+{% load markup %}
+
+{% block title %}Manufacturers{% endblock %}
+
+{% block content %}
+
+    <h1><a href="/manufacturer/">Manufacturer</a>: {{object.name}}</h1>
+    {% if user.is_authenticated %}<p class="editlink"><a href="update/">edit</a><br />
+  <a href="add_link/" rel="facebox">add link</a><br />
+  <a href="add_gear/" rel="facebox">add gear</a><br />
+    </p>{% endif %}
+    <p class="timestamp">Added: {{object.added|date}}, Modified: {{object.modified|date}}</p>
+    
+    {{object.description|markdown}}
+
+
+    <table width="100%">
+    {% if object.links.count %}
+    <tr><th>Links</th>
+      <td>{% if user.is_authenticated %}<p class="editlink"><a href="update/#links">edit</a></p>{% endif %}
+    <ul>
+      {% for link in object.links.all %}
+      <li><a href="{{link.url}}">{{link.title}}</a> {{link.description}}</li>
+      {% endfor %}
+    </ul>
+    </td>
+      </tr>
+    {% endif %}
+
+    {% if object.gear_set.count %}
+    <tr><th>Gear</th>
+      <td>
+    <ul>
+      {% for gear in object.gear_set.all %}
+      <li><a href="{{gear.get_absolute_url}}">{{gear.name}}</a></li>
+      {% endfor %}
+    </ul>
+    </td>
+    </tr>
+    {% endif %}
+</table>
+
+
+
+{% endblock %}

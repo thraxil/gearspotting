@@ -44,6 +44,9 @@ class Manufacturer(models.Model):
                 exclude = ('content_object','content_type','object_id')
         return LinkForm
 
+    def gear_count(self):
+        return self.gear_set.all().count()
+
     def type_display(self):
         return "Manufacturer"
 

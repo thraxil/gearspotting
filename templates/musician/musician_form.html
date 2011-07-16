@@ -1,0 +1,86 @@
+{% extends "profiles/base.html" %}
+
+{% load i18n %}
+
+{% block head_title %}Musicians{% endblock %}
+
+{% block body %}
+
+    {% if user.is_authenticated %}
+
+    {% if object %}
+<h1>Update Musician:</h1>
+{% else %}
+<h1>Add Musician:</h1>
+{% endif %}
+
+{% if form.has_errors %}
+<h2>Please correct the following error{{ form.errors|pluralize }}:</h2>
+{% endif %}
+
+{% if object %}
+<form method="post" action="{{object.get_absolute_url}}update/">
+{% else %}
+<form method="post" action=".">
+{% endif %}
+<table>
+{{form.as_table}}
+</table>
+<input type="submit" />
+</form>
+
+{% if object %}
+<a name="links"></a>
+<h2>Links</h2>
+<form action="{{object.get_absolute_url}}edit_links/" method="post">
+<table>
+{{ object.links_formset }}
+</table>
+
+<input type="submit" value="edit links" />
+</form>
+
+<a name="photos"></a>
+<h2>Photos</h2>
+
+<form action="{{object.get_absolute_url}}edit_photos/" method="post" enctype="multipart/form-data">
+<table>
+{{ object.photos_formset }}
+</table>
+
+<input type="submit" value="edit photos" />
+</form>
+
+<a name="gear"></a>
+<h2>Gear</h2>
+
+<form action="{{object.get_absolute_url}}edit_gear/" method="post">
+<table>
+{{ object.gear_formset }}
+</table>
+
+<input type="submit" value="edit gear" />
+</form>
+
+
+
+<hr />
+<form action="{{object.get_absolute_url}}delete/" method="post">
+<input type="submit" value="delete" />
+</form>
+
+
+
+{% endif %}
+
+<!--
+This is a lifesaver when debugging!
+<p> {{ form.error_dict }} </p>
+-->
+
+    {% else %}
+    <p>not authenticated</p>
+    {% endif %}
+
+
+{% endblock %}

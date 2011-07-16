@@ -1,0 +1,99 @@
+{% extends "base.html" %}
+{% load markup %}
+{% load thumbnail %}
+{% load tagging_tags %}
+
+{% block title %}Musician: {{object.name}}{% endblock %}
+
+{% block content %}
+
+    <h1><a href="/musician/">Musician</a>: {{object.name}}</h1>
+    
+    {% if user.is_authenticated %}<p class="editlink"><a href="update/" >edit</a><br />
+  <a href="add_link/" rel="facebox">add link</a><br />
+  <a href="add_photo/" rel="facebox">add photo</a><br />
+  <a href="add_gear/" rel="facebox">add gear</a>
+    </p>{% endif %}
+    
+
+    {% if object.photos.count %}
+    <div id="mainimage">
+    <img src="{% thumbnail object.first_photo.image 200x200 %}" />
+    </div>
+    {% endif %}
+
+
+    <p class="timestamp">Added: {{object.added|date}}, Modified: {{object.modified|date}}</p>
+    
+    {{object.description|markdown}}
+
+    <p class="tags">Tags: {% tags_for_object object as tags %}
+      {% for tag in tags %}<a href="{% url musician_tag_detail tag %}">{{tag}}</a> {% endfor %}</p>
+
+    <br style="clear:both" />
+
+    <table width="100%">
+    {% if object.links.count %}
+    <tr><th>Links</th>
+      <td>{% if user.is_authenticated %}<p class="editlink"><a href="update/#links">edit</a></p>{% endif %}
+
+    <ul>
+      {% for link in object.links.all %}
+      <li><a href="{{link.url}}">{{link.title}}</a> {{link.description}}</li>
+      {% endfor %}
+    </ul></td>
+      </tr>
+    {% endif %}
+
+    {% if object.photos.count %}
+    <tr><th>Photos</th>
+      <td>{% if user.is_authenticated %}<p class="editlink"><a href="update/#photos">edit</a></p>{% endif %}
+
+      {% for photo in object.photos.all %}
+      <div class="thumbnail"><a href="{{photo.get_absolute_url}}" title="{{photo.caption}}"><img src="{% thumbnail photo.image 100000x100 %}" /></a></div>
+      {% endfor %}
+
+    </td>
+      </tr>
+    {% endif %}
+
+    {% if object.musiciangear_set.count %}
+    <tr><th>Gear</th>
+      <td>{% if user.is_authenticated %}<p class="editlink"><a href="update/#gear">edit</a></p>{% endif %}
+
+	<table width="100%">
+      {% for musiciangear in object.musiciangear_set.all %}
+      <tr class="{% cycle 'even' 'odd' %}">
+      <td><a href="{{musiciangear.get_absolute_url}}"><b>{{musiciangear.gear.manufacturer.name}}
+      {{musiciangear.gear.name}}</b></a> {{musiciangear.description}}
+
+	{% if musiciangear.photos.count %}
+	<br style="clear:both"/>
+	{% for photo in musiciangear.photos.all %}
+	<div class="thumbnail"><a href="{{photo.get_absolute_url}}" title="{{photo.caption}}"><img src="{% thumbnail photo.image 100000x100 %}" /></a></div>
+	{% endfor %}
+	<br style="clear:both"/>
+	{% endif %}
+
+	{% if musiciangear.gear.photos.count %}
+	<br style="clear:both"/>
+	{% for photo in musiciangear.gear.photos.all %}
+	<div class="thumbnail"><a href="{{photo.get_absolute_url}}" title="{{photo.caption}}"><img src="{% thumbnail photo.image 100000x100 %}" /></a></div>
+	{% endfor %}
+	<br style="clear:both"/>
+	{% endif %}
+
+
+	{% tags_for_object musiciangear.gear as geartags %}
+	{% if geartags %}
+	<p class="geartags" style="text-align: right">
+      {% for tag in geartags %}<a href="{% url gear_tag_detail tag %}">{{tag}}</a> {% endfor %}</p>
+	{% endif %}
+      </td>
+      </tr>
+      {% endfor %}
+    </table></td></tr>
+    {% endif %}
+    </table>
+
+{% endblock %}

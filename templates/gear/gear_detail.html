@@ -1,0 +1,70 @@
+{% extends "base.html" %}
+{% load thumbnail %}
+{% load markup %}
+{% load tagging_tags %}
+
+{% block title %}Gear: {{object.name}}{% endblock %}
+
+
+{% block content %}
+
+    <h1><a href="/gear/">Gear</a>: {{object.name}}</h1>
+    {% if user.is_authenticated %}<p class="editlink"><a href="update/">edit</a><br />
+  <a href="add_link/" rel="facebox">add link</a><br />
+  <a href="add_photo/" rel="facebox">add photo</a><br />
+
+</p>{% endif %}
+    <p>Manufacturer: <a href="{{object.manufacturer.get_absolute_url}}">{{object.manufacturer.name}}</a></p>
+    <p class="timestamp">Added: {{object.added|date}}, Modified: {{object.modified|date}}</p>
+
+    {% if object.photos.count %}
+    <div id="mainimage">
+    <img src="{% thumbnail object.first_photo.image 300x300 %}" />
+    </div>
+    {% endif %}
+      
+    {{object.description|markdown}}
+
+    <p class="tags">Tags: {% tags_for_object object as tags %}
+      {% for tag in tags %}<a href="{% url gear_tag_detail tag %}">{{tag}}</a> {% endfor %}</p>
+
+    <br style="clear:both"/>
+    <table width="100%">
+    {% if object.links.count %}
+    <tr><th>Links</th>
+      <td>{% if user.is_authenticated %}<p class="editlink"><a href="update/#links">edit</a></p>{% endif %}
+    <ul>
+      {% for link in object.links.all %}
+      <li><a href="{{link.url}}">{{link.title}}</a> {{link.description}}</li>
+      {% endfor %}
+    </ul>
+    </td>
+      </tr>
+    {% endif %}
+
+
+    {% if object.photos.count %}
+    <tr><th>Photos</th>
+      <td>{% if user.is_authenticated %}<p class="editlink"><a href="update/#photos">edit</a></p>{% endif %}
+      {% for photo in object.photos.all %}
+      <div class="thumbnail"><a href="{{photo.get_absolute_url}}" title="{{photo.caption}}"><img src="{% thumbnail photo.image 100000x100 %}" /></a></div>
+      {% endfor %}
+    </td></tr>
+    {% endif %}
+    </table>
+
+    </table>
+
+    {% if object.musiciangear_set.count %}
+    <h2>Musicians using this gear</h2>
+    <table width="100%">
+      {% for musiciangear in object.musiciangear_set.all %}
+      <tr class="{% cycle 'even' 'odd' %}">
+	<th><a href="{{musiciangear.get_absolute_url}}">{{musiciangear.musician.name}}</a></th>
+	<td>{{musiciangear.description|markdown}}</td>
+      </tr>
+      {% endfor %}
+    </table>
+    {% endif %}
+
+{% endblock %}

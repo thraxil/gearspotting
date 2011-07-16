@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+
+{% block title %}{{tag}}{% endblock %}
+
+{% block content %}
+
+    <h1><a href="/gear/tag/">Tag</a>: {{tag}} {% if user.is_authenticated %}{% endif %}</h1>
+    
+
+{% if object_list %}
+    <ul>Gear:
+    {% for gear in object_list %}
+        <li><a href="{{gear.manufacturer.get_absolute_url}}">{{gear.manufacturer.name}}</a> 
+	  <a href="{{ gear.get_absolute_url }}">{{ gear.name }}</a></li>
+    {% endfor %}
+    </ul>
+{% else %}
+    <p>No gear available.</p>
+{% endif %}
+
+{% endblock %}

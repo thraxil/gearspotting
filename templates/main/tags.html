@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+{% load tagging_tags %}
+
+{% block title %}tags{% endblock %}
+
+{% block content %}
+
+    <h2>Gear</h2>
+   
+
+{% tag_cloud_for_model gear.Gear as cloud %}
+
+{% for tag in cloud %}
+<font size="{{ tag.font_size }}">
+<a href="/gear/tag/{{tag}}/">{{tag}}</a>
+</font>
+{% endfor %}
+
+
+    <h2>Musicians</h2>
+   
+
+{% tag_cloud_for_model musician.Musician as cloud %}
+
+{% for tag in cloud %}
+<font size="{{ tag.font_size }}">
+<a href="/musician/tag/{{tag}}/">{{tag}}</a>
+</font>
+{% endfor %}
+
+
+{% endblock %}

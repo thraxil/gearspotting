@@ -1,0 +1,25 @@
+{% extends "profiles/base.html" %}
+
+{% load i18n %}
+
+{% block head_title %}Manufacturers{% endblock %}
+
+{% block body %}
+
+    <h1>Manufacturers</h1>
+
+    {% if user.is_authenticated %}
+
+    <form action="." method="post">
+
+      <table>
+	{{add_manufacturer_form.as_table}}
+      </table>
+      <input type="submit" value="add manufacturer" />
+    </form>
+    {% else %}
+
+    {% endif %}
+
+
+{% endblock %}

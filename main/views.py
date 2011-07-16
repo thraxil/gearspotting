@@ -27,3 +27,8 @@ def index(request):
  #   return dict(newest_gear=Gear.objects.all().order_by("-added")[:10],
 #                newest_musicians=Musician.objects.all().order_by("-added")[:10],
 #                newest_comments=ThreadedComment.objects.all().order_by("-date_submitted")[:10])
+
+
+@rendered_with('main/tags.html')
+def tags(request):
+    return dict()
