@@ -5,6 +5,8 @@ from django.forms import ModelForm
 from django.contrib.contenttypes import generic
 from django.template.defaultfilters import slugify
 
+
+
 class Manufacturer(models.Model):
     name = models.CharField(default="",unique=True, max_length=256)
     slug = models.SlugField(max_length=256,editable=False)
@@ -54,5 +56,3 @@ class ManufacturerAdmin(admin.ModelAdmin):
     prepopulated_fields = {"slug": ("name",)}
     inlines = [LinkInline,]
 admin.site.register(Manufacturer, ManufacturerAdmin)
-
-

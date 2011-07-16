@@ -78,6 +78,7 @@ INSTALLED_APPS = (
     'htags',
     'treebeard',
     'registration',
+    'musiciangear',
 )
 
 ACCOUNT_ACTIVATION_DAYS = 7
