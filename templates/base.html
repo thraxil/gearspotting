@@ -44,7 +44,7 @@ media="all" />
     <h1 class="grid_6">Gearspotting.com</h1>
     <div class="grid_3 prefix_3 usermenu">
       {% if request.user.is_anonymous %}
-      <a href="/accounts/login/">login</a> or signup
+      <a href="/accounts/login/">login</a> or <a href="/accounts/register/">signup</a>
       {% else %}
       logged in as <b>{{ request.user.first_name }} {{ request.user.last_name }}</b>
       [<a href="/accounts/logout/">logout</a>]
