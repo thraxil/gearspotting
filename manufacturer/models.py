@@ -52,7 +52,4 @@ class ManufacturerForm(ModelForm):
         model = Manufacturer
 #        exclude = ('slug',)
 
-class ManufacturerAdmin(admin.ModelAdmin):
-    prepopulated_fields = {"slug": ("name",)}
-    inlines = [LinkInline,]
-admin.site.register(Manufacturer, ManufacturerAdmin)
+

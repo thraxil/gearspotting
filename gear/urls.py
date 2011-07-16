@@ -8,7 +8,7 @@ info_dict = {
 }
 
 urlpatterns = patterns('',
-                       (r'^$', 'django.views.generic.list_detail.object_list', info_dict),
+                       (r'^$', 'gearspotting.gear.views.index'),
                        (r'^create/?$', 'django.views.generic.create_update.create_object',
                         dict(model=Gear, post_save_redirect="/gear/") ),
 

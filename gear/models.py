@@ -69,7 +69,4 @@ class AddGearForm(ModelForm):
         model = Gear
         exclude = ('manufacturer',)
 
-class GearAdmin(admin.ModelAdmin):
-    prepopulated_fields = {"slug": ("name",)}
-    inlines = [LinkInline,PhotoInline]
-admin.site.register(Gear, GearAdmin)
+

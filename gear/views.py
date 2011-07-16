@@ -4,6 +4,7 @@ from django.http import HttpResponseRedirect
 from django.contrib.contenttypes import generic
 from django.template import RequestContext
 from django.shortcuts import render_to_response
+from gearspotting.manufacturer.models import Manufacturer, ManufacturerForm
 
 class rendered_with(object):
     def __init__(self, template_name):
@@ -17,6 +18,11 @@ class rendered_with(object):
             else:
                 return items
         return rendered_func
+
+@rendered_with('gear/index.html')
+def index(request):
+    return dict(manufacturers=Manufacturer.objects.all(),
+                add_manufacturer_form=ManufacturerForm())
 
 @rendered_with('gear/tags.html')
 def tags(request):
