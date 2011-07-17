@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+{% load thumbnail %}
+{% load markup %}
+{% block title %}Photo{% endblock %}
+
+{% block content %}
+
+<h2>Photo of: <a href="{{object.content_object.get_absolute_url}}">{{object.label}}</a></h2>
+
+<img src="{% thumbnail object.image 1024x1024 %}" />
+
+    {{object.caption|markdown}}
+
+<p class="timestamp">Added: {{object.added|date}}, Modified: {{object.modified|date}}</p>
+{% if object.source_url %}
+<p>source: <a href="{{object.source_url}}">{{object.source_name|default:object.source_url}}</a></p>
+{% else %}
+{% if object.source_name %}
+<p>source: {{object.source_name}}</p>
+{% endif %}
+{% endif %}
+
+
+{% endblock %}

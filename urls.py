@@ -20,6 +20,7 @@ urlpatterns = patterns('',
                        (r'^musician/',include('musician.urls')),
                        (r'^musiciangear/',include('musiciangear.urls')),
                        (r'^manufacturer/',include('manufacturer.urls')),
+                       (r'^photos/',include('photo.urls')),
                        (r'^site_media/(?P<path>.*)$', 'django.views.static.serve', {'document_root': site_media_root}),
                        (r'^uploads/(?P<path>.*)$','django.views.static.serve',{'document_root' : settings.MEDIA_ROOT}),
 ) + staticmedia.serve()
