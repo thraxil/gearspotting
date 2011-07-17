@@ -27,7 +27,9 @@
 
 <script>
 jQuery(function() {
+{% if request.user.is_authenticated %}
 jQuery('#add-manufacturer-form').hide();
+{% endif %}
 });
 </script>
 {% endblock %}
