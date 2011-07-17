@@ -32,3 +32,12 @@ def index(request):
 @rendered_with('main/tags.html')
 def tags(request):
     return dict()
+
+@rendered_with("main/search.html")
+def search(request):
+    q = request.GET.get('q',None)
+    results = dict()
+    if q is not None:
+        results["gear"] = Gear.objects.filter(name__icontains=q)
+        results["musicians"] = Musician.objects.filter(name__icontains=q)
+    return dict(q=q,results=results)

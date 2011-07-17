@@ -11,6 +11,7 @@ site_media_root = os.path.join(os.path.dirname(__file__),"media")
 urlpatterns = patterns('',
                        (r'^$','main.views.index'),
                        (r'^tag/$','main.views.tags'),
+                       (r'^search/$','main.views.search'),
                        (r'^accounts/profile/$', direct_to_template, {'template': 'registration/profile.html'}),
                        (r'^accounts/', include('registration.backends.default.urls')),
                        (r'^admin/(.*)', include(admin.site.urls)),
