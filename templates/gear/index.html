@@ -17,8 +17,8 @@
 <table>
 {% for manufacturer in manufacturers %}
 <tr>
-<th>
-<a href="{{manufacturer.get_absolute_url}}/">{{manufacturer.name}}</a>
+<th align="left">
+<a href="{{manufacturer.get_absolute_url}}">{{manufacturer.name}}</a>
 </th>
 <td>{{manufacturer.gear_set.count}}</td>
 </tr>
