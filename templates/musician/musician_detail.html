@@ -7,7 +7,7 @@
 
 {% block content %}
 
-    <h1><a href="/musician/">Musician</a>: {{object.name}}</h1>
+    <h2><a href="/musician/">Musician</a>: {{object.name}}</h2>
     
     {% if user.is_authenticated %}<p class="editlink"><a href="update/" >edit</a><br />
   <a href="add_link/" rel="facebox">add link</a><br />

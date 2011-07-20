@@ -13,3 +13,22 @@ body {background-image: url('/site_media/img/flybg2000.jpg');
 background-repeat:no-repeat;
 background-attachment:fixed;
 }
+#mainimage {
+float: left;
+width: 200px;
+padding-right: 2em;
+}
+.timestamp {color: #aaa;}
+th {vertical-align: top; text-align: left; 
+    border-bottom: #ddd solid 1px;
+    background-color: #ddf;
+}
+td { border-bottom: #ddd solid 1px;}
+tr.even th {background-color: #eee; text-align: left; vertical-align: top;}
+tr.even td {background-color: #eee;}
+.thumbnail {float: left; padding-right: 2px;}
+.editlink {
+float: right;
+border: #ddd solid 1px;
+padding: 2px;
+}

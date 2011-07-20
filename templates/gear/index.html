@@ -16,7 +16,7 @@
 {% endif %}
 <table>
 {% for manufacturer in manufacturers %}
-<tr>
+<tr class="{% cycle 'even' 'odd' %}">
 <th align="left">
 <a href="{{manufacturer.get_absolute_url}}">{{manufacturer.name}}</a>
 </th>
