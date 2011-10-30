@@ -23,7 +23,6 @@ class Musician(models.Model):
     description = models.TextField(default="",blank=True)
     tags = tagging.fields.TagField()
     links = generic.GenericRelation(Link)
-    photos = generic.GenericRelation(Photo)
 
     added = models.DateTimeField(auto_now_add=True,editable=False)
     modified = models.DateTimeField(auto_now=True,editable=False)
@@ -48,13 +47,6 @@ class Musician(models.Model):
                 exclude = ('content_object','content_type','object_id')
         return LinkForm
 
-    def add_photo_form(self):
-        class PhotoForm(ModelForm):
-            class Meta:
-                model = Photo
-                exclude = ('content_object','content_type','object_id')
-        return PhotoForm
-
     def add_gear_form(self):
         from musiciangear.models import MusicianGear
         class GearForm(ModelForm):
@@ -67,23 +59,23 @@ class Musician(models.Model):
         self.slug = slugify(self.name)[:256]
         super(Musician, self).save()
 
-    def photos_formset(self):
-        PhotoFormset = generic.generic_inlineformset_factory(Photo, extra=1)
-        return PhotoFormset(instance=self)
-
     def gear_formset(self):
         from musiciangear.models import MusicianGear
         GearFormSet = inlineformset_factory(Musician, MusicianGear,extra=1)
         return GearFormSet(instance=self)
 
     def first_photo(self):
-        if self.photos.count() > 0:
-            return self.photos.all()[0]
+        if self.musicianphotos.count() > 0:
+            return self.musicianphotos.all()[0].photo
         else:
             return None
 
     def type_display(self):
         return "Musician"
+
+class MusicianPhoto(models.Model):
+    musician = models.ForeignKey(Musician)
+    photo = models.ForeignKey(Photo)
 
 class MusicianForm(ModelForm):
     class Meta:

@@ -16,7 +16,7 @@
     </p>{% endif %}
     
 
-    {% if object.photos.count %}
+    {% if object.musicianphotos.count %}
     <div id="mainimage">
     <img src="{% thumbnail object.first_photo.image 200x200 %}" />
     </div>
@@ -45,12 +45,12 @@
       </tr>
     {% endif %}
 
-    {% if object.photos.count %}
+    {% if object.musicianphotos.count %}
     <tr><th>Photos</th>
       <td>{% if user.is_authenticated %}<p class="editlink"><a href="update/#photos">edit</a></p>{% endif %}
 
-      {% for photo in object.photos.all %}
-      <div class="thumbnail"><a href="{{photo.get_absolute_url}}" title="{{photo.caption}}"><img src="{% thumbnail photo.image 100000x100 %}" /></a></div>
+      {% for photo in object.musicianphotos.all %}
+      <div class="thumbnail"><a href="{{photo.photo.get_absolute_url}}" title="{{photo.photo.caption}}"><img src="{% thumbnail photo.photo.image 100000x100 %}" /></a></div>
       {% endfor %}
 
     </td>
