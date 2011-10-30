@@ -17,7 +17,7 @@
     <p>Manufacturer: <a href="{{object.manufacturer.get_absolute_url}}">{{object.manufacturer.name}}</a></p>
     <p class="timestamp">Added: {{object.added|date}}, Modified: {{object.modified|date}}</p>
 
-    {% if object.photos.count %}
+    {% if object.gearphoto_set.count %}
     <div id="mainimage">
     <img src="{% thumbnail object.first_photo.image 300x300 %}" />
     </div>
@@ -43,11 +43,11 @@
     {% endif %}
 
 
-    {% if object.photos.count %}
+    {% if object.gearphoto_set.count %}
     <tr><th>Photos</th>
       <td>{% if user.is_authenticated %}<p class="editlink"><a href="update/#photos">edit</a></p>{% endif %}
-      {% for photo in object.photos.all %}
-      <div class="thumbnail"><a href="{{photo.get_absolute_url}}" title="{{photo.caption}}"><img src="{% thumbnail photo.image 100000x100 %}" /></a></div>
+      {% for photo in object.gearphoto_set.all %}
+      <div class="thumbnail"><a href="{{photo.photo.get_absolute_url}}" title="{{photo.photo.caption}}"><img src="{% thumbnail photo.photo.image 100000x100 %}" /></a></div>
       {% endfor %}
     </td></tr>
     {% endif %}
