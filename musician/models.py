@@ -23,7 +23,6 @@ class Musician(models.Model):
     description = models.TextField(default="",blank=True)
     tags = tagging.fields.TagField()
     links = generic.GenericRelation(Link)
-    photos = generic.GenericRelation(Photo)
 
     added = models.DateTimeField(auto_now_add=True,editable=False)
     modified = models.DateTimeField(auto_now=True,editable=False)
