@@ -73,6 +73,10 @@ class Gear(models.Model):
                 exclude = ('content_object','content_type','object_id')
         return PhotoForm
 
+class GearPhoto(models.Model):
+    gear = models.ForeignKey(Gear)
+    photo = models.ForeignKey(Photo)
+
 class AddGearForm(ModelForm):
     class Meta:
         model = Gear
