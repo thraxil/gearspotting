@@ -94,5 +94,5 @@ STATICMEDIA_MOUNTS = (
     ('/sitemedia', 'sitemedia'),
 )
 
-
+SOUTH_AUTO_FREEZE_APP = True
 
