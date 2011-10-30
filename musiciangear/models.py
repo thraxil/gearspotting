@@ -60,6 +60,10 @@ class MusicianGear(models.Model):
                 exclude = ('content_object','content_type','object_id')
         return PhotoForm
 
+class MusicianGearPhoto(models.Model):
+    musiciangear = models.ForeignKey(MusicianGear)
+    photo = models.ForeignKey(Photo)
+
 class MusicianGearAdmin(admin.ModelAdmin):
     inlines = [LinkInline,PhotoInline]
 admin.site.register(MusicianGear, MusicianGearAdmin)
