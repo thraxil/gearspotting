@@ -20,7 +20,6 @@ class MusicianGear(models.Model):
     gear = models.ForeignKey(Gear)
     description = models.TextField(default="",blank=True)
     links = generic.GenericRelation(Link)
-    photos = generic.GenericRelation(Photo)
     added = models.DateTimeField(auto_now_add=True,editable=False)
     modified = models.DateTimeField(auto_now=True,editable=False)
 
