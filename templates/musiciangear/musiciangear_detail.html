@@ -18,7 +18,7 @@
 
     <p class="timestamp">Added: {{object.added|date}}, Modified: {{object.modified|date}}</p>
 
-    {% if object.photos.count %}
+    {% if object.musiciangearphoto_set.count %}
     <div id="mainimage">
     <img src="{% thumbnail object.first_photo.image 200x200 %}" />
     </div>
@@ -40,11 +40,11 @@
     </td></tr>
     {% endif %}
 
-    {% if object.photos.count %}
+    {% if object.musiciangearphoto_set.count %}
     <tr><th>Photos</th>
       <td>{% if user.is_authenticated %}<p class="editlink"><a href="update/#photos">edit</a></p>{% endif %}
-      {% for photo in object.photos.all %}
-      <div class="thumbnail"><a href="{{photo.get_absolute_url}}" title="{{photo.caption}}"><img src="{% thumbnail photo.image 100000x100 %}" /></a></div>
+      {% for photo in object.musiciangearphoto_set.all %}
+      <div class="thumbnail"><a href="{{photo.photo.get_absolute_url}}" title="{{photo.photo.caption}}"><img src="{% thumbnail photo.photo.image 100000x100 %}" /></a></div>
       {% endfor %}
     </td></tr>
     {% endif %}

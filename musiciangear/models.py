@@ -34,13 +34,9 @@ class MusicianGear(models.Model):
         LinkFormset = generic.generic_inlineformset_factory(Link, extra=1)
         return LinkFormset(instance=self)
 
-    def photos_formset(self):
-        PhotoFormset = generic.generic_inlineformset_factory(Photo, extra=1)
-        return PhotoFormset(instance=self)
-
     def first_photo(self):
-        if self.photos.count() > 0:
-            return self.photos.all()[0]
+        if self.musiciangearphotos.count() > 0:
+            return self.musiciangearphotos.all()[0].photo
         else:
             return None
     def type_display(self):
@@ -53,12 +49,6 @@ class MusicianGear(models.Model):
                 exclude = ('content_object','content_type','object_id')
         return LinkForm
 
-    def add_photo_form(self):
-        class PhotoForm(ModelForm):
-            class Meta:
-                model = Photo
-                exclude = ('content_object','content_type','object_id')
-        return PhotoForm
 
 class MusicianGearPhoto(models.Model):
     musiciangear = models.ForeignKey(MusicianGear)
