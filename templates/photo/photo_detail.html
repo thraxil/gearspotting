@@ -20,5 +20,28 @@
 {% endif %}
 {% endif %}
 
+{% if object.gear %}
+<ul>Gear
+{% for gear in object.gear %}
+<li><a href="{{gear.get_absolute_url}}">{{gear.name}}</a></li>
+{% endfor %}
+</ul>
+{% endif %}
+
+{% if object.musicians %}
+<ul>Musician
+{% for musician in object.musicians %}
+<li><a href="{{musician.get_absolute_url}}">{{musician.name}}</a></li>
+{% endfor %}
+</ul>
+{% endif %}
+
+{% if object.musiciangear %}
+<ul>MusicianGear
+{% for musiciangear in object.musiciangear %}
+<li><a href="{{musiciangear.musician.get_absolute_url}}">{{musiciangear.musician.name}}</a> <a href="{{musiciangear.gear.get_absolute_url}}">{{musiciangear.gear.name}}</a></li>
+{% endfor %}
+</ul>
+{% endif %}
 
 {% endblock %}

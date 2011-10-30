@@ -40,6 +40,16 @@ class Photo(models.Model):
     def type_display(self):
         return "Photo"
 
+    def gear(self):
+        return [g.gear for g in self.gearphoto_set.all()]
+
+    def musicians(self):
+        return [g.musician for g in self.musicianphoto_set.all()]
+
+    def musiciangear(self):
+        return [g.musiciangear for g in self.musiciangearphoto_set.all()]
+
+
 class PhotoInline(generic.GenericTabularInline):
     model = Photo
 
