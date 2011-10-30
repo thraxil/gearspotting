@@ -13,4 +13,4 @@ requirements/src/django-sentry-1.5.4.tar.gz
 requirements/src/django-munin-0.1.1.tar.gz
 requirements/src/django-treebeard-1.61.tar.gz
 requirements/src/django-registration-0.7.tar.gz
-
+requirements/src/South-0.7.3.tar.gz

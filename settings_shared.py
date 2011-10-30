@@ -67,7 +67,6 @@ INSTALLED_APPS = (
     'smartif',
     'template_utils',
     'typogrify',
-    'sentry.client',
     'munin',
     'main',
     'musician',
@@ -79,24 +78,11 @@ INSTALLED_APPS = (
     'treebeard',
     'registration',
     'musiciangear',
+    'south',
 )
 
 ACCOUNT_ACTIVATION_DAYS = 7
 LOGIN_REDIRECT_URL = "/"
-
-import logging
-from sentry.client.handlers import SentryHandler
-logger = logging.getLogger()
-if SentryHandler not in map(lambda x: x.__class__, logger.handlers):
-    logger.addHandler(SentryHandler())
-    logger = logging.getLogger('sentry.errors')
-    logger.propagate = False
-    logger.addHandler(logging.StreamHandler())
-
-SENTRY_REMOTE_URL = 'http://sentry.ccnmtl.columbia.edu/sentry/store/'
-# remember to set the SENTRY_KEY in a local_settings.py
-# as documented in the wiki
-SENTRY_SITE = 'gearspotting'
 
 THUMBNAIL_SUBDIR = "thumbs"
 EMAIL_SUBJECT_PREFIX = "[gearspotting] "

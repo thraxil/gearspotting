@@ -4,6 +4,13 @@ from link.models import Link, LinkInline
 from django.forms import ModelForm
 from django.contrib.contenttypes import generic
 from django.template.defaultfilters import slugify
+from south.modelsinspector import add_introspection_rules
+
+add_introspection_rules([], 
+                        ["^django_extensions\.db\.fields\.CreationDateTimeField",
+                         "django_extensions.db.fields.ModificationDateTimeField",
+                         "sorl.thumbnail.fields.ImageWithThumbnailsField",
+                         "django_extensions.db.fields.UUIDField"])
 
 
 
