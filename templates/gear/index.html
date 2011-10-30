@@ -9,7 +9,7 @@
 <p><a href="#add-manufacturer-form"
    onclick="jQuery('#add-manufacturer-form').toggle();return false">add</a></p>
 
-<form action="add_manufacturer/" method="post" id="add-manufacturer-form">
+<form action="/manufacturer/create/" method="post" id="add-manufacturer-form">
 {{ add_manufacturer_form.as_p }}
 <input type="submit" value="add manufacturer" />
 </form>
