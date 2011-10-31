@@ -72,7 +72,7 @@ def import_photo(request):
                 mline = line.strip()
                 if not mline:
                     continue
-                m = musician.models.Musician.objects.get_or_create(name=mline)
+                m,created = musician.models.Musician.objects.get_or_create(name=mline)
                 mp = musician.models.MusicianPhoto.objects.create(musician=m,photo=p)
 
             for line in request.POST.get('gear','').split('\n'):
