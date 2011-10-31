@@ -41,9 +41,9 @@ class Gear(models.Model):
         LinkFormset = generic.generic_inlineformset_factory(Link, extra=1)
         return LinkFormset(instance=self)
 
-    def save(self):
+    def save(self,*args,**kwargs):
         self.slug = slugify(self.manufacturer.name + "-" + self.name)[:256]
-        super(Gear, self).save()
+        super(Gear, self).save(*args,**kwargs)
 
     def first_photo(self):
         if self.gearphoto_set.count() > 0:

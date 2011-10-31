@@ -55,9 +55,9 @@ class Musician(models.Model):
                 exclude = ('musician')
         return GearForm
 
-    def save(self):
+    def save(self,*args,**kwargs):
         self.slug = slugify(self.name)[:256]
-        super(Musician, self).save()
+        super(Musician, self).save(*args,**kwargs)
 
     def gear_formset(self):
         from musiciangear.models import MusicianGear

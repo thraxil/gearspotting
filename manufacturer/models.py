@@ -36,9 +36,9 @@ class Manufacturer(models.Model):
         LinkFormset = generic.generic_inlineformset_factory(Link, extra=1)
         return LinkFormset(instance=self)
 
-    def save(self):
+    def save(self,*args,**kwargs):
         self.slug = slugify(self.name)[:256]
-        super(Manufacturer, self).save()
+        super(Manufacturer, self).save(*args,**kwargs)
 
     def add_gear_form(self):
         from gear.models import AddGearForm

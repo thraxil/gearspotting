@@ -3,6 +3,7 @@ from django.contrib.contenttypes.models import ContentType
 from django.contrib.contenttypes import generic
 from sorl.thumbnail.fields import ImageWithThumbnailsField
 from south.modelsinspector import add_introspection_rules
+from django.forms import ModelForm
 
 add_introspection_rules([], 
                         ["^django_extensions\.db\.fields\.CreationDateTimeField",
@@ -49,6 +50,15 @@ class Photo(models.Model):
     def musiciangear(self):
         return [g.musiciangear for g in self.musiciangearphoto_set.all()]
 
+
+class AddPhotoForm(ModelForm):
+    class Meta:
+        model = Photo
+
+class ImportPhotoForm(ModelForm):
+    class Meta:
+        model = Photo
+        exclude = ('image',)
 
 class PhotoInline(generic.GenericTabularInline):
     model = Photo
