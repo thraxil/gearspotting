@@ -84,8 +84,8 @@ def import_photo(request):
                     split_char = ':'
                 if split_char in gearline:
                     parts = gearline.split(split_char)
-                    manufacturer_name = parts[0]
-                    gear_name = ' '.join(parts[1:])
+                    manufacturer_name = parts[0].strip()
+                    gear_name = ' '.join(parts[1:]).strip()
 
                     manufacturer,created = manmodels.Manufacturer.objects.get_or_create(name=manufacturer_name)
                     g,created = gear.models.Gear.objects.get_or_create(manufacturer=manufacturer,name=gear_name)
