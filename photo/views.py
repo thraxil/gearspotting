@@ -79,8 +79,11 @@ def import_photo(request):
                 gearline = line.strip()
                 if not gearline:
                     continue
-                if ' ' in gearline:
-                    parts = gearline.split(' ')
+                split_char = ' '
+                if ':' in gearline:
+                    split_char = ':'
+                if split_char in gearline:
+                    parts = gearline.split(split_char)
                     manufacturer_name = parts[0]
                     gear_name = ' '.join(parts[1:])
 
