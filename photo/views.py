@@ -11,6 +11,7 @@ from restclient import GET
 from django.conf import settings
 import cStringIO
 import os
+import os.path
 from datetime import datetime
 import musician.models
 import gear.models
@@ -30,8 +31,13 @@ class rendered_with(object):
         return rendered_func
 
 def clean_filename(filename):
+    filename = filename.replace("%20","_")
+    filename = filename.replace("%25","_")
     filename = filename.replace(' ','_')
     filename = filename.replace('%','_')
+    (base,ext) = os.path.splitext(filename)
+    base = base[:95]
+    filename = base + ext
     return filename.lower()
 
 @rendered_with('photo/import_photo.html')
