@@ -29,7 +29,10 @@ class rendered_with(object):
                 return items
         return rendered_func
 
-
+def clean_filename(filename):
+    filename = filename.replace(' ','_')
+    filename = filename.replace('%','_')
+    return filename.lower()
 
 @rendered_with('photo/import_photo.html')
 def import_photo(request):
@@ -55,6 +58,7 @@ def import_photo(request):
                 # bad filename
                 pass
 
+            filename = clean_filename(filename)
             now = datetime.now()
             rel_path = "images/%04d/%02d/%02d/" % (now.year,now.month,now.day)
             path = os.path.join(settings.MEDIA_ROOT,rel_path)
