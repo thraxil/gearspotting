@@ -36,7 +36,7 @@ def clean_filename(filename):
     filename = filename.replace(' ','_')
     filename = filename.replace('%','_')
     (base,ext) = os.path.splitext(filename)
-    base = base[:95]
+    base = base[:75]
     filename = base + ext
     return filename.lower()
 
