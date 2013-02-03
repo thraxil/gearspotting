@@ -8,26 +8,27 @@ from django.contrib.contenttypes import generic
 from django.forms import ModelForm
 from south.modelsinspector import add_introspection_rules
 
-add_introspection_rules([], 
-                        ["^django_extensions\.db\.fields\.CreationDateTimeField",
-                         "django_extensions.db.fields.ModificationDateTimeField",
-                         "sorl.thumbnail.fields.ImageWithThumbnailsField",
-                         "django_extensions.db.fields.UUIDField"])
+add_introspection_rules(
+    [],
+    ["^django_extensions\.db\.fields\.CreationDateTimeField",
+     "django_extensions.db.fields.ModificationDateTimeField",
+     "sorl.thumbnail.fields.ImageWithThumbnailsField",
+     "django_extensions.db.fields.UUIDField"])
 
 
 class MusicianGear(models.Model):
     musician = models.ForeignKey(Musician)
     gear = models.ForeignKey(Gear)
-    description = models.TextField(default="",blank=True)
+    description = models.TextField(default="", blank=True)
     links = generic.GenericRelation(Link)
-    added = models.DateTimeField(auto_now_add=True,editable=False)
-    modified = models.DateTimeField(auto_now=True,editable=False)
+    added = models.DateTimeField(auto_now_add=True, editable=False)
+    modified = models.DateTimeField(auto_now=True, editable=False)
 
     def get_absolute_url(self):
         return "/musiciangear/%d/" % self.id
 
     def __unicode__(self):
-        return "%s - %s" % (self.musician.name,self.gear.name)
+        return "%s - %s" % (self.musician.name, self.gear.name)
 
     def links_formset(self):
         LinkFormset = generic.generic_inlineformset_factory(Link, extra=1)
@@ -38,6 +39,7 @@ class MusicianGear(models.Model):
             return self.musiciangearphotos.all()[0].photo
         else:
             return None
+
     def type_display(self):
         return "Musician Gear"
 
@@ -45,7 +47,7 @@ class MusicianGear(models.Model):
         class LinkForm(ModelForm):
             class Meta:
                 model = Link
-                exclude = ('content_object','content_type','object_id')
+                exclude = ('content_object', 'content_type', 'object_id')
         return LinkForm
 
 
@@ -53,6 +55,7 @@ class MusicianGearPhoto(models.Model):
     musiciangear = models.ForeignKey(MusicianGear)
     photo = models.ForeignKey(Photo)
 
+
 class MusicianGearAdmin(admin.ModelAdmin):
-    inlines = [LinkInline,PhotoInline]
+    inlines = [LinkInline, PhotoInline]
 admin.site.register(MusicianGear, MusicianGearAdmin)
