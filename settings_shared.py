@@ -117,3 +117,5 @@ STATICMEDIA_MOUNTS = (
 
 SOUTH_AUTO_FREEZE_APP = True
 
+SESSION_ENGINE = "django.contrib.sessions.backends.signed_cookies"
+SESSION_COOKIE_HTTPONLY = True
