@@ -6,13 +6,13 @@ from django.views.generic.simple import direct_to_template
 admin.autodiscover()
 import staticmedia
 
-site_media_root = os.path.join(os.path.dirname(__file__),"media")
+site_media_root = os.path.join(os.path.dirname(__file__), "media")
 
 urlpatterns = patterns(
     '',
-    (r'^$','main.views.index'),
-    (r'^tag/$','main.views.tags'),
-    (r'^search/$','main.views.search'),
+    (r'^$', 'main.views.index'),
+    (r'^tag/$', 'main.views.tags'),
+    (r'^search/$', 'main.views.search'),
     (r'^accounts/profile/$', direct_to_template, {'template': 'registration/profile.html'}),
     (r'^accounts/', include('registration.backends.default.urls')),
     (r'^admin/(.*)', include(admin.site.urls)),
@@ -23,6 +23,6 @@ urlpatterns = patterns(
     (r'^manufacturer/',include('manufacturer.urls')),
     (r'^photos/',include('photo.urls')),
     (r'^site_media/(?P<path>.*)$', 'django.views.static.serve', {'document_root': site_media_root}),
-    (r'^uploads/(?P<path>.*)$','django.views.static.serve',{'document_root' : settings.MEDIA_ROOT}),
+    (r'^uploads/(?P<path>.*)$', 'django.views.static.serve',{'document_root' : settings.MEDIA_ROOT}),
 ) + staticmedia.serve()
 
