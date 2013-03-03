@@ -9,8 +9,10 @@
 <img class="img-rounded" src="{% thumbnail object.image 1024x1024 %}" />
 
 <dl class="dl-horizontal">
+{% if object.caption %}
 	<dt>caption</dt>
 	<dd>{{object.caption|markdown}}</dd>
+{% endif %}
 	<dt>Added</dt>
 	<dd>{{object.added|date}}</dd>
 	<dt>Modified</dt>
