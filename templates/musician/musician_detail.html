@@ -4,7 +4,9 @@
 {% load tagging_tags %}
 
 {% block title %}Musician: {{object.name}}{% endblock %}
-{% block subhead %}<a href="/musician/">Musician</a>: {{object.name}}{% endblock %}
+{% block subhead %}<a href="/musician/">Musician</a>: <span itemprop="name">{{object.name}}</span>{% endblock %}
+
+{% block containerextra %}itemscope itemtype="http://schema.org/Person"{% endblock %}
 
 {% block content %}
     {% if user.is_authenticated %}<p class="editlink"><a href="update/" >edit</a><br />
@@ -17,14 +19,14 @@
 <div class="row">
 	<div class="span3">
     {% if object.musicianphotos.count %}
-    <img class="img-rounded" src="{% thumbnail object.first_photo.image 200x200 %}" />
+    <img itemprop="image" class="img-rounded" src="{% thumbnail object.first_photo.image 200x200 %}" />
     {% endif %}
 	</div>
 	<div class="span9">
 		<dl class="dl-horizontal">
 			{% if object.description %}
 			<dt>Description</dt>
-			<dd>{{object.description|markdown}}</dd>
+			<dd itemprop="description">{{object.description|markdown}}</dd>
 			{% endif %}
 			<dt>Added</dt>
 			<dd>{{object.added|date}}</dd>
@@ -51,7 +53,7 @@
 	<div class="span9">
     <dl class="dl-horizontal">
       {% for link in object.links.all %}
-      <dt><a href="{{link.url}}">{{link.title}}</a></dt><dd>{{link.description}}</dd>
+      <dt><a itemprop="url" href="{{link.url}}">{{link.title}}</a></dt><dd>{{link.description}}</dd>
       {% endfor %}
     </dl>
 	</div>

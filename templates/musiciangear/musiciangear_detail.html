@@ -4,8 +4,12 @@
 {% load tagging_tags %}
 
 {% block title %}{{object.gear.name}} used by {{object.musician.name}}{% endblock %}
-{% block subhead %}<a href="{{object.musician.get_absolute_url}}">{{object.musician.name}}</a>
-    : <a href="{{object.gear.get_absolute_url}}">{{object.gear.name}}</a>{% endblock %}
+{% block subhead %}
+<span itemscope itemtype="http://schema.org/Person">
+	<a itemprop="url" href="{{object.musician.get_absolute_url}}">{{object.musician.name}}</a></span>
+    : 
+<span itemscope itemtype="http://schema.org/Product">
+	<a itemprop="url" href="{{object.gear.get_absolute_url}}">{{object.gear.name}}</a></span>{% endblock %}
 
 {% block content %}
 

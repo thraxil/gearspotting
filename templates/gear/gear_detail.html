@@ -4,7 +4,10 @@
 {% load tagging_tags %}
 
 {% block title %}Gear: {{object.manufacturer.name}} {{object.name}}{% endblock %}
-{% block subhead %}<a href="/gear/">Gear</a>: <a href="{{object.manufacturer.get_absolute_url}}">{{object.manufacturer.name}}</a> {{object.name}}{% endblock %}
+{% block subhead %}<a href="/gear/">Gear</a>: <a href="{{object.manufacturer.get_absolute_url}}"><span itemprop="manufacturer">{{object.manufacturer.name}}</span></a>
+<span itemprop="name">{{object.name}}</span>{% endblock %}
+
+{% block containerextra %}itemscope itemtype="http://schema.org/Product"{% endblock %}
 
 {% block content %}
 
@@ -17,7 +20,7 @@
 <div class="row">
     <div id="mainimage" class="span3">
 {% if object.gearphoto_set.count %}
-    <img class="img-rounded" src="{% thumbnail object.first_photo.image 300x300 %}" />
+    <img itemprop="image" class="img-rounded" src="{% thumbnail object.first_photo.image 300x300 %}" />
 {% endif %}
     </div>
 <div class="span9">
@@ -33,7 +36,7 @@
 
 {% if object.description %}
 		<dt>Description</dt>
-		<dd>{{object.description|markdown}}</dd>
+		<dd itemprop="description">{{object.description|markdown}}</dd>
 {% endif %}
 
 {% tags_for_object object as tags %}
@@ -57,7 +60,7 @@
 	<div class="span9">
     <dl class="dl-horizontal">
       {% for link in object.links.all %}
-      <dt><a href="{{link.url}}">{{link.title}}</a></dt><dd>{{link.description}}</dd>
+      <dt><a itemprop="url" href="{{link.url}}">{{link.title}}</a></dt><dd>{{link.description}}</dd>
       {% endfor %}
     </dl>
 	</div>
