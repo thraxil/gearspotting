@@ -1,11 +1,9 @@
 {% extends "base.html" %}
 
 {% block title %}{{tag}}{% endblock %}
+{% block subhead %}<a href="/gear/tag/">Tag</a>: {{tag}}{% endblock %}
 
 {% block content %}
-
-    <h1><a href="/gear/tag/">Tag</a>: {{tag}} {% if user.is_authenticated %}{% endif %}</h1>
-    
 
 {% if object_list %}
     <ul>Gear:

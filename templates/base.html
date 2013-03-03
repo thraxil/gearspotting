@@ -18,7 +18,10 @@
 	<link rel="shortcut icon" href="/site_media/img/favicon.ico">
 	<link rel="apple-touch-icon" href="/site_media/img/apple-touch-icon.png">
 
-	<link rel="stylesheet" href="/site_media/css/960.css">
+  <link rel="stylesheet"
+				href="/site_media/bootstrap/css/bootstrap.min.css">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="/site_media/bootstrap/css/bootstrap-responsive.min.css" rel="stylesheet">
 	<link rel="stylesheet" href="/site_media/css/main.css">
 	<link rel="stylesheet" media="handheld" href="/site_media/css/handheld.css?v=2">
 	<script src="/site_media/js/libs/modernizr-1.7.min.js"></script></head>
@@ -52,47 +55,37 @@ media="all" />
 
 </head>
 <body>
-	<div id="container">
+    <div class="navbar navbar-fixed-top">
+  		<div class="navbar-inner">
+        <a class="brand" href="/">Gearspotting.com</a>
+        <ul class="nav">
+          <li><a href="/gear/">Gear</a></li>
+          <li><a href="/musician/">Musicians</a></li>
+          <li><a href="/tag/">Tags</a></li>
+        </ul>
+        <form class="navbar-search pull-right" action="/search/" method="get">
+          <input name="q" type="text" class="search-query"
+ 					 placeholder="Search" value="{{q|default:''}}">
+        </form>
 
-<div class="header">
-  <div class="container_12 mainheader">
-    <h1 class="grid_6">Gearspotting.com</h1>
-    <div class="grid_3 prefix_3 usermenu">
+				<ul class="nav pull-right">
       {% if request.user.is_anonymous %}
-      <a href="/accounts/login/">login</a> or <a href="/accounts/register/">signup</a>
+      <li><a href="/accounts/login/">login</a></li>
+			<li><a href="/accounts/register/">or signup</a></li>
       {% else %}
-      logged in as <b>{{ request.user.first_name }} {{ request.user.last_name }}</b>
-      [<a href="/accounts/logout/">logout</a>]
+      <li>logged in as <b>{{ request.user.first_name }} {{ request.user.last_name }}</b></li>
+      <li><a href="/accounts/logout/">logout</a></li>
       {% endif %}
+			</ul>
+
+      </div>
     </div>
-  </div>
+	<div class="container">
+    <h1>{% block subhead %}{% endblock %}</h1>
+   {% block content %}{% endblock %}
 
-  <div class="container_12 mainmenu">
-    <div class="grid_9">
-      <a href="/">home</a>
-      <a href="/gear/">gear</a>
-      <a href="/musician/">musicians</a>
-      <a href="/tag/">tags</a>
-    </div>
-    <div class="grid_3 searchbar">
-      <form action="/search/" method="get"><input type="text"
-      value="{{q|default:'search'}}" name="q" /></form>
-    </div>
-  </div>
-
-</div>
-
-		<div id="main" role="main" class="container_12">
-<div class="grid_1"></div>
-<div class="grid_10">
-<h2>{% block subhead %}{% endblock %}</h2>
-{% block content %}{% endblock %}
-</div>
-<div class="grid_1"></div>
-		</div>
-
-		<footer class="container_12">
-		  <p class="grid_12">Like trainspotting, but for gear.</p>
+		<footer class="">
+		  <p class="muted">Like trainspotting, but for gear.</p>
 		</footer>
 	</div>
 

@@ -1,34 +1,5 @@
-body { background-color: #ddd;}
-.mainheader {background-color: #000; color: #fff; font-family: verdana; border-left: #000 solid 1px; border-right: #000 solid 1px;}
-.mainmenu {background-color: #eee; border-left: #000 solid 1px; border-right: #000 solid 1px;}
-#main {background-color: #fff; border-left: #000 solid 1px; border-right: #000 solid 1px;}
-footer {background-color: #eee; font-size: .8em; color: #999; border-left: #000 solid 1px; border-right: #000 solid 1px;}
-.usermenu { font-size: .8em; align: right;}
-.usermenu a {color: #fff; font-weight: bold;}
-.searchbar input {font-size: .8em; border: #000 solid 1px;}
-.searchbar { align: right;}
-.mainmenu a {margin-right: 1em; color: #000; font-weight: bold;}
-.mainmenu a:hover {background-color: #fff;}
-body {background-image: url('/site_media/img/flybg2000.jpg');
-background-repeat:no-repeat;
-background-attachment:fixed;
-}
-#mainimage {
-float: left;
-width: 200px;
-padding-right: 2em;
-}
-.timestamp {color: #aaa;}
-th {vertical-align: top; text-align: left; 
-    border-bottom: #ddd solid 1px;
-    background-color: #ddf;
-}
-td { border-bottom: #ddd solid 1px;}
-tr.even th {background-color: #eee; text-align: left; vertical-align: top;}
-tr.even td {background-color: #eee;}
-.thumbnail {float: left; padding-right: 2px;}
-.editlink {
-float: right;
-border: #ddd solid 1px;
-padding: 2px;
+
+body { padding-top: 40px; }
+@media screen and (max-width: 768px) {
+    body { padding-top: 0px; }
 }

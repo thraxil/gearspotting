@@ -2,53 +2,71 @@
 {% load thumbnail %}
 {% load markup %}
 {% load tagging_tags %}
-{% block head_title %}{{object.gear.name}} used by {{object.musician.name}}{% endblock %}
+
+{% block title %}{{object.gear.name}} used by {{object.musician.name}}{% endblock %}
+{% block subhead %}<a href="{{object.musician.get_absolute_url}}">{{object.musician.name}}</a>
+    : <a href="{{object.gear.get_absolute_url}}">{{object.gear.name}}</a>{% endblock %}
 
 {% block content %}
 
-    <h1><a href="{{object.musician.get_absolute_url}}">{{object.musician.name}}</a>
-    : <a href="{{object.gear.get_absolute_url}}">{{object.gear.name}}</a></h1>
+<div class="row">
+	<div class="span3">
+    {% if object.musiciangearphoto_set.count %}
+    <img class="img-rounded" src="{% thumbnail object.first_photo.image 200x200 %}" />
+    {% endif %}
+
     {% if user.is_authenticated %}<p class="editlink"><a href="update/">edit</a>
 <br />
   <a href="add_link/" rel="facebox">add link</a><br />
   <a href="add_photo/" rel="facebox">add photo</a><br />
 </p>{% endif %}
-    <p>Manufacturer: <a href="{{object.gear.manufacturer.get_absolute_url}}">{{object.gear.manufacturer.name}}</a></p>
+	</div>
+	<div class="span9">
+		<dl class="dl-horizontal">
+			<dt>Manufacturer</dt>
+			<dd><a href="{{object.gear.manufacturer.get_absolute_url}}">{{object.gear.manufacturer.name}}</a></dd>
+{% if object.description %}
+			<dt>Description</dt>
+			<dd>{{object.description|markdown}}</dd>
+{% endif %}
+			<dt>Added</dt>
+			<dd>{{object.added|date}}</dd>
+			<dt>Modified</dt>
+			<dd>{{object.modified|date}}</dd>
+		</dl>
+	</div>
+</div>
 
-
-    <p class="timestamp">Added: {{object.added|date}}, Modified: {{object.modified|date}}</p>
-
-    {% if object.musiciangearphoto_set.count %}
-    <div id="mainimage">
-    <img src="{% thumbnail object.first_photo.image 200x200 %}" />
-    </div>
-    {% endif %}
-      
-    {{object.description|markdown}}
-
-    <br style="clear:both"/>
-
-    <table width="100%">
-    {% if object.links.count %}
-    <tr><th>Links</th>
-      <td>{% if user.is_authenticated %}<p class="editlink"><a href="update/#links">edit</a></p>{% endif %}
+{% if object.links.count %}
+<div class="row">
+	<div class="span3">
+		<h3>Links</h3>
+    {% if user.is_authenticated %}<p class="editlink"><a href="update/#links">edit</a></p>{% endif %}
+	</div>
+	<div class="span9">
     <ul>
       {% for link in object.links.all %}
       <li><a href="{{link.url}}">{{link.title}}</a> {{link.description}}</li>
       {% endfor %}
     </ul>
-    </td></tr>
-    {% endif %}
+	</div>
+</div>
+{% endif %}
 
-    {% if object.musiciangearphoto_set.count %}
-    <tr><th>Photos</th>
-      <td>{% if user.is_authenticated %}<p class="editlink"><a href="update/#photos">edit</a></p>{% endif %}
-      {% for photo in object.musiciangearphoto_set.all %}
-      <div class="thumbnail"><a href="{{photo.photo.get_absolute_url}}" title="{{photo.photo.caption}}"><img src="{% thumbnail photo.photo.image 100000x100 %}" /></a></div>
-      {% endfor %}
-    </td></tr>
-    {% endif %}
-    </table>
+{% if object.musiciangearphoto_set.count %}
+<div class="row">
+	<div class="span3">
+    <h3>Photos</h3>
+    {% if user.is_authenticated %}<p class="editlink"><a href="update/#photos">edit</a></p>{% endif %}
+	</div>
+	<div class="span9">
+    {% for photo in object.musiciangearphoto_set.all %}
+    <a href="{{photo.photo.get_absolute_url}}"
+    title="{{photo.photo.caption}}"><img class="img-polaroid" src="{% thumbnail photo.photo.image 100000x100 %}" /></a>
+    {% endfor %}
+	</div>
+</div>
+{% endif %}
 
 
 {% endblock %}

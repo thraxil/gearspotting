@@ -1,46 +1,63 @@
 {% extends "base.html" %}
 {% load markup %}
 
-{% block title %}Manufacturers{% endblock %}
+{% block title %}Manufacturer: {{object.name}}{% endblock %}
+{% block subhead %}<a href="/manufacturer/">Manufacturer</a>: {{object.name}}{% endblock %}
 
 {% block content %}
 
-    <h1><a href="/manufacturer/">Manufacturer</a>: {{object.name}}</h1>
+
+<div class="row">
+	<div class="span3">
     {% if user.is_authenticated %}<p class="editlink"><a href="update/">edit</a><br />
   <a href="add_link/" rel="facebox">add link</a><br />
   <a href="add_gear/" rel="facebox">add gear</a><br />
     </p>{% endif %}
-    <p class="timestamp">Added: {{object.added|date}}, Modified: {{object.modified|date}}</p>
-    
-    {{object.description|markdown}}
+	</div>
+	<div class="span9">
+		<dl class="dl-horizontal">
+			<dt>Description</dt>
+			<dd>{{object.description|markdown}}</dd>
 
+			<dt>Added</dt>
+			<dd>{{object.added|date}}</dd>
 
-    <table width="100%">
-    {% if object.links.count %}
-    <tr><th>Links</th>
-      <td>{% if user.is_authenticated %}<p class="editlink"><a href="update/#links">edit</a></p>{% endif %}
+			<dt>Modified</dt>
+			<dd>{{object.modified|date}}</dd>
+		</dl>
+	</div>
+</div>
+
+{% if object.links.count %}
+<div class="row">
+	<div class="span3">
+		<h3>Links</h3>
+    {% if user.is_authenticated %}<p class="editlink"><a href="update/#links">edit</a></p>{% endif %}
+	</div>
+	<div class="span9">
     <ul>
       {% for link in object.links.all %}
       <li><a href="{{link.url}}">{{link.title}}</a> {{link.description}}</li>
       {% endfor %}
     </ul>
-    </td>
-      </tr>
-    {% endif %}
+	</div>
+</div>
+{% endif %}
 
-    {% if object.gear_set.count %}
-    <tr><th>Gear</th>
-      <td>
+{% if object.gear_set.count %}
+<div class="row">
+	<div class="span3">
+    <h3>Gear</h3>
+	</div>
+	<div class="span9">
     <ul>
       {% for gear in object.gear_set.all %}
       <li><a href="{{gear.get_absolute_url}}">{{gear.name}}</a></li>
       {% endfor %}
     </ul>
-    </td>
-    </tr>
-    {% endif %}
-</table>
-
+	</div>
+</div>
+{% endif %}
 
 
 {% endblock %}

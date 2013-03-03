@@ -35,8 +35,8 @@ class MusicianGear(models.Model):
         return LinkFormset(instance=self)
 
     def first_photo(self):
-        if self.musiciangearphotos.count() > 0:
-            return self.musiciangearphotos.all()[0].photo
+        if self.musiciangearphoto_set.count() > 0:
+            return self.musiciangearphoto_set.all()[0].photo
         else:
             return None
 
