@@ -46,6 +46,7 @@ USE_I18N = False
 MEDIA_ROOT = "/var/www/gearspotting/uploads/"
 MEDIA_URL = '/uploads/'
 ADMIN_MEDIA_PREFIX = '/media/'
+STATIC_URL = "/media/"
 SECRET_KEY = 'WHUHGASD%TYJMSAFDS'
 TEMPLATE_LOADERS = (
    'django.template.loaders.filesystem.Loader',

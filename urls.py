@@ -18,7 +18,7 @@ urlpatterns = patterns(
     (r'^search/$', 'main.views.search'),
     (r'^accounts/profile/$', direct_to_template, {'template': 'registration/profile.html'}),
     (r'^accounts/', include('registration.backends.default.urls')),
-    (r'^admin/(.*)', include(admin.site.urls)),
+    (r'^admin/', include(admin.site.urls)),
     (r'^munin/',include('munin.urls')),
     (r'^gear/',include('gear.urls')),
     (r'^musician/',include('musician.urls')),
