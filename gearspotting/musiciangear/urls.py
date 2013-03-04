@@ -1,5 +1,5 @@
 from django.conf.urls.defaults import patterns
-from musiciangear.models import MusicianGear
+from gearspotting.musiciangear.models import MusicianGear
 
 info_dict = {
     'queryset': MusicianGear.objects.all(),

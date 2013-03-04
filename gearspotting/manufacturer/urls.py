@@ -1,6 +1,6 @@
 from django.conf.urls.defaults import patterns
 
-from manufacturer.models import Manufacturer, ManufacturerForm
+from gearspotting.manufacturer.models import Manufacturer, ManufacturerForm
 
 info_dict = {
     'queryset': Manufacturer.objects.all(),

@@ -1,11 +1,12 @@
 from django.db import models
-from django.contrib import admin
-from link.models import Link, LinkInline
-from gear.models import Gear
-from musician.models import Musician
-from photo.models import Photo, PhotoInline
+from gearspotting.manufacturer.models import Manufacturer
+from gearspotting.link.models import Link
+from gearspotting.photo.models import Photo
 from django.contrib.contenttypes import generic
 from django.forms import ModelForm
+import tagging
+from django.template.defaultfilters import slugify
+
 from south.modelsinspector import add_introspection_rules
 
 add_introspection_rules(
@@ -16,32 +17,41 @@ add_introspection_rules(
      "django_extensions.db.fields.UUIDField"])
 
 
-class MusicianGear(models.Model):
-    musician = models.ForeignKey(Musician)
-    gear = models.ForeignKey(Gear)
+class Gear(models.Model):
+    name = models.CharField(default="", max_length=256)
+    slug = models.SlugField(max_length=256, editable=False)
+    manufacturer = models.ForeignKey(Manufacturer)
     description = models.TextField(default="", blank=True)
+    tags = tagging.fields.TagField()
     links = generic.GenericRelation(Link)
     added = models.DateTimeField(auto_now_add=True, editable=False)
     modified = models.DateTimeField(auto_now=True, editable=False)
 
+    class Meta:
+        ordering = ["manufacturer__name", "name", ]
+
     def get_absolute_url(self):
-        return "/musiciangear/%d/" % self.id
+        return "/gear/%s/" % self.slug
 
     def __unicode__(self):
-        return "%s - %s" % (self.musician.name, self.gear.name)
+        return self.manufacturer.name + ": " + self.name
 
     def links_formset(self):
         LinkFormset = generic.generic_inlineformset_factory(Link, extra=1)
         return LinkFormset(instance=self)
 
+    def save(self, *args, **kwargs):
+        self.slug = slugify(self.manufacturer.name + "-" + self.name)[:256]
+        super(Gear, self).save(*args, **kwargs)
+
     def first_photo(self):
-        if self.musiciangearphoto_set.count() > 0:
-            return self.musiciangearphoto_set.all()[0].photo
+        if self.gearphoto_set.count() > 0:
+            return self.gearphoto_set.all()[0].photo
         else:
             return None
 
     def type_display(self):
-        return "Musician Gear"
+        return "Gear"
 
     def add_link_form(self):
         class LinkForm(ModelForm):
@@ -51,11 +61,12 @@ class MusicianGear(models.Model):
         return LinkForm
 
 
-class MusicianGearPhoto(models.Model):
-    musiciangear = models.ForeignKey(MusicianGear)
+class GearPhoto(models.Model):
+    gear = models.ForeignKey(Gear)
     photo = models.ForeignKey(Photo)
 
 
-class MusicianGearAdmin(admin.ModelAdmin):
-    inlines = [LinkInline, PhotoInline]
-admin.site.register(MusicianGear, MusicianGearAdmin)
+class AddGearForm(ModelForm):
+    class Meta:
+        model = Gear
+        exclude = ('manufacturer',)

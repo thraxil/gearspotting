@@ -1,8 +1,6 @@
 import os, sys, site
 
 # paths we might need to pick up the project's settings
-sys.path.append('/var/www/')
-sys.path.append('/var/www/gearspotting/')
 sys.path.append('/var/www/gearspotting/gearspotting/')
 
 os.environ['DJANGO_SETTINGS_MODULE'] = 'gearspotting.settings_production'

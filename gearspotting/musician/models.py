@@ -1,6 +1,6 @@
 from django.db import models
-from link.models import Link
-from photo.models import Photo
+from gearspotting.link.models import Link
+from gearspotting.photo.models import Photo
 from django.forms import ModelForm, Textarea
 from django.contrib.contenttypes import generic
 from django.template.defaultfilters import slugify

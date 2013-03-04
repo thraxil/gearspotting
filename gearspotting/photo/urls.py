@@ -1,6 +1,6 @@
 from django.conf.urls.defaults import patterns
 
-from photo.models import Photo
+from gearspotting.photo.models import Photo
 
 info_dict = {
     'queryset': Photo.objects.all(),

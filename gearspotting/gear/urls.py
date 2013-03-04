@@ -1,6 +1,6 @@
 from django.conf.urls.defaults import patterns, url
 
-from gear.models import Gear
+from gearspotting.gear.models import Gear
 from tagging.views import tagged_object_list
 
 info_dict = {

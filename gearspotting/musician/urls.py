@@ -1,6 +1,6 @@
 from django.conf.urls.defaults import patterns, url
 
-from musician.models import Musician, MusicianForm
+from gearspotting.musician.models import Musician, MusicianForm
 from tagging.views import tagged_object_list
 
 info_dict = {

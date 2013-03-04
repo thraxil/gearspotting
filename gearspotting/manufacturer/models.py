@@ -1,5 +1,5 @@
 from django.db import models
-from link.models import Link
+from gearspotting.link.models import Link
 from django.forms import ModelForm
 from django.contrib.contenttypes import generic
 from django.template.defaultfilters import slugify

@@ -70,7 +70,7 @@ MIDDLEWARE_CLASSES = (
 ROOT_URLCONF = 'gearspotting.urls'
 
 TEMPLATE_DIRS = (
-    "/var/www/gearspotting/templates/",
+    "/var/www/gearspotting/gearspotting/templates/",
     os.path.join(os.path.dirname(__file__),"templates"),
 )
 
@@ -89,23 +89,22 @@ INSTALLED_APPS = (
     'template_utils',
     'typogrify',
     'munin',
-    'main',
-    'musician',
-    'gear',
-    'photo',
-    'link',
-    'manufacturer',
-    'htags',
+    'gearspotting.main',
+    'gearspotting.musician',
+    'gearspotting.gear',
+    'gearspotting.photo',
+    'gearspotting.link',
+    'gearspotting.manufacturer',
+    'gearspotting.htags',
     'treebeard',
-    'registration',
-    'musiciangear',
+    'gearspotting.musiciangear',
     'south',
     'django_nose',
     'bootstrapform',
     'easy_thumbnails',
     'guardian',
     'userena',
-    'profile',
+    'gearspotting.profile',
 )
 
 ACCOUNT_ACTIVATION_DAYS = 7
