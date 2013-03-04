@@ -101,6 +101,7 @@ INSTALLED_APPS = (
     'musiciangear',
     'south',
     'django_nose',
+    'bootstrapform',
 )
 
 ACCOUNT_ACTIVATION_DAYS = 7
