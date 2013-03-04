@@ -76,15 +76,15 @@ media="all" />
 
 				<ul class="nav pull-right">
       {% if request.user.is_anonymous %}
-      <li><a href="/accounts/login/">login</a></li>
+      <li><a href="/accounts/signin/">login</a></li>
 			<li><a href="/accounts/register/">or signup</a></li>
       {% else %}
-      <li><a href="/">logged in as <b>{% if request.user.last_name %}
+      <li><a href="/accounts/{{request.user.username}}/">logged in as <b>{% if request.user.last_name %}
 					{{ request.user.first_name }} {{ request.user.last_name }}
 					{% else %}
 					{{ request.user.username }}
 					{% endif %}</b></a></li>
-      <li><a href="/accounts/logout/">logout</a></li>
+      <li><a href="/accounts/signout/">logout</a></li>
       {% endif %}
 			</ul>
 

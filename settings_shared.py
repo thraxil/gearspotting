@@ -102,10 +102,17 @@ INSTALLED_APPS = (
     'south',
     'django_nose',
     'bootstrapform',
+    'easy_thumbnails',
+    'guardian',
+    'userena',
+    'profile',
 )
 
 ACCOUNT_ACTIVATION_DAYS = 7
-LOGIN_REDIRECT_URL = "/"
+
+LOGIN_REDIRECT_URL = '/accounts/%(username)s/'
+LOGIN_URL = '/accounts/signin/'
+LOGOUT_URL = '/accounts/signout/'
 
 THUMBNAIL_SUBDIR = "thumbs"
 EMAIL_SUBJECT_PREFIX = "[gearspotting] "
@@ -121,3 +128,11 @@ SOUTH_AUTO_FREEZE_APP = True
 
 SESSION_ENGINE = "django.contrib.sessions.backends.signed_cookies"
 SESSION_COOKIE_HTTPONLY = True
+
+AUTHENTICATION_BACKENDS = (
+    'userena.backends.UserenaAuthenticationBackend',
+    'django.contrib.auth.backends.ModelBackend', # default
+    'guardian.backends.ObjectPermissionBackend',
+)
+ANONYMOUS_USER_ID = -1
+AUTH_PROFILE_MODULE = 'profile.MyProfile'
