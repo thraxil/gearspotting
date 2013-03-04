@@ -79,7 +79,11 @@ media="all" />
       <li><a href="/accounts/login/">login</a></li>
 			<li><a href="/accounts/register/">or signup</a></li>
       {% else %}
-      <li>logged in as <b>{{ request.user.first_name }} {{ request.user.last_name }}</b></li>
+      <li><a href="/">logged in as <b>{% if request.user.last_name %}
+					{{ request.user.first_name }} {{ request.user.last_name }}
+					{% else %}
+					{{ request.user.username }}
+					{% endif %}</b></a></li>
       <li><a href="/accounts/logout/">logout</a></li>
       {% endif %}
 			</ul>
