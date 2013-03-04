@@ -39,7 +39,7 @@ class Manufacturer(models.Model):
         super(Manufacturer, self).save(*args, **kwargs)
 
     def add_gear_form(self):
-        from gear.models import AddGearForm
+        from gearspotting.gear.models import AddGearForm
         return AddGearForm
 
     def add_link_form(self):

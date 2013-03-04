@@ -20,8 +20,8 @@ urlpatterns = patterns(
     (r'^(?P<object_id>\d+)/$',
      'django.views.generic.list_detail.object_detail',
      info_dict),
-    (r'^(?P<id>\d+)/edit_links/?$', 'musiciangear.views.edit_links'),
-    (r'^(?P<id>\d+)/edit_photos/?$', 'musiciangear.views.edit_photos'),
-    (r'^(?P<id>\d+)/add_link/$', 'musiciangear.views.add_link'),
-    (r'^(?P<id>\d+)/add_photo/$', 'musiciangear.views.add_photo'),
+    (r'^(?P<id>\d+)/edit_links/?$', 'gearspotting.musiciangear.views.edit_links'),
+    (r'^(?P<id>\d+)/edit_photos/?$', 'gearspotting.musiciangear.views.edit_photos'),
+    (r'^(?P<id>\d+)/add_link/$', 'gearspotting.musiciangear.views.add_link'),
+    (r'^(?P<id>\d+)/add_photo/$', 'gearspotting.musiciangear.views.add_photo'),
 )

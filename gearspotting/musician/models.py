@@ -48,7 +48,7 @@ class Musician(models.Model):
         return LinkForm
 
     def add_gear_form(self):
-        from musiciangear.models import MusicianGear
+        from gearspotting.musiciangear.models import MusicianGear
 
         class GearForm(ModelForm):
             class Meta:
@@ -61,7 +61,7 @@ class Musician(models.Model):
         super(Musician, self).save(*args, **kwargs)
 
     def gear_formset(self):
-        from musiciangear.models import MusicianGear
+        from gearspotting.musiciangear.models import MusicianGear
         GearFormSet = inlineformset_factory(Musician, MusicianGear, extra=1)
         return GearFormSet(instance=self)
 

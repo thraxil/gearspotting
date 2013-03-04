@@ -1,4 +1,4 @@
-from photo.models import ImportPhotoForm
+from gearspotting.photo.models import ImportPhotoForm
 from django.http import HttpResponseRedirect
 from django.template import RequestContext
 from django.shortcuts import render_to_response
@@ -7,9 +7,9 @@ from django.conf import settings
 import os
 import os.path
 from datetime import datetime
-import musician.models
-import gear.models
-import manufacturer.models as manmodels
+import gearspotting.musician.models
+import gearspotting.gear.models
+import gearspotting.manufacturer.models as manmodels
 import re
 
 
