@@ -1,7 +1,7 @@
 from settings_shared import *
 
 TEMPLATE_DIRS = (
-    "/var/www/gearspotting/gearspotting/templates",
+    "/var/www/gearspotting/gearspotting/gearspotting/templates",
 )
 
 MEDIA_ROOT = '/var/www/gearspotting/uploads/'
