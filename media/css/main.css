@@ -7,3 +7,7 @@ body { padding-top: 40px; }
 textarea {
 		width: 70em;
 }
+
+.byline {
+		margin-bottom: 2em;
+}
