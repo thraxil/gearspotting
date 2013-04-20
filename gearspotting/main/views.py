@@ -2,6 +2,7 @@ from django.template import RequestContext
 from django.shortcuts import render_to_response
 from gearspotting.gear.models import Gear
 from gearspotting.musician.models import Musician
+from gearspotting.blog.models import Post
 
 
 class rendered_with(object):
@@ -22,9 +23,11 @@ class rendered_with(object):
 
 @rendered_with("homepage.html")
 def index(request):
-    return dict(newest_gear=Gear.objects.all().order_by("-added")[:10],
-                newest_musicians=Musician.objects.all().order_by(
-                    "-added")[:10])
+    return dict(
+        newest_gear=Gear.objects.all().order_by("-added")[:10],
+        newest_musicians=Musician.objects.all().order_by("-added")[:10],
+        newest_posts=Post.objects.all()[:10],
+        )
 
 
 @rendered_with('main/tags.html')

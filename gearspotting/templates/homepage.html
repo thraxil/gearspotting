@@ -35,4 +35,14 @@
     </ul>
 </div>
 
+<div class="span12">
+	<h3>Latest Blog Posts</h3>
+	
+  <ul>
+		{% for post in newest_posts %}
+		<li><a href="{{post.get_absolute_url}}">{{post.title}}</a> [{{post.published}}]</li>
+		{% endfor %}
+	</ul>
+</div>
+
 {% endblock %}
