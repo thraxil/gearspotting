@@ -18,7 +18,7 @@
 <div class="row muted">
 	by <span itemprop="author" itemscope itemtype="http://schema.org/Person">
     <span itemprop="name">
-			<a itemprop="url" rel="author" href="{{post.author.get_absolute_url}}">{{post.author.username}}</a>
+			<a itemprop="url" rel="author" href="/accounts/{{post.author.username}}/">{{post.author.username}}</a>
 		</span>
 	</span>
 	<time datetime="{{post.published|date:'c'}}" itemprop="datePublished">{{post.published}}</time>

@@ -13,6 +13,7 @@ from gearspotting.musician.models import Musician
 from gearspotting.musiciangear.models import MusicianGear
 from gearspotting.manufacturer.models import Manufacturer
 from gearspotting.photo.models import Photo
+from gearspotting.blog.models import Post
 
 site_media_root = os.path.join(os.path.dirname(__file__), "../media")
 
@@ -36,6 +37,10 @@ photo_info_dict = {
     'queryset': Photo.objects.all(),
     'date_field': 'modified',
 }
+post_info_dict = {
+    'queryset': Post.objects.all(),
+    'date_field': 'modified',
+}
 
 sitemaps = {
     'gear': GenericSitemap(gear_info_dict, priority=0.6),
@@ -43,6 +48,7 @@ sitemaps = {
     'musiciangears': GenericSitemap(musiciangear_info_dict, priority=0.6),
     'manufacturers': GenericSitemap(manufacturer_info_dict, priority=0.6),
     'photos': GenericSitemap(photo_info_dict, priority=0.6),
+    'posts': GenericSitemap(post_info_dict, priority=0.6),
 }
 
 urlpatterns = patterns(
