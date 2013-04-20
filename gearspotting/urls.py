@@ -1,9 +1,8 @@
-from django.conf.urls.defaults import *
+from django.conf.urls.defaults import patterns, include
 from django.contrib import admin
 from django.conf import settings
-from django.contrib.sitemaps import FlatPageSitemap, GenericSitemap
+from django.contrib.sitemaps import GenericSitemap
 import os.path
-from django.views.generic.simple import direct_to_template
 admin.autodiscover()
 import staticmedia
 
@@ -53,16 +52,19 @@ urlpatterns = patterns(
     (r'^search/$', 'gearspotting.main.views.search'),
     (r'^accounts/', include('userena.urls')),
     (r'^admin/', include(admin.site.urls)),
-    (r'^munin/',include('munin.urls')),
-    (r'^gear/',include('gearspotting.gear.urls')),
-    (r'^musician/',include('gearspotting.musician.urls')),
-    (r'^musiciangear/',include('gearspotting.musiciangear.urls')),
-    (r'^manufacturer/',include('gearspotting.manufacturer.urls')),
-    (r'^photos/',include('gearspotting.photo.urls')),
+    (r'^munin/', include('munin.urls')),
+    (r'^gear/', include('gearspotting.gear.urls')),
+    (r'^musician/', include('gearspotting.musician.urls')),
+    (r'^musiciangear/', include('gearspotting.musiciangear.urls')),
+    (r'^manufacturer/', include('gearspotting.manufacturer.urls')),
+    (r'^photos/', include('gearspotting.photo.urls')),
     (r'^feeds/gear/$', GearFeed()),
     (r'^feeds/musician/$', MusicianFeed()),
-    (r'^sitemap\.xml$', 'django.contrib.sitemaps.views.sitemap', {'sitemaps': sitemaps}),
-    (r'^site_media/(?P<path>.*)$', 'django.views.static.serve', {'document_root': site_media_root}),
-    (r'^uploads/(?P<path>.*)$', 'django.views.static.serve',{'document_root' : settings.MEDIA_ROOT}),
+    (r'^sitemap\.xml$',
+     'django.contrib.sitemaps.views.sitemap',
+     {'sitemaps': sitemaps}),
+    (r'^site_media/(?P<path>.*)$', 'django.views.static.serve',
+     {'document_root': site_media_root}),
+    (r'^uploads/(?P<path>.*)$', 'django.views.static.serve',
+     {'document_root': settings.MEDIA_ROOT}),
 ) + staticmedia.serve()
-

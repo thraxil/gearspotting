@@ -7,8 +7,8 @@ from django.conf import settings
 import os
 import os.path
 from datetime import datetime
-import gearspotting.musician.models
-import gearspotting.gear.models
+import gearspotting.musician.models as musician
+import gearspotting.gear.models as gear
 import gearspotting.manufacturer.models as manmodels
 import re
 

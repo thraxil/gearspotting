@@ -28,7 +28,8 @@ urlpatterns = patterns(
      'django.views.generic.list_detail.object_detail',
      dict(slug_field='slug', queryset=Gear.objects.all())),
     (r'^(?P<slug>[^/]+)/edit_links/?$', 'gearspotting.gear.views.edit_links'),
-    (r'^(?P<slug>[^/]+)/edit_photos/?$', 'gearspotting.gear.views.edit_photos'),
+    (r'^(?P<slug>[^/]+)/edit_photos/?$',
+     'gearspotting.gear.views.edit_photos'),
     (r'^(?P<slug>[^/]+)/add_link/$', 'gearspotting.gear.views.add_link'),
     (r'^(?P<slug>[^/]+)/add_photo/$', 'gearspotting.gear.views.add_photo'),
 )

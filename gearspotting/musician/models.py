@@ -1,7 +1,7 @@
 from django.db import models
 from gearspotting.link.models import Link
 from gearspotting.photo.models import Photo
-from django.forms import ModelForm, Textarea
+from django.forms import ModelForm
 from django.contrib.contenttypes import generic
 from django.template.defaultfilters import slugify
 import tagging
@@ -83,4 +83,3 @@ class MusicianPhoto(models.Model):
 class MusicianForm(ModelForm):
     class Meta:
         model = Musician
-
