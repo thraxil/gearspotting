@@ -8,6 +8,7 @@ import staticmedia
 
 from gearspotting.gear.feeds import GearFeed
 from gearspotting.musician.feeds import MusicianFeed
+from gearspotting.blog.feeds import BlogFeed
 from gearspotting.gear.models import Gear
 from gearspotting.musician.models import Musician
 from gearspotting.musiciangear.models import MusicianGear
@@ -67,6 +68,7 @@ urlpatterns = patterns(
     (r'^photos/', include('gearspotting.photo.urls')),
     (r'^feeds/gear/$', GearFeed()),
     (r'^feeds/musician/$', MusicianFeed()),
+    (r'^feeds/blog/$', BlogFeed()),
     (r'^sitemap\.xml$',
      'django.contrib.sitemaps.views.sitemap',
      {'sitemaps': sitemaps}),
