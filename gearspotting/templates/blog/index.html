@@ -1,8 +1,9 @@
 {% extends 'base.html' %}
 {% load markup %}
 
+{% block containerextra %}itemscope itemtype="http://schema.org/Blog"{% endblock %}
 {% block title %}Blog{% endblock %}
-{% block subhead %}Gearspotting Blog{% endblock %}
+{% block subhead %}<span itemprop="name">Gearspotting Blog</span>{% endblock %}
 
 {% block content %}
 {% if user.is_authenticated %}
@@ -10,16 +11,23 @@
 {% endif %}
 
 {% for post in posts %}
+<div itemscope itemtype="http://schema.org/BlogPosting">
 <div class="row">
-	<h2><a href="{{post.get_absolute_url}}">{{post.title}}</a></h2>
+	<h2 itemprop="name headline"><a itemprop="url" href="{{post.get_absolute_url}}">{{post.title}}</a></h2>
 </div>
 <div class="row muted">
-	by <a href="{{post.author.get_absolute_url}}">{{post.author.username}}</a>
-	{{post.published}}
+	by <span itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <span itemprop="name">
+			<a itemprop="url" rel="author" href="{{post.author.get_absolute_url}}">{{post.author.username}}</a>
+		</span>
+	</span>
+	<time datetime="{{post.published|date:'c'}}" itemprop="datePublished">{{post.published}}</time>
 </div>
 
+<div itemprop="articleBody">
 {{post.body|markdown}}
-
+</div>
+</div>
 {% endfor %}
 
 {% endblock %}
