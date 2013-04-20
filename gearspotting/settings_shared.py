@@ -106,6 +106,7 @@ INSTALLED_APPS = (
     'userena',
     'gearspotting.profile',
     'django.contrib.sitemaps',
+    'gearspotting.blog',
 )
 
 ACCOUNT_ACTIVATION_DAYS = 7

@@ -4,7 +4,7 @@ import datetime
 from south.db import db
 from south.v2 import DataMigration
 from django.db import models
-from musician.models import Musician,MusicianPhoto
+from gearspotting.musician.models import Musician,MusicianPhoto
 
 class Migration(DataMigration):
 

@@ -4,8 +4,8 @@ import datetime
 from south.db import db
 from south.v2 import DataMigration
 from django.db import models
-from gear.models import Gear, GearPhoto
-from photo.models import Photo
+from gearspotting.gear.models import Gear, GearPhoto
+from gearspotting.photo.models import Photo
 
 class Migration(DataMigration):
 

@@ -54,6 +54,7 @@ urlpatterns = patterns(
     (r'^admin/', include(admin.site.urls)),
     (r'^munin/', include('munin.urls')),
     (r'^gear/', include('gearspotting.gear.urls')),
+    (r'^blog/', include('gearspotting.blog.urls')),
     (r'^musician/', include('gearspotting.musician.urls')),
     (r'^musiciangear/', include('gearspotting.musiciangear.urls')),
     (r'^manufacturer/', include('gearspotting.manufacturer.urls')),
