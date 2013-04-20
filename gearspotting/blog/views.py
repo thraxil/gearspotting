@@ -3,6 +3,7 @@ from django.contrib.auth.models import User
 from django.shortcuts import get_object_or_404
 from django.shortcuts import render, redirect
 from django.template.defaultfilters import slugify
+from django.contrib.sitemaps import ping_google
 
 
 def index(request):
@@ -25,6 +26,10 @@ def add_post(request):
             title=title,
             slug=slug,
         )
+        try:
+            ping_google('/sitemap.xml')
+        except:
+            pass
         return redirect("/blog/")
     return render(
         request,
