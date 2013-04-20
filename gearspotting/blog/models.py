@@ -10,6 +10,9 @@ class Post(models.Model):
     published = models.DateTimeField(auto_now_add=True)
     modified = models.DateTimeField(auto_now=True)
 
+    class Meta:
+        ordering = ('-published', )
+
     def __unicode__(self):
         return self.title
 

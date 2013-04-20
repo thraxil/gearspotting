@@ -1,9 +1,25 @@
 {% extends 'base.html' %}
+{% load markup %}
+
+{% block title %}Blog{% endblock %}
+{% block subhead %}Gearspotting Blog{% endblock %}
 
 {% block content %}
-<h1>Gearspotting Blog</h1>
+{% if user.is_authenticated %}
+<p class="editlink"><a href="post/">post</a><br />
+{% endif %}
+
 {% for post in posts %}
-<h2>{{post.title}}</h2>
+<div class="row">
+	<h2><a href="{{post.get_absolute_url}}">{{post.title}}</a></h2>
+</div>
+<div class="row muted">
+	by <a href="{{post.author.get_absolute_url}}">{{post.author.username}}</a>
+	{{post.published}}
+</div>
+
+{{post.body|markdown}}
+
 {% endfor %}
 
 {% endblock %}
