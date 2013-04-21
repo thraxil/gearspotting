@@ -19,7 +19,7 @@ def add_post(request):
         if not request.POST.get('body', False):
             return redirect("/blog/post/")
         title = request.POST.get('title', 'no title')
-        slug = slugify(title)
+        slug = slugify(title)[:50]
         Post.objects.create(
             author=request.user,
             body=request.POST.get('body', ''),
