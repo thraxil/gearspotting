@@ -73,6 +73,5 @@ def link_text(text):
                     % (slugify(musician_name),
                        musician_name)
                     )
-
         results.append(part)
     return ''.join(results)
