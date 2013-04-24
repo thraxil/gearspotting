@@ -1,6 +1,8 @@
 from django.db import models
 from django.contrib.auth.models import User
 from django.template.defaultfilters import slugify
+from gearspotting.gear.models import Gear
+from gearspotting.musician.models import Musician
 import re
 
 
@@ -29,6 +31,16 @@ class Post(models.Model):
 
     def linked_body(self):
         return link_text(self.body)
+
+
+class PostGear(models.Model):
+    post = models.ForeignKey(Post)
+    gear = models.ForeignKey(Gear)
+
+
+class PostMusician(models.Model):
+    post = models.ForeignKey(Post)
+    musician = models.ForeignKey(Musician)
 
 
 def link_text(text):
