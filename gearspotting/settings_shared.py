@@ -60,6 +60,8 @@ TEMPLATE_CONTEXT_PROCESSORS = (
 )
 
 MIDDLEWARE_CLASSES = (
+    'django_statsd.middleware.GraphiteRequestTimingMiddleware',
+    'django_statsd.middleware.GraphiteMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
@@ -107,6 +109,7 @@ INSTALLED_APPS = (
     'gearspotting.profile',
     'django.contrib.sitemaps',
     'gearspotting.blog',
+    'django_statsd',
 )
 
 ACCOUNT_ACTIVATION_DAYS = 7
@@ -139,3 +142,9 @@ ANONYMOUS_USER_ID = -1
 AUTH_PROFILE_MODULE = 'profile.MyProfile'
 
 USERENA_DEFAULT_PRIVACY = "open"
+
+STATSD_CLIENT = 'statsd.client'
+STATSD_PREFIX = 'gearspotting'
+STATSD_HOST = '127.0.0.1'
+STATSD_PORT = 8125
+STATSD_PATCHES = ['django_statsd.patches.db', ]

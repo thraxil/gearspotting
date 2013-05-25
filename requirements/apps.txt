@@ -19,3 +19,4 @@ requirements/src/django-bootstrap-form-2.0.3.tar.gz
 requirements/src/easy-thumbnails-1.2.tar.gz
 requirements/src/django-guardian-1.1.0.beta.tar.gz
 requirements/src/django-userena-1.2.0.tar.gz
+requirements/src/django-statsd-mozilla-0.3.3.tar.gz
