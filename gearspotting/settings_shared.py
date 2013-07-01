@@ -110,6 +110,7 @@ INSTALLED_APPS = (
     'django.contrib.sitemaps',
     'gearspotting.blog',
     'django_statsd',
+    'gunicorn',
 )
 
 ACCOUNT_ACTIVATION_DAYS = 7
