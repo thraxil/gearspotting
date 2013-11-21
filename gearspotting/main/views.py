@@ -27,7 +27,7 @@ def index(request):
         newest_gear=Gear.objects.all().order_by("-added")[:10],
         newest_musicians=Musician.objects.all().order_by("-added")[:10],
         newest_posts=Post.objects.all()[:10],
-        )
+    )
 
 
 @rendered_with('main/tags.html')

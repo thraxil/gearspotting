@@ -77,13 +77,13 @@ def link_text(text):
                     """<a href="/manufacturer/%s/">%s</a>"""
                     % (slugify(manufacturer_name),
                        manufacturer_name)
-                    )
+                )
             if parts[0].lower() == 'musician':
                 musician_name = parts[1]
                 part = (
                     """<a href="/musician/%s/">%s</a>"""
                     % (slugify(musician_name),
                        musician_name)
-                    )
+                )
         results.append(part)
     return ''.join(results)
