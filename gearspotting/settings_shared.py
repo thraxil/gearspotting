@@ -90,7 +90,6 @@ INSTALLED_APPS = (
     'smartif',
     'template_utils',
     'typogrify',
-    'munin',
     'gearspotting.main',
     'gearspotting.musician',
     'gearspotting.gear',

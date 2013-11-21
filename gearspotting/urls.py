@@ -59,7 +59,6 @@ urlpatterns = patterns(
     (r'^search/$', 'gearspotting.main.views.search'),
     (r'^accounts/', include('userena.urls')),
     (r'^admin/', include(admin.site.urls)),
-    (r'^munin/', include('munin.urls')),
     (r'^gear/', include('gearspotting.gear.urls')),
     (r'^blog/', include('gearspotting.blog.urls')),
     (r'^musician/', include('gearspotting.musician.urls')),
