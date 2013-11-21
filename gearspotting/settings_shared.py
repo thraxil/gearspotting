@@ -97,7 +97,6 @@ INSTALLED_APPS = (
     'gearspotting.link',
     'gearspotting.manufacturer',
     'gearspotting.htags',
-    'treebeard',
     'gearspotting.musiciangear',
     'south',
     'django_nose',

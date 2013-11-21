@@ -24,7 +24,6 @@ django-staticmedia==0.2
 django-indexer==0.2.1
 django-templatetag-sugar==0.1
 django-paging==0.2.2
-django-treebeard==1.61
 django-registration==0.8-alpha-1
 South==0.8.1
 django-nose==0.1.3
