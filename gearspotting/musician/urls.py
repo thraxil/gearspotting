@@ -1,7 +1,10 @@
 from django.conf.urls.defaults import patterns, url
+from django.views.generic.detail import DetailView
+from django.views.generic.list import ListView
+from django.views.generic.edit import CreateView, UpdateView, DeleteView
 
 from gearspotting.musician.models import Musician, MusicianForm
-from tagging.views import tagged_object_list
+#from tagging.views import tagged_object_list
 
 info_dict = {
     'queryset': Musician.objects.all(),
@@ -9,20 +12,19 @@ info_dict = {
 
 urlpatterns = patterns(
     '',
-    (r'^$', 'django.views.generic.list_detail.object_list', info_dict),
-    (r'^create/?$', 'django.views.generic.create_update.create_object',
-     dict(form_class=MusicianForm, post_save_redirect="/musician/")),
+    (r'^$', ListView.as_view(model=Musician)),
+    (r'^create/?$',
+     CreateView.as_view(
+         form_class=MusicianForm, model=Musician)),
     (r'^(?P<slug>[^/]+)/update/?$',
-     'django.views.generic.create_update.update_object',
-     dict(form_class=MusicianForm, post_save_redirect="/musician/")),
-    (r'^(?P<slug>[^/]+)/delete/?$',
-     'django.views.generic.create_update.delete_object',
-     dict(model=Musician, post_delete_redirect="/musician/")),
-    url(r'^tag/(?P<tag>[^/]+)/$',
-        tagged_object_list,
-        dict(queryset_or_model=Musician, paginate_by=100, allow_empty=True,
-             template_name="musician/musician_tag_list.html"),
-        name='musician_tag_detail'),
+     UpdateView.as_view(
+         form_class=MusicianForm, model=Musician)),
+    (r'^(?P<slug>[^/]+)/delete/?$', DeleteView.as_view(model=Musician)),
+    # url(r'^tag/(?P<tag>[^/]+)/$',
+    #     tagged_object_list,
+    #     dict(queryset_or_model=Musician, paginate_by=100, allow_empty=True,
+    #          template_name="musician/musician_tag_list.html"),
+    #     name='musician_tag_detail'),
     url(r'^tag/$', 'gearspotting.musician.views.tags'),
     (r'^(?P<slug>[^/]+)/edit_links/?$',
      'gearspotting.musician.views.edit_links'),
@@ -33,7 +35,5 @@ urlpatterns = patterns(
      'gearspotting.musician.views.edit_photos'),
     (r'^(?P<slug>[^/]+)/edit_gear/?$',
      'gearspotting.musician.views.edit_gear'),
-    (r'^(?P<slug>[^/]+)/$',
-     'django.views.generic.list_detail.object_detail',
-     info_dict),
+    (r'^(?P<slug>[^/]+)/$', DetailView.as_view(model=Musician)),
 )
