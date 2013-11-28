@@ -15,18 +15,18 @@
 	
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	
-	<link rel="shortcut icon" href="/site_media/img/favicon.ico">
-	<link rel="apple-touch-icon" href="/site_media/img/apple-touch-icon.png">
+	<link rel="shortcut icon" href="{{STATIC_URL}}img/favicon.ico">
+	<link rel="apple-touch-icon" href="{{STATIC_URL}}img/apple-touch-icon.png">
 
   <link rel="stylesheet"
-				href="/site_media/bootstrap/css/bootstrap.min.css">
+				href="{{STATIC_URL}}bootstrap/css/bootstrap.min.css">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link href="/site_media/bootstrap/css/bootstrap-responsive.min.css" rel="stylesheet">
-	<link rel="stylesheet" href="/site_media/css/main.css">
-	<link rel="stylesheet" media="handheld" href="/site_media/css/handheld.css?v=2">
-	<script src="/site_media/js/libs/modernizr-1.7.min.js"></script>
+  <link href="{{STATIC_URL}}bootstrap/css/bootstrap-responsive.min.css" rel="stylesheet">
+	<link rel="stylesheet" href="{{STATIC_URL}}css/main.css">
+	<link rel="stylesheet" media="handheld" href="{{STATIC_URL}}css/handheld.css?v=2">
+	<script src="{{STATIC_URL}}js/libs/modernizr-1.7.min.js"></script>
 
-	<link rel="shortcut icon" href="/site_media/img/favicon.ico" type="image/x-icon" />
+	<link rel="shortcut icon" href="{{STATIC_URL}}img/favicon.ico" type="image/x-icon" />
 
 	<link href="/feeds/gear/" type="application/atom+xml"
 	rel="alternate" title="Atom feed of new Gear" />
@@ -104,9 +104,9 @@ media="all" />
 	</div>
 
 	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.5.1/jquery.min.js"></script>
-	<script>!window.jQuery && document.write(unescape('%3Cscript src="/site_media/js/libs/jquery-1.5.1.min.js"%3E%3C/script%3E'))</script>
-	<script src="/site_media/js/plugins.js"></script>
-	<script src="/site_media/js/script.js"></script>
+	<script>!window.jQuery && document.write(unescape('%3Cscript src="{{STATIC_URL}}js/libs/jquery-1.5.1.min.js"%3E%3C/script%3E'))</script>
+	<script src="{{STATIC_URL}}js/plugins.js"></script>
+	<script src="{{STATIC_URL}}js/script.js"></script>
 	<!--[if lt IE 7 ]>
 	<script src="js/libs/dd_belatedpng.js"></script>
 	<script> DD_belatedPNG.fix('img, .png_bg');</script>

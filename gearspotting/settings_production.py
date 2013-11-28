@@ -8,12 +8,15 @@ TEMPLATE_DIRS = (
 MEDIA_ROOT = '/var/www/gearspotting/uploads/'
 # put any static media here to override app served static media
 STATICMEDIA_MOUNTS = (
-    ('/sitemedia', '/var/www/gearspotting/gearspotting/sitemedia'),	
+    ('/sitemedia', '/var/www/gearspotting/gearspotting/sitemedia'),
 )
 
 
 DEBUG = False
 TEMPLATE_DEBUG = DEBUG
+
+STATICFILES_DIRS = ()
+STATIC_ROOT = "/var/www/gearspotting/gearspotting/media/"
 
 try:
     from local_settings import *

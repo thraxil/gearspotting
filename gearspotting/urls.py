@@ -2,9 +2,7 @@ from django.conf.urls.defaults import patterns, include
 from django.contrib import admin
 from django.conf import settings
 from django.contrib.sitemaps import GenericSitemap
-import os.path
 admin.autodiscover()
-import staticmedia
 
 from gearspotting.gear.feeds import GearFeed
 from gearspotting.musician.feeds import MusicianFeed
@@ -15,8 +13,6 @@ from gearspotting.musiciangear.models import MusicianGear
 from gearspotting.manufacturer.models import Manufacturer
 from gearspotting.photo.models import Photo
 from gearspotting.blog.models import Post
-
-site_media_root = os.path.join(os.path.dirname(__file__), "../media")
 
 gear_info_dict = {
     'queryset': Gear.objects.all(),
@@ -71,8 +67,6 @@ urlpatterns = patterns(
     (r'^sitemap\.xml$',
      'django.contrib.sitemaps.views.sitemap',
      {'sitemaps': sitemaps}),
-    (r'^site_media/(?P<path>.*)$', 'django.views.static.serve',
-     {'document_root': site_media_root}),
     (r'^uploads/(?P<path>.*)$', 'django.views.static.serve',
      {'document_root': settings.MEDIA_ROOT}),
-) + staticmedia.serve()
+)
