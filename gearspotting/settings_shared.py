@@ -77,7 +77,7 @@ TEMPLATE_DIRS = (
     os.path.join(os.path.dirname(__file__), "templates"),
 )
 
-INSTALLED_APPS = (
+INSTALLED_APPS = [
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
@@ -111,7 +111,7 @@ INSTALLED_APPS = (
     'gearspotting.blog',
     'django_statsd',
     'gunicorn',
-)
+]
 
 ACCOUNT_ACTIVATION_DAYS = 7
 
