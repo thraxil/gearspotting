@@ -32,14 +32,16 @@
 			<dd>{{object.added|date}}</dd>
 			<dt>Modified</dt>
 			<dd>{{object.modified|date}}</dd>
-    
+
+{% comment %}    
 {% tags_for_object object as tags %}
 			{% if tags %}
     <dt>Tags</dt>
 		<dd>
-      {% for tag in tags %}<a href="{% url musician_tag_detail tag %}">{{tag}}</a> {% endfor %}
+      {% for tag in tags %}<a href="{% url 'musician_tag_detail' tag %}">{{tag}}</a> {% endfor %}
 		</dd>
 {% endif %}
+{% endcomment %}
 		</dl>
 	</div>
 </div>
@@ -95,11 +97,12 @@
 	{% endfor %}
 	{% endif %}
 
+{% comment %}
 	{% tags_for_object musiciangear.gear as geartags %}
 	{% if geartags %}
 	<p class="geartags pull-right">
-      {% for tag in geartags %}<a href="{% url gear_tag_detail tag %}">{{tag}}</a> {% endfor %}</p>
-	{% endif %}
+      {% for tag in geartags %}<a href="{% url 'gear_tag_detail' tag %}">{{tag}}</a> {% endfor %}</p>
+	{% endif %}{% endcomment %}
       </td>
       </tr>
       {% endfor %}
