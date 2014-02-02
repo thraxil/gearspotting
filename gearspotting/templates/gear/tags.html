@@ -1,18 +1,18 @@
 {% extends "base.html" %}
-
+{% load taggit_extras %}
 {% block title %}gear by tags{% endblock %}
-{% block subhead %}Tags{% endblock %}
 
 {% block content %}
 
-{% comment %}
-{% tag_cloud_for_model gear.Gear as cloud %}
+<h1>Tags</h1>
+
+{% get_tagcloud as cloud for 'gear.Gear' %}
 
 {% for tag in cloud %}
-<font size="{{ tag.font_size }}">
+<font size="{{ tag.weight }}">
 <a href="/gear/tag/{{tag}}/">{{tag}}</a>
 </font>
 {% endfor %}
-{% endcomment %}
+
 
 {% endblock %}

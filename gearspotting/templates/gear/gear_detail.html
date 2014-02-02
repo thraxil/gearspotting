@@ -38,15 +38,13 @@
 		<dd itemprop="description">{{object.description|markdown}}</dd>
 {% endif %}
 
-{% comment %}
-{% tags_for_object object as tags %}
-{% if tags %}
+{% if object.tags.count %}
 		<dt>Tags</dt>
 		<dd>
-      {% for tag in tags %}<a href="{% url gear_tag_detail tag %}">{{tag}}</a> {% endfor %}
+      {% for tag in object.tags.all %}<a href="{% url 'gear_tag_detail' tag %}">{{tag}}</a> {% endfor %}
 		</dd>
 {% endif %}
-{% endcomment %}
+
 </dl>
 </div>
 </div>

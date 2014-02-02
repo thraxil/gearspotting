@@ -4,6 +4,8 @@ from django.http import HttpResponseRedirect
 from django.contrib.contenttypes import generic
 from django.template import RequestContext
 from django.shortcuts import render_to_response
+from django.views.generic.base import TemplateView
+
 from gearspotting.manufacturer.models import Manufacturer, ManufacturerForm
 
 
@@ -22,6 +24,13 @@ class rendered_with(object):
             else:
                 return items
         return rendered_func
+
+
+class GearTagView(TemplateView):
+    template_name = "gear/gear_tag_list.html"
+    def get_context_data(self, tag=""):
+        return dict(tag=tag,
+                    gear_list=Gear.objects.filter(tags__name__in=[tag]))
 
 
 @rendered_with('gear/index.html')

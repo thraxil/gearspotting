@@ -5,9 +5,9 @@
 
 {% block content %}
 
-{% if object_list %}
+{% if gear_list %}
     <ul>Gear:
-    {% for gear in object_list %}
+    {% for gear in gear_list %}
         <li><a href="{{gear.manufacturer.get_absolute_url}}">{{gear.manufacturer.name}}</a> 
 	  <a href="{{ gear.get_absolute_url }}">{{ gear.name }}</a></li>
     {% endfor %}
