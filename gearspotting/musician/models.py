@@ -4,7 +4,6 @@ from gearspotting.photo.models import Photo
 from django.forms import ModelForm
 from django.contrib.contenttypes import generic
 from django.template.defaultfilters import slugify
-import tagging
 from django.forms.models import inlineformset_factory
 
 from south.modelsinspector import add_introspection_rules
@@ -21,7 +20,6 @@ class Musician(models.Model):
     name = models.CharField(default="", unique=True, max_length=256)
     slug = models.SlugField(max_length=256, editable=False)
     description = models.TextField(default="", blank=True)
-    tags = tagging.fields.TagField()
     links = generic.GenericRelation(Link)
 
     added = models.DateTimeField(auto_now_add=True, editable=False)

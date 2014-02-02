@@ -88,7 +88,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'sorl.thumbnail',
     'django.contrib.admin',
-    'tagging',
+    'taggit',
     'smartif',
     'template_utils',
     'typogrify',

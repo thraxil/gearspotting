@@ -4,7 +4,6 @@ from gearspotting.link.models import Link
 from gearspotting.photo.models import Photo
 from django.contrib.contenttypes import generic
 from django.forms import ModelForm
-import tagging
 from django.template.defaultfilters import slugify
 
 from south.modelsinspector import add_introspection_rules
@@ -22,7 +21,6 @@ class Gear(models.Model):
     slug = models.SlugField(max_length=256, editable=False)
     manufacturer = models.ForeignKey(Manufacturer)
     description = models.TextField(default="", blank=True)
-    tags = tagging.fields.TagField()
     links = generic.GenericRelation(Link)
     added = models.DateTimeField(auto_now_add=True, editable=False)
     modified = models.DateTimeField(auto_now=True, editable=False)

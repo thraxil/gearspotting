@@ -1,7 +1,6 @@
 {% extends "base.html" %}
 {% load thumbnail %}
 {% load markup %}
-{% load tagging_tags %}
 
 {% block title %}Gear: {{object.manufacturer.name}} {{object.name}}{% endblock %}
 {% block subhead %}<a href="/gear/">Gear</a>: <a href="{{object.manufacturer.get_absolute_url}}"><span itemprop="manufacturer">{{object.manufacturer.name}}</span></a>

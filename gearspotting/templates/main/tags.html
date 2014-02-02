@@ -1,5 +1,5 @@
 {% extends "base.html" %}
-{% load tagging_tags %}
+
 
 {% block title %}tags{% endblock %}
 
@@ -7,7 +7,7 @@
 
     <h2>Gear</h2>
    
-
+{% comment %}
 {% tag_cloud_for_model gear.Gear as cloud %}
 
 {% for tag in cloud %}
@@ -15,11 +15,13 @@
 <a href="/gear/tag/{{tag}}/">{{tag}}</a>
 </font>
 {% endfor %}
+{% endcomment %}
 
 
     <h2>Musicians</h2>
    
 
+{% comment %}
 {% tag_cloud_for_model musician.Musician as cloud %}
 
 {% for tag in cloud %}
@@ -27,6 +29,6 @@
 <a href="/musician/tag/{{tag}}/">{{tag}}</a>
 </font>
 {% endfor %}
-
+{% endcomment %}
 
 {% endblock %}
