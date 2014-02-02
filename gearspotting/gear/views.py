@@ -1,29 +1,10 @@
 from models import Gear, Link, Photo
-from django.shortcuts import get_object_or_404
+from django.shortcuts import get_object_or_404, render
 from django.http import HttpResponseRedirect
 from django.contrib.contenttypes import generic
-from django.template import RequestContext
-from django.shortcuts import render_to_response
-from django.views.generic.base import TemplateView
+from django.views.generic.base import TemplateView, View
 
 from gearspotting.manufacturer.models import Manufacturer, ManufacturerForm
-
-
-class rendered_with(object):
-    def __init__(self, template_name):
-        self.template_name = template_name
-
-    def __call__(self, func):
-        def rendered_func(request, *args, **kwargs):
-            items = func(request, *args, **kwargs)
-            if isinstance(items, dict):
-                return render_to_response(
-                    self.template_name,
-                    items,
-                    context_instance=RequestContext(request))
-            else:
-                return items
-        return rendered_func
 
 
 class GearTagView(TemplateView):
@@ -34,64 +15,74 @@ class GearTagView(TemplateView):
                     gear_list=Gear.objects.filter(tags__name__in=[tag]))
 
 
-@rendered_with('gear/index.html')
-def index(request):
-    return dict(manufacturers=Manufacturer.objects.all(),
-                add_manufacturer_form=ManufacturerForm())
+class IndexView(TemplateView):
+    template_name = 'gear/index.html'
+
+    def get_context_data(self):
+        return dict(manufacturers=Manufacturer.objects.all(),
+                    add_manufacturer_form=ManufacturerForm())
 
 
-@rendered_with('gear/tags.html')
-def tags(request):
-    return dict()
+class TagsView(TemplateView):
+    template_name = 'gear/tags.html'
 
 
-@rendered_with('gear/add_link.html')
-def add_link(request, slug):
-    gear = get_object_or_404(Gear, slug=slug)
-    form = gear.add_link_form()
-    if request.method == "POST":
-        f = form(request.POST)
+class AddSomethingView(View):
+    def get(self, request, slug):
+        gear = get_object_or_404(Gear, slug=slug)
+        form = self.get_form(gear)
+        f = form()
+        return render(
+            request, self.template_name,
+            dict(gear=gear, form=f))
+
+    def post(self, request, slug):
+        gear = get_object_or_404(Gear, slug=slug)
+        form = self.get_form(gear)
+        f = form(request.POST, request.FILES)
         if f.is_valid():
             l = f.save(commit=False)
             l.content_object = gear
             l.save()
             return HttpResponseRedirect(gear.get_absolute_url())
-    else:
-        f = form()
-    return dict(gear=gear, form=f)
+        return render(
+            request, self.template_name,
+            dict(gear=gear, form=f))
 
 
-@rendered_with('gear/add_photo.html')
-def add_photo(request, slug):
-    gear = get_object_or_404(Gear, slug=slug)
-    form = gear.add_photo_form()
-    if request.method == "POST":
-        f = form(request.POST, request.FILES)
-        if f.is_valid():
-            p = f.save(commit=False)
-            p.content_object = gear
-            p.save()
-            return HttpResponseRedirect(gear.get_absolute_url())
-    else:
-        f = form()
-    return dict(gear=gear, form=f)
+class AddLinkView(AddSomethingView):
+    template_name = 'gear/add_link.html'
+
+    def get_form(self, gear):
+        return gear.add_link_form()
 
 
-def edit_links(request, slug):
-    gear = get_object_or_404(Gear, slug=slug)
-    LinksFormset = generic.generic_inlineformset_factory(Link, extra=1)
-    if request.method == 'POST':
-        formset = LinksFormset(request.POST, request.FILES, instance=gear)
+class AddPhotoView(AddSomethingView):
+    template_name = 'gear/add_photo.html'
+
+    def get_form(self, gear):
+        return gear.add_photo_form()
+
+
+class EditSomethingView(View):
+    def get(self, request, slug):
+        gear = get_object_or_404(Gear, slug=slug)
+        return HttpResponseRedirect(gear.get_absolute_url())
+
+    def post(self, request, slug):
+        gear = get_object_or_404(Gear, slug=slug)
+        Formset = self.get_formset()
+        formset = Formset(request.POST, request.FILES, instance=gear)
         if formset.is_valid():
             formset.save()
-    return HttpResponseRedirect(gear.get_absolute_url())
+        return HttpResponseRedirect(gear.get_absolute_url())
 
 
-def edit_photos(request, slug):
-    gear = get_object_or_404(Gear, slug=slug)
-    PhotosFormset = generic.generic_inlineformset_factory(Photo, extra=1)
-    if request.method == 'POST':
-        formset = PhotosFormset(request.POST, request.FILES, instance=gear)
-        if formset.is_valid():
-            formset.save()
-    return HttpResponseRedirect(gear.get_absolute_url())
+class EditLinksView(EditSomethingView):
+    def get_formset(self):
+        return generic.generic_inlineformset_factory(Link, extra=1)
+
+
+class EditPhotosView(EditSomethingView):
+    def get_formset(self):
+        generic.generic_inlineformset_factory(Photo, extra=1)
