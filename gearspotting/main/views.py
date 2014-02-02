@@ -37,11 +37,13 @@ class TagsView(TemplateView):
     template_name = "main/tags.html"
 
 
-@rendered_with("main/search.html")
-def search(request):
-    q = request.GET.get('q', None)
-    results = dict()
-    if q is not None:
-        results["gear"] = Gear.objects.filter(name__icontains=q)
-        results["musicians"] = Musician.objects.filter(name__icontains=q)
-    return dict(q=q, results=results)
+class SearchView(TemplateView):
+    template_name = "main/search.html"
+
+    def get_context_data(self):
+        q = self.request.GET.get('q', None)
+        results = dict()
+        if q is not None:
+            results["gear"] = Gear.objects.filter(name__icontains=q)
+            results["musicians"] = Musician.objects.filter(name__icontains=q)
+        return dict(q=q, results=results)

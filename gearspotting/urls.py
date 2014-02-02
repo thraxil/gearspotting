@@ -54,7 +54,7 @@ urlpatterns = patterns(
     '',
     (r'^$', mainviews.IndexView.as_view()),
     (r'^tag/$', mainviews.TagsView.as_view()),
-    (r'^search/$', 'gearspotting.main.views.search'),
+    (r'^search/$', mainviews.SearchView.as_view()),
     (r'^accounts/', include('userena.urls')),
     (r'^admin/', include(admin.site.urls)),
     (r'^gear/', include('gearspotting.gear.urls')),
