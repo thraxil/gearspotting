@@ -111,6 +111,7 @@ INSTALLED_APPS = [
     'gearspotting.blog',
     'django_statsd',
     'gunicorn',
+    'taggit_templatetags',
 ]
 
 ACCOUNT_ACTIVATION_DAYS = 7

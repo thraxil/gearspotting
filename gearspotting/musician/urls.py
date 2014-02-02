@@ -4,11 +4,7 @@ from django.views.generic.list import ListView
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 
 from gearspotting.musician.models import Musician, MusicianForm
-#from tagging.views import tagged_object_list
-
-info_dict = {
-    'queryset': Musician.objects.all(),
-}
+from gearspotting.musician.views import MusicianTagView
 
 urlpatterns = patterns(
     '',
@@ -20,11 +16,8 @@ urlpatterns = patterns(
      UpdateView.as_view(
          form_class=MusicianForm, model=Musician)),
     (r'^(?P<slug>[^/]+)/delete/?$', DeleteView.as_view(model=Musician)),
-    # url(r'^tag/(?P<tag>[^/]+)/$',
-    #     tagged_object_list,
-    #     dict(queryset_or_model=Musician, paginate_by=100, allow_empty=True,
-    #          template_name="musician/musician_tag_list.html"),
-    #     name='musician_tag_detail'),
+     url(r'^tag/(?P<tag>[^/]+)/$', MusicianTagView.as_view(),
+         name='musician_tag_detail'),
     url(r'^tag/$', 'gearspotting.musician.views.tags'),
     (r'^(?P<slug>[^/]+)/edit_links/?$',
      'gearspotting.musician.views.edit_links'),

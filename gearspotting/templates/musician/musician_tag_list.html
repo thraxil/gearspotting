@@ -7,9 +7,9 @@
     <h1><a href="/musician/tag/">Tag</a>: {{tag}} {% if user.is_authenticated %}{% endif %}</h1>
     
 
-{% if object_list %}
+{% if musicians %}
     <ul>
-    {% for musician in object_list %}
+    {% for musician in musicians %}
         <li><a href="{{ musician.get_absolute_url }}">{{ musician.name }}</a></li>
     {% endfor %}
     </ul>

@@ -5,6 +5,7 @@ from django.contrib.contenttypes import generic
 from django.forms.models import inlineformset_factory
 from django.template import RequestContext
 from django.shortcuts import render_to_response
+from django.views.generic.base import TemplateView
 
 
 class rendered_with(object):
@@ -22,6 +23,13 @@ class rendered_with(object):
             else:
                 return items
         return rendered_func
+
+
+class MusicianTagView(TemplateView):
+    template_name = "musician/musician_tag_list.html"
+    def get_context_data(self, tag=""):
+        return dict(tag=tag,
+                    musicians=Musician.objects.filter(tags__name__in=[tag]))
 
 
 @rendered_with('musician/tags.html')
