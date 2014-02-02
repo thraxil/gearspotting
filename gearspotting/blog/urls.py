@@ -1,11 +1,12 @@
 from django.conf.urls.defaults import patterns, url
+from .views import IndexView, AddPostView, PostView
 
 
 urlpatterns = patterns(
     'gearspotting.blog.views',
-    url(r'^$', 'index'),
-    url(r'^post/$', 'add_post'),
+    url(r'^$', IndexView.as_view()),
+    url(r'^post/$', AddPostView.as_view()),
     url((r'(?P<year>\d+)/(?P<month>\d+)/(?P<day>\d+)/'
          r'(?P<username>\w+)/(?P<slug>[\w\-]+)/$'),
-        'post'),
+        PostView.as_view()),
 )

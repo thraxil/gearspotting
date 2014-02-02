@@ -4,18 +4,23 @@ from django.shortcuts import get_object_or_404
 from django.shortcuts import render, redirect
 from django.template.defaultfilters import slugify
 from django.contrib.sitemaps import ping_google
+from django.views.generic.base import TemplateView, View
 
 
-def index(request):
-    return render(
-        request,
-        "blog/index.html",
-        {'posts': Post.objects.all()},
-    )
+class IndexView(TemplateView):
+    template_name = "blog/index.html"
+
+    def get_context_data(self):
+        return dict(posts=Post.objects.all())
 
 
-def add_post(request):
-    if request.method == 'POST':
+class AddPostView(View):
+    template_name = "blog/add_post.html"
+
+    def get(self, request):
+        return render(request, self.template_name, dict())
+
+    def post(self, request):
         if not request.POST.get('body', False):
             return redirect("/blog/post/")
         title = request.POST.get('title', 'no title')
@@ -31,22 +36,16 @@ def add_post(request):
         except:
             pass
         return redirect("/blog/")
-    return render(
-        request,
-        "blog/add_post.html",
-        {},
-    )
 
 
-def post(request, year, month, day, username, slug):
-    author = get_object_or_404(User, username=username)
-    post = get_object_or_404(
-        Post,
-        author=author,
-        slug=slug,
-    )
-    return render(
-        request,
-        "blog/post.html",
-        {'post': post},
-    )
+class PostView(TemplateView):
+    template_name = "blog/post.html"
+
+    def get_context_data(self, year, month, day, username, slug):
+        author = get_object_or_404(User, username=username)
+        post = get_object_or_404(
+            Post,
+            author=author,
+            slug=slug,
+        )
+        return dict(post=post)
