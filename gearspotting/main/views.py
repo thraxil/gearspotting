@@ -1,5 +1,6 @@
 from django.template import RequestContext
 from django.shortcuts import render_to_response
+from django.views.generic.base import TemplateView
 from gearspotting.gear.models import Gear
 from gearspotting.musician.models import Musician
 from gearspotting.blog.models import Post
@@ -21,13 +22,15 @@ class rendered_with(object):
         return rendered_func
 
 
-@rendered_with("homepage.html")
-def index(request):
-    return dict(
-        newest_gear=Gear.objects.all().order_by("-added")[:10],
-        newest_musicians=Musician.objects.all().order_by("-added")[:10],
-        newest_posts=Post.objects.all()[:10],
-    )
+class IndexView(TemplateView):
+    template_name = "homepage.html"
+
+    def get_context_data(self):
+        return dict(
+            newest_gear=Gear.objects.all().order_by("-added")[:10],
+            newest_musicians=Musician.objects.all().order_by("-added")[:10],
+            newest_posts=Post.objects.all()[:10],
+        )
 
 
 @rendered_with('main/tags.html')

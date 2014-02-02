@@ -14,6 +14,8 @@ from gearspotting.manufacturer.models import Manufacturer
 from gearspotting.photo.models import Photo
 from gearspotting.blog.models import Post
 
+import gearspotting.main.views as mainviews
+
 gear_info_dict = {
     'queryset': Gear.objects.all(),
     'date_field': 'modified',
@@ -50,7 +52,7 @@ sitemaps = {
 
 urlpatterns = patterns(
     '',
-    (r'^$', 'gearspotting.main.views.index'),
+    (r'^$', mainviews.IndexView.as_view()),
     (r'^tag/$', 'gearspotting.main.views.tags'),
     (r'^search/$', 'gearspotting.main.views.search'),
     (r'^accounts/', include('userena.urls')),
