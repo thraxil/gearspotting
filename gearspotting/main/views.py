@@ -33,9 +33,8 @@ class IndexView(TemplateView):
         )
 
 
-@rendered_with('main/tags.html')
-def tags(request):
-    return dict()
+class TagsView(TemplateView):
+    template_name = "main/tags.html"
 
 
 @rendered_with("main/search.html")

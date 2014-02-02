@@ -53,7 +53,7 @@ sitemaps = {
 urlpatterns = patterns(
     '',
     (r'^$', mainviews.IndexView.as_view()),
-    (r'^tag/$', 'gearspotting.main.views.tags'),
+    (r'^tag/$', mainviews.TagsView.as_view()),
     (r'^search/$', 'gearspotting.main.views.search'),
     (r'^accounts/', include('userena.urls')),
     (r'^admin/', include(admin.site.urls)),
