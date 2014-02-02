@@ -17,7 +17,6 @@ statsd==2.0.3
 gunicorn==0.17.4
 django-smartif==0.1
 sorl==3.1
-django-tagging==0.3.1
 template_utils==0.4p2
 typogrify==1.0
 django-staticmedia==0.2
