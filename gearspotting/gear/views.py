@@ -28,6 +28,7 @@ class rendered_with(object):
 
 class GearTagView(TemplateView):
     template_name = "gear/gear_tag_list.html"
+
     def get_context_data(self, tag=""):
         return dict(tag=tag,
                     gear_list=Gear.objects.filter(tags__name__in=[tag]))

@@ -16,8 +16,8 @@ urlpatterns = patterns(
      UpdateView.as_view(
          form_class=MusicianForm, model=Musician)),
     (r'^(?P<slug>[^/]+)/delete/?$', DeleteView.as_view(model=Musician)),
-     url(r'^tag/(?P<tag>[^/]+)/$', MusicianTagView.as_view(),
-         name='musician_tag_detail'),
+    url(r'^tag/(?P<tag>[^/]+)/$', MusicianTagView.as_view(),
+        name='musician_tag_detail'),
     url(r'^tag/$', 'gearspotting.musician.views.tags'),
     (r'^(?P<slug>[^/]+)/edit_links/?$',
      'gearspotting.musician.views.edit_links'),

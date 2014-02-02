@@ -27,6 +27,7 @@ class rendered_with(object):
 
 class MusicianTagView(TemplateView):
     template_name = "musician/musician_tag_list.html"
+
     def get_context_data(self, tag=""):
         return dict(tag=tag,
                     musicians=Musician.objects.filter(tags__name__in=[tag]))
