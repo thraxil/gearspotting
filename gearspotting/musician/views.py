@@ -1,28 +1,9 @@
 from models import Musician, Link, Photo
-from django.shortcuts import get_object_or_404
+from django.shortcuts import get_object_or_404, render
 from django.http import HttpResponseRedirect
 from django.contrib.contenttypes import generic
 from django.forms.models import inlineformset_factory
-from django.template import RequestContext
-from django.shortcuts import render_to_response
-from django.views.generic.base import TemplateView
-
-
-class rendered_with(object):
-    def __init__(self, template_name):
-        self.template_name = template_name
-
-    def __call__(self, func):
-        def rendered_func(request, *args, **kwargs):
-            items = func(request, *args, **kwargs)
-            if isinstance(items, dict):
-                return render_to_response(
-                    self.template_name,
-                    items,
-                    context_instance=RequestContext(request))
-            else:
-                return items
-        return rendered_func
+from django.views.generic.base import TemplateView, View
 
 
 class MusicianTagView(TemplateView):
@@ -37,52 +18,48 @@ class TagsView(TemplateView):
     template_name = "musician/tags.html"
 
 
-@rendered_with('musician/add_link.html')
-def add_link(request, slug):
-    musician = get_object_or_404(Musician, slug=slug)
-    form = musician.add_link_form()
-    if request.method == "POST":
-        f = form(request.POST)
+class AddSomethingView(View):
+    def get(self, request, slug):
+        musician = get_object_or_404(Musician, slug=slug)
+        form = self.get_form(musician)
+        f = form()
+        return render(
+            request, self.template_name,
+            dict(musician=musician, form=f))
+
+    def post(self, request, slug):
+        musician = get_object_or_404(Musician, slug=slug)
+        form = self.get_form(musician)
+        f = form(request.POST, request.FILES)
         if f.is_valid():
             l = f.save(commit=False)
             l.content_object = musician
             l.save()
             return HttpResponseRedirect(musician.get_absolute_url())
-    else:
-        f = form()
-    return dict(musician=musician, form=f)
+        return render(
+            request, self.template_name,
+            dict(musician=musician, form=f))
 
 
-@rendered_with('musician/add_photo.html')
-def add_photo(request, slug):
-    musician = get_object_or_404(Musician, slug=slug)
-    form = musician.add_photo_form()
-    if request.method == "POST":
-        f = form(request.POST, request.FILES)
-        if f.is_valid():
-            p = f.save(commit=False)
-            p.content_object = musician
-            p.save()
-            return HttpResponseRedirect(musician.get_absolute_url())
-    else:
-        f = form()
-    return dict(musician=musician, form=f)
+class AddLinkView(AddSomethingView):
+    template_name = 'musician/add_link.html'
+
+    def get_form(self, musician):
+        return musician.add_link_form()
 
 
-@rendered_with('musician/add_gear.html')
-def add_gear(request, slug):
-    musician = get_object_or_404(Musician, slug=slug)
-    form = musician.add_gear_form()
-    if request.method == "POST":
-        f = form(request.POST, request.FILES)
-        if f.is_valid():
-            g = f.save(commit=False)
-            g.musician = musician
-            g.save()
-            return HttpResponseRedirect(musician.get_absolute_url())
-    else:
-        f = form()
-    return dict(musician=musician, form=f)
+class AddPhotoView(AddSomethingView):
+    template_name = "musician/add_photo.html"
+
+    def get_form(self, musician):
+        return musician.add_photo_form()
+
+
+class AddGearView(AddSomethingView):
+    template_name = "musician/add_gear.html"
+
+    def get_form(self, musician):
+        return musician.add_gear_form()
 
 
 def edit_links(request, slug):
