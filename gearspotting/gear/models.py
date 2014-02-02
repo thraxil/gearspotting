@@ -5,7 +5,7 @@ from gearspotting.photo.models import Photo
 from django.contrib.contenttypes import generic
 from django.forms import ModelForm
 from django.template.defaultfilters import slugify
-
+from taggit.managers import TaggableManager
 from south.modelsinspector import add_introspection_rules
 
 add_introspection_rules(
@@ -22,6 +22,7 @@ class Gear(models.Model):
     manufacturer = models.ForeignKey(Manufacturer)
     description = models.TextField(default="", blank=True)
     links = generic.GenericRelation(Link)
+    tags = TaggableManager()
     added = models.DateTimeField(auto_now_add=True, editable=False)
     modified = models.DateTimeField(auto_now=True, editable=False)
 

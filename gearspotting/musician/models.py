@@ -5,7 +5,7 @@ from django.forms import ModelForm
 from django.contrib.contenttypes import generic
 from django.template.defaultfilters import slugify
 from django.forms.models import inlineformset_factory
-
+from taggit.managers import TaggableManager
 from south.modelsinspector import add_introspection_rules
 
 add_introspection_rules(
@@ -21,7 +21,7 @@ class Musician(models.Model):
     slug = models.SlugField(max_length=256, editable=False)
     description = models.TextField(default="", blank=True)
     links = generic.GenericRelation(Link)
-
+    tags = TaggableManager()
     added = models.DateTimeField(auto_now_add=True, editable=False)
     modified = models.DateTimeField(auto_now=True, editable=False)
 
