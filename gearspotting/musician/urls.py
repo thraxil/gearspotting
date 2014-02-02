@@ -6,7 +6,7 @@ from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from gearspotting.musician.models import Musician, MusicianForm
 from gearspotting.musician.views import (
     MusicianTagView, TagsView, AddLinkView, AddPhotoView,
-    AddGearView)
+    AddGearView, EditLinksView, EditPhotosView, EditGearView)
 
 urlpatterns = patterns(
     '',
@@ -21,14 +21,11 @@ urlpatterns = patterns(
     url(r'^tag/(?P<tag>[^/]+)/$', MusicianTagView.as_view(),
         name='musician_tag_detail'),
     url(r'^tag/$', TagsView.as_view()),
-    (r'^(?P<slug>[^/]+)/edit_links/?$',
-     'gearspotting.musician.views.edit_links'),
     (r'^(?P<slug>[^/]+)/add_link/$', AddLinkView.as_view()),
     (r'^(?P<slug>[^/]+)/add_photo/$', AddPhotoView.as_view()),
     (r'^(?P<slug>[^/]+)/add_gear/$', AddGearView.as_view()),
-    (r'^(?P<slug>[^/]+)/edit_photos/?$',
-     'gearspotting.musician.views.edit_photos'),
-    (r'^(?P<slug>[^/]+)/edit_gear/?$',
-     'gearspotting.musician.views.edit_gear'),
+    (r'^(?P<slug>[^/]+)/edit_links/?$', EditLinksView.as_view()),
+    (r'^(?P<slug>[^/]+)/edit_photos/?$', EditPhotosView.as_view()),
+    (r'^(?P<slug>[^/]+)/edit_gear/?$', EditGearView.as_view()),
     (r'^(?P<slug>[^/]+)/$', DetailView.as_view(model=Musician)),
 )

@@ -62,33 +62,31 @@ class AddGearView(AddSomethingView):
         return musician.add_gear_form()
 
 
-def edit_links(request, slug):
-    musician = get_object_or_404(Musician, slug=slug)
-    LinksFormset = generic.generic_inlineformset_factory(Link, extra=1)
-    if request.method == 'POST':
-        formset = LinksFormset(
-            request.POST, request.FILES, instance=musician)
+class EditSomethingView(View):
+    def get(self, request, slug):
+        musician = get_object_or_404(Musician, slug=slug)
+        return HttpResponseRedirect(musician.get_absolute_url())
+
+    def post(self, request, slug):
+        musician = get_object_or_404(Musician, slug=slug)
+        Formset = self.get_formset()
+        formset = Formset(request.POST, request.FILES, instance=musician)
         if formset.is_valid():
             formset.save()
-    return HttpResponseRedirect(musician.get_absolute_url())
+        return HttpResponseRedirect(musician.get_absolute_url())
 
 
-def edit_photos(request, slug):
-    musician = get_object_or_404(Musician, slug=slug)
-    PhotosFormset = generic.generic_inlineformset_factory(Photo, extra=1)
-    if request.method == 'POST':
-        formset = PhotosFormset(request.POST, request.FILES, instance=musician)
-        if formset.is_valid():
-            formset.save()
-    return HttpResponseRedirect(musician.get_absolute_url())
+class EditLinksView(EditSomethingView):
+    def get_formset(self):
+        return generic.generic_inlineformset_factory(Link, extra=1)
 
 
-def edit_gear(request, slug):
-    musician = get_object_or_404(Musician, slug=slug)
-    from musiciangear.models import MusicianGear
-    GearFormSet = inlineformset_factory(Musician, MusicianGear, extra=1)
-    if request.method == 'POST':
-        formset = GearFormSet(request.POST, request.FILES, instance=musician)
-        if formset.is_valid():
-            formset.save()
-    return HttpResponseRedirect(musician.get_absolute_url())
+class EditPhotosView(EditSomethingView):
+    def get_formset(self):
+        return generic.generic_inlineformset_factory(Photo, extra=1)
+
+
+class EditGearView(EditSomethingView):
+    def get_formset(self):
+        from musiciangear.models import MusicianGear
+        return inlineformset_factory(Musician, MusicianGear, extra=1)
