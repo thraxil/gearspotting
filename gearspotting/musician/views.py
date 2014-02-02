@@ -33,9 +33,8 @@ class MusicianTagView(TemplateView):
                     musicians=Musician.objects.filter(tags__name__in=[tag]))
 
 
-@rendered_with('musician/tags.html')
-def tags(request):
-    return dict()
+class TagsView(TemplateView):
+    template_name = "musician/tags.html"
 
 
 @rendered_with('musician/add_link.html')
