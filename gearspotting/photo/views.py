@@ -94,7 +94,7 @@ def save_image(form, url):
     return p
 
 
-class ImportPhotosView(View):
+class ImportPhotoView(View):
     template_name = 'photo/import_photo.html'
 
     def get(self, request):
