@@ -24,6 +24,76 @@ def clean_filename(filename):
     return filename.lower()
 
 
+def url_to_filename(url):
+    if " " in url:
+        url = url.replace(" ", "%20")
+    filename = url.split("/")[-1]
+    if "?" in filename:
+        filename = re.sub(r'(\?.*)$', '', filename)
+    if "#" in filename:
+        filename = re.sub(r'(\#.*)$', '', filename)
+    return filename
+
+
+def mdirs(path):
+    try:
+        os.makedirs(path)
+    except:
+        pass
+
+
+def make_musicians_and_mphotos(text, p):
+    for line in text.split('\n'):
+        mline = line.strip()
+        if not mline:
+            continue
+        m, created = musician.models.Musician.objects.get_or_create(
+            name=mline)
+        musician.models.MusicianPhoto.objects.create(
+            musician=m, photo=p)
+
+
+def process_gearline(line, p):
+    gearline = line.strip()
+    if not gearline:
+        return
+    split_char = ' '
+    if ':' in gearline:
+        split_char = ':'
+    if split_char not in gearline:
+        return
+    parts = gearline.split(split_char)
+    manufacturer_name = parts[0].strip()
+    gear_name = ' '.join(parts[1:]).strip()
+
+    (manufacturer,
+     created) = manmodels.Manufacturer.objects.get_or_create(
+         name=manufacturer_name)
+    g, created = gear.models.Gear.objects.get_or_create(
+        manufacturer=manufacturer, name=gear_name)
+    gear.models.GearPhoto.objects.create(gear=g, photo=p)
+
+
+def save_image(form, url):
+    p = form.save(commit=False)
+    filename = url_to_filename(url)
+    imgdata = GET(url)
+
+    filename = clean_filename(filename)
+    now = datetime.now()
+    rel_path = "images/%04d/%02d/%02d/" % (now.year,
+                                           now.month,
+                                           now.day)
+    path = os.path.join(settings.MEDIA_ROOT, rel_path)
+    mdirs(path)
+    f = open(os.path.join(path, filename), "wb")
+    f.write(imgdata)
+    f.close()
+    p.image = os.path.join(rel_path, filename)
+    p.save()
+    return p
+
+
 class ImportPhotosView(View):
     template_name = 'photo/import_photo.html'
 
@@ -37,59 +107,9 @@ class ImportPhotosView(View):
     def post(self, request):
         form = ImportPhotoForm(request.POST, request.FILES)
         if form.is_valid():
-            p = form.save(commit=False)
-            url = request.POST.get('url', '')
-            if " " in url:
-                url = url.replace(" ", "%20")
-            filename = url.split("/")[-1]
-            if "?" in filename:
-                filename = re.sub(r'(\?.*)$', '', filename)
-            if "#" in filename:
-                filename = re.sub(r'(\#.*)$', '', filename)
-
-            imgdata = GET(url)
-
-            filename = clean_filename(filename)
-            now = datetime.now()
-            rel_path = "images/%04d/%02d/%02d/" % (now.year,
-                                                   now.month,
-                                                   now.day)
-            path = os.path.join(settings.MEDIA_ROOT, rel_path)
-            try:
-                os.makedirs(path)
-            except:
-                pass
-            f = open(os.path.join(path, filename), "wb")
-            f.write(imgdata)
-            f.close()
-            p.image = os.path.join(rel_path, filename)
-            p.save()
-
-            for line in request.POST.get('musicians', '').split('\n'):
-                mline = line.strip()
-                if not mline:
-                    continue
-                m, created = musician.models.Musician.objects.get_or_create(
-                    name=mline)
-                musician.models.MusicianPhoto.objects.create(
-                    musician=m, photo=p)
+            p = save_image(form, request.POST.get('url', ''))
+            make_musicians_and_mphotos(request.POST.get('musicians', ''), p)
 
             for line in request.POST.get('gear', '').split('\n'):
-                gearline = line.strip()
-                if not gearline:
-                    continue
-                split_char = ' '
-                if ':' in gearline:
-                    split_char = ':'
-                if split_char in gearline:
-                    parts = gearline.split(split_char)
-                    manufacturer_name = parts[0].strip()
-                    gear_name = ' '.join(parts[1:]).strip()
-
-                    (manufacturer,
-                     created) = manmodels.Manufacturer.objects.get_or_create(
-                         name=manufacturer_name)
-                    g, created = gear.models.Gear.objects.get_or_create(
-                        manufacturer=manufacturer, name=gear_name)
-                    gear.models.GearPhoto.objects.create(gear=g, photo=p)
+                process_gearline(line, p)
             return HttpResponseRedirect(p.get_absolute_url())
