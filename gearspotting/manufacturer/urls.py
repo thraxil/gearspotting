@@ -4,6 +4,9 @@ from django.views.generic.list import ListView
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 
 from gearspotting.manufacturer.models import Manufacturer, ManufacturerForm
+from gearspotting.manufacturer.views import (
+    AddLinkView, AddGearView, EditLinksView)
+
 
 urlpatterns = patterns(
     '',
@@ -19,11 +22,11 @@ urlpatterns = patterns(
     (r'^(?P<slug>[^/]+)/delete/?$',
      DeleteView.as_view(model=Manufacturer)),
     (r'^(?P<slug>[^/]+)/edit_links/?$',
-     'gearspotting.manufacturer.views.edit_links'),
+     EditLinksView.as_view()),
     (r'^(?P<slug>[^/]+)/add_gear/$',
-     'gearspotting.manufacturer.views.add_gear'),
+     AddGearView.as_view()),
     (r'^(?P<slug>[^/]+)/$',
      DetailView.as_view(model=Manufacturer)),
     (r'^(?P<slug>[^/]+)/add_link/$',
-     'gearspotting.manufacturer.views.add_link'),
+     AddLinkView.as_view()),
 )

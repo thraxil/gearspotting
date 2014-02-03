@@ -1,7 +1,7 @@
 from gearspotting.photo.models import ImportPhotoForm
 from django.http import HttpResponseRedirect
-from django.template import RequestContext
-from django.shortcuts import render_to_response
+from django.shortcuts import render
+from django.views.generic.base import View
 from restclient import GET
 from django.conf import settings
 import os
@@ -11,23 +11,6 @@ import gearspotting.musician.models as musician
 import gearspotting.gear.models as gear
 import gearspotting.manufacturer.models as manmodels
 import re
-
-
-class rendered_with(object):
-    def __init__(self, template_name):
-        self.template_name = template_name
-
-    def __call__(self, func):
-        def rendered_func(request, *args, **kwargs):
-            items = func(request, *args, **kwargs)
-            if isinstance(items, dict):
-                return render_to_response(
-                    self.template_name,
-                    items,
-                    context_instance=RequestContext(request))
-            else:
-                return items
-        return rendered_func
 
 
 def clean_filename(filename):
@@ -41,10 +24,17 @@ def clean_filename(filename):
     return filename.lower()
 
 
-@rendered_with('photo/import_photo.html')
-def import_photo(request):
-    form = ImportPhotoForm()
-    if request.method == "POST":
+class ImportPhotosView(View):
+    template_name = 'photo/import_photo.html'
+
+    def get(self, request):
+        form = ImportPhotoForm()
+        return render(
+            request, self.template_name,
+            dict(url=request.GET.get('url', ''),
+                 form=form))
+
+    def post(self, request):
         form = ImportPhotoForm(request.POST, request.FILES)
         if form.is_valid():
             p = form.save(commit=False)
@@ -103,6 +93,3 @@ def import_photo(request):
                         manufacturer=manufacturer, name=gear_name)
                     gear.models.GearPhoto.objects.create(gear=g, photo=p)
             return HttpResponseRedirect(p.get_absolute_url())
-
-    return dict(url=request.GET.get('url', ''),
-                form=form)
