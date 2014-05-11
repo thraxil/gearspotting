@@ -8,15 +8,15 @@ def restart_gunicorn():
     sudo("restart gearspotting")
 
 def prepare_deploy():
-    local("./manage.py test")
+    local("make test")
+    local("make flake8")
 
 def deploy():
     code_dir = "/var/www/gearspotting/gearspotting"
     with cd(code_dir):
         run("git pull origin master")
-        run("./bootstrap.py")
-        run("./manage.py migrate")
-        run("./manage.py collectstatic --noinput --settings=gearspotting.settings_production")
+        run("make migrate")
+        run("make collectstatic")
         for n in nginx_hosts:
             run(("rsync -avp --delete media/ "
                  "%s:/var/www/gearspotting/gearspotting/media/") % n)
