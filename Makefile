@@ -1,5 +1,5 @@
 MANAGE=./manage.py
-APP=mithras
+APP=gearspotting
 FLAKE8=./ve/bin/flake8
 
 test: ./ve/bin/python
