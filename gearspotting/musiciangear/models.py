@@ -1,19 +1,10 @@
 from django.db import models
-from django.contrib import admin
-from gearspotting.link.models import Link, LinkInline
+from gearspotting.link.models import Link
 from gearspotting.gear.models import Gear
 from gearspotting.musician.models import Musician
-from gearspotting.photo.models import Photo, PhotoInline
+from gearspotting.photo.models import Photo
 from django.contrib.contenttypes import generic
 from django.forms import ModelForm
-from south.modelsinspector import add_introspection_rules
-
-add_introspection_rules(
-    [],
-    ["^django_extensions\.db\.fields\.CreationDateTimeField",
-     "django_extensions.db.fields.ModificationDateTimeField",
-     "sorl.thumbnail.fields.ImageWithThumbnailsField",
-     "django_extensions.db.fields.UUIDField"])
 
 
 class MusicianGear(models.Model):
@@ -54,8 +45,3 @@ class MusicianGear(models.Model):
 class MusicianGearPhoto(models.Model):
     musiciangear = models.ForeignKey(MusicianGear)
     photo = models.ForeignKey(Photo)
-
-
-class MusicianGearAdmin(admin.ModelAdmin):
-    inlines = [LinkInline, PhotoInline]
-admin.site.register(MusicianGear, MusicianGearAdmin)

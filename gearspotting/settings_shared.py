@@ -37,12 +37,6 @@ NOSE_ARGS = [
     '--cover-package=gearspotting',
 ]
 
-SOUTH_TESTS_MIGRATE = False
-SOUTH_MIGRATION_MODULES = {
-    'easy_thumbnails': 'easy_thumbnails.south_migrations',
-}
-
-
 TIME_ZONE = 'America/New_York'
 LANGUAGE_CODE = 'en-us'
 SITE_ID = 1
@@ -92,7 +86,6 @@ INSTALLED_APPS = [
     'sorl.thumbnail',
     'django.contrib.admin',
     'taggit',
-    'smartif',
     'template_utils',
     'typogrify',
     'gearspotting.main',
@@ -102,7 +95,6 @@ INSTALLED_APPS = [
     'gearspotting.link',
     'gearspotting.manufacturer',
     'gearspotting.musiciangear',
-    'south',
     'django_nose',
     'bootstrapform',
     'easy_thumbnails',
@@ -142,8 +134,6 @@ STATICFILES_FINDERS = (
     'django.contrib.staticfiles.finders.FileSystemFinder',
     'django.contrib.staticfiles.finders.AppDirectoriesFinder',
 )
-
-SOUTH_AUTO_FREEZE_APP = True
 
 SESSION_ENGINE = "django.contrib.sessions.backends.signed_cookies"
 SESSION_COOKIE_HTTPONLY = True

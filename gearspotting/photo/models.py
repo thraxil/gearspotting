@@ -1,15 +1,7 @@
 from django.db import models
 from django.contrib.contenttypes import generic
 from sorl.thumbnail.fields import ImageWithThumbnailsField
-from south.modelsinspector import add_introspection_rules
 from django.forms import ModelForm
-
-add_introspection_rules(
-    [],
-    ["^django_extensions\.db\.fields\.CreationDateTimeField",
-     "django_extensions.db.fields.ModificationDateTimeField",
-     "sorl.thumbnail.fields.ImageWithThumbnailsField",
-     "django_extensions.db.fields.UUIDField"])
 
 
 class Photo(models.Model):
