@@ -83,7 +83,6 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.sites',
     'django.contrib.flatpages',
-    'django.contrib.markup',
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'sorl.thumbnail',
@@ -111,6 +110,7 @@ INSTALLED_APPS = [
     'django_statsd',
     'gunicorn',
     'taggit_templatetags',
+    'django_markwhat',
 ]
 
 ACCOUNT_ACTIVATION_DAYS = 7
