@@ -38,6 +38,10 @@ NOSE_ARGS = [
 ]
 
 SOUTH_TESTS_MIGRATE = False
+SOUTH_MIGRATION_MODULES = {
+    'easy_thumbnails': 'easy_thumbnails.south_migrations',
+}
+
 
 TIME_ZONE = 'America/New_York'
 LANGUAGE_CODE = 'en-us'
