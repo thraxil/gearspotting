@@ -1,4 +1,4 @@
-from django.conf.urls.defaults import patterns
+from django.conf.urls import patterns
 from django.views.generic.detail import DetailView
 
 from gearspotting.photo.models import Photo

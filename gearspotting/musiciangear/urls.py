@@ -1,4 +1,4 @@
-from django.conf.urls.defaults import patterns
+from django.conf.urls import patterns
 from gearspotting.musiciangear.models import MusicianGear
 from django.views.generic.detail import DetailView
 from django.views.generic.list import ListView
