@@ -18,6 +18,8 @@ TEMPLATE_DEBUG = DEBUG
 STATICFILES_DIRS = ()
 STATIC_ROOT = "/var/www/gearspotting/gearspotting/media/"
 
+COMPRESS_OFFLINE = True
+
 if 'migrate' not in sys.argv:
     INSTALLED_APPS = INSTALLED_APPS + [
         'raven.contrib.django.raven_compat',
