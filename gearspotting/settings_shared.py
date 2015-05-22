@@ -101,6 +101,7 @@ INSTALLED_APPS = [
     'gunicorn',
     'taggit_templatetags',
     'django_markwhat',
+    'compressor',
 ]
 
 ACCOUNT_ACTIVATION_DAYS = 7
@@ -127,6 +128,7 @@ STATIC_ROOT = ""
 STATICFILES_FINDERS = (
     'django.contrib.staticfiles.finders.FileSystemFinder',
     'django.contrib.staticfiles.finders.AppDirectoriesFinder',
+    'compressor.finders.CompressorFinder',
 )
 
 SESSION_ENGINE = "django.contrib.sessions.backends.signed_cookies"
