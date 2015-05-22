@@ -48,7 +48,7 @@ rebase:
 collectstatic: ./ve/bin/python validate
 	$(MANAGE) collectstatic --noinput --settings=$(APP).settings_production
 
-collectstatic: ./ve/bin/python validate
+compress: ./ve/bin/python validate
 	$(MANAGE) compress --settings=$(APP).settings_production
 
 deploy: ./ve/bin/python validate test
