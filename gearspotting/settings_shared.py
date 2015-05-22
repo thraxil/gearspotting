@@ -30,12 +30,7 @@ if 'test' in sys.argv or 'harvest' in sys.argv:
             'USER': '',
             'PASSWORD': '', }}
 
-TEST_RUNNER = 'django_nose.NoseTestSuiteRunner'
-
-NOSE_ARGS = [
-    '--with-coverage',
-    '--cover-package=gearspotting',
-]
+TEST_RUNNER = 'django.test.runner.DiscoverRunner'
 
 TIME_ZONE = 'America/New_York'
 LANGUAGE_CODE = 'en-us'
@@ -95,7 +90,6 @@ INSTALLED_APPS = [
     'gearspotting.link',
     'gearspotting.manufacturer',
     'gearspotting.musiciangear',
-    'django_nose',
     'bootstrapform',
     'easy_thumbnails',
     'guardian',
