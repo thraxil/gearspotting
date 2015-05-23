@@ -1,5 +1,4 @@
 {% extends "base.html" %}
-{% load thumbnail %}
 {% load markup %}
 
 {% block title %}Gear: {{object.manufacturer.name}} {{object.name}}{% endblock %}
@@ -19,7 +18,8 @@
 <div class="row">
     <div id="mainimage" class="span3">
 {% if object.gearphoto_set.count %}
-    <img itemprop="image" class="img-rounded" src="{% thumbnail object.first_photo.image 300x300 %}" />
+    <img itemprop="image" class="img-rounded"
+ src="{{ object.first_photo.get_300_src }}" />
 {% endif %}
     </div>
 <div class="span9">
@@ -78,7 +78,7 @@
     title="{{photo.photo.caption}}">
 			<img
 				 class="img-polaroid"
-				 src="{% thumbnail photo.photo.image 100000x100 %}" /></a>
+				 src="{{ object.first_photo.get_100h_src }}" /></a>
     {% endfor %}
 	</div>
 </div>

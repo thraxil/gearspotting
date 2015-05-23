@@ -157,3 +157,4 @@ LOGGING = {
 
 ALLOWED_HOSTS = ['localhost', '.gearspotting.com']
 RETICULUM_BASE = "http://reticulum.thraxil.org/"
+RETICULUM_PUBLIC_BASE = "https://d2f33fmhbh7cs9.cloudfront.net/"

@@ -1,12 +1,11 @@
 {% extends "base.html" %}
-{% load thumbnail %}
 {% load markup %}
 {% block title %}Photo{% endblock %}
 {% block subhead %}Photo{% endblock %}
 
 {% block content %}
 
-<img class="img-rounded" src="{% thumbnail object.image 1024x1024 %}" />
+<img class="img-rounded" src="{{object.get_1024_src}}" />
 
 <dl class="dl-horizontal">
 {% if object.caption %}

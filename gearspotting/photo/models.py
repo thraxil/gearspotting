@@ -2,6 +2,7 @@ from django.db import models
 from django.contrib.contenttypes import generic
 from sorl.thumbnail.fields import ImageWithThumbnailsField
 from django.forms import ModelForm
+from django.conf import settings
 
 
 class Photo(models.Model):
@@ -45,6 +46,41 @@ class Photo(models.Model):
 
     def musiciangear(self):
         return [g.musiciangear for g in self.musiciangearphoto_set.all()]
+
+    def get_full_src(self):
+        return ("%simage/%s/full/%d%s" % (
+            settings.RETICULUM_PUBLIC_BASE,
+            self.reticulum_key,
+            self.id,
+            self.extension))
+
+    def get_1024_src(self):
+        return ("%simage/%s/1024w1024h/%d%s" % (
+            settings.RETICULUM_PUBLIC_BASE,
+            self.reticulum_key,
+            self.id,
+            self.extension))
+
+    def get_300_src(self):
+        return ("%simage/%s/300w300h/%d%s" % (
+            settings.RETICULUM_PUBLIC_BASE,
+            self.reticulum_key,
+            self.id,
+            self.extension))
+
+    def get_200_src(self):
+        return ("%simage/%s/200w200h/%d%s" % (
+            settings.RETICULUM_PUBLIC_BASE,
+            self.reticulum_key,
+            self.id,
+            self.extension))
+
+    def get_100h_src(self):
+        return ("%simage/%s/100h/%d%s" % (
+            settings.RETICULUM_PUBLIC_BASE,
+            self.reticulum_key,
+            self.id,
+            self.extension))
 
 
 class AddPhotoForm(ModelForm):

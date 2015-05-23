@@ -1,5 +1,4 @@
 {% extends "base.html" %}
-{% load thumbnail %}
 {% load markup %}
 
 {% block title %}{{object.gear.name}} used by {{object.musician.name}}{% endblock %}
@@ -15,7 +14,8 @@
 <div class="row">
 	<div class="span3">
     {% if object.musiciangearphoto_set.count %}
-    <img class="img-rounded" src="{% thumbnail object.first_photo.image 200x200 %}" />
+    <img class="img-rounded"
+ src="{{ object.first_photo.get_200_src }}" />
     {% endif %}
 
     {% if user.is_authenticated %}<p class="editlink"><a href="update/">edit</a>
@@ -65,7 +65,7 @@
 	<div class="span9">
     {% for photo in object.musiciangearphoto_set.all %}
     <a href="{{photo.photo.get_absolute_url}}"
-    title="{{photo.photo.caption}}"><img class="img-polaroid" src="{% thumbnail photo.photo.image 100000x100 %}" /></a>
+    title="{{photo.photo.caption}}"><img class="img-polaroid" src="{{ photo.photo.get_100h_src }}" /></a>
     {% endfor %}
 	</div>
 </div>

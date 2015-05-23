@@ -1,6 +1,5 @@
 {% extends "base.html" %}
 {% load markup %}
-{% load thumbnail %}
 
 {% block title %}Musician: {{object.name}}{% endblock %}
 {% block subhead %}<a href="/musician/">Musician</a>: <span itemprop="name">{{object.name}}</span>{% endblock %}
@@ -18,7 +17,8 @@
 <div class="row">
 	<div class="span3">
     {% if object.musicianphotos.count %}
-    <img itemprop="image" class="img-rounded" src="{% thumbnail object.first_photo.image 200x200 %}" />
+    <img itemprop="image" class="img-rounded"
+ src="{{ object.first_photo.get_200_src }}" />
     {% endif %}
 	</div>
 	<div class="span9">
@@ -68,7 +68,8 @@
 	<div class="span9">
       {% for photo in object.musicianphoto_set.all %}
       <a href="{{photo.photo.get_absolute_url}}"
-      title="{{photo.photo.caption}}"><img class="img-polaroid" src="{% thumbnail photo.photo.image 100000x100 %}" /></a>
+      title="{{photo.photo.caption}}"><img class="img-polaroid"
+ src="{{ photo.photo.get_100h_src }}" /></a>
       {% endfor %}
 	</div>
 </div>
@@ -90,7 +91,8 @@
 	{% if musiciangear.musiciangearphoto_set.count %}
 	{% for photo in musiciangear.musiciangearphoto_set.all %}
 	<a href="{{photo.photo.get_absolute_url}}"
-	title="{{photo.photo.caption}}"><img class="img-polaroid" src="{% thumbnail photo.photo.image 100000x100 %}" /></a></div>
+	title="{{photo.photo.caption}}"><img class="img-polaroid"
+ src="{{ photo.photo.get_100h_src }}" /></a></div>
 	{% endfor %}
 	{% endif %}
 
