@@ -1,23 +1,10 @@
 from django.db import models
 from django.contrib.contenttypes import generic
-from sorl.thumbnail.fields import ImageWithThumbnailsField
 from django.forms import ModelForm
 from django.conf import settings
 
 
 class Photo(models.Model):
-    image = ImageWithThumbnailsField(
-        upload_to="images/%Y/%m/%d",
-        thumbnail={
-            'size': (65, 65)
-        },
-        extra_thumbnails={
-            'admin': {
-                'size': (70, 50),
-                'options': ('sharpen',),
-            }
-        }
-    )
     # reticulum fields
     reticulum_key = models.CharField(max_length=256, default="")
     extension = models.CharField(max_length=256, default="jpg")
@@ -91,7 +78,7 @@ class AddPhotoForm(ModelForm):
 class ImportPhotoForm(ModelForm):
     class Meta:
         model = Photo
-        exclude = ('image', 'reticulum_key', 'extension')
+        exclude = ('reticulum_key', 'extension')
 
 
 class PhotoInline(generic.GenericTabularInline):
