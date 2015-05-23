@@ -2,11 +2,11 @@ from gearspotting.photo.models import ImportPhotoForm
 from django.http import HttpResponseRedirect
 from django.shortcuts import render
 from django.views.generic.base import View
-from restclient import GET
 from django.conf import settings
 import os
 import os.path
-from datetime import datetime
+import requests
+import cStringIO
 import gearspotting.musician.models as musician
 import gearspotting.gear.models as gear
 import gearspotting.manufacturer.models as manmodels
@@ -77,19 +77,19 @@ def process_gearline(line, p):
 def save_image(form, url):
     p = form.save(commit=False)
     filename = url_to_filename(url)
-    imgdata = GET(url)
+    ext = os.path.splitext(filename)[1].lower()
 
-    filename = clean_filename(filename)
-    now = datetime.now()
-    rel_path = "images/%04d/%02d/%02d/" % (now.year,
-                                           now.month,
-                                           now.day)
-    path = os.path.join(settings.MEDIA_ROOT, rel_path)
-    mdirs(path)
-    f = open(os.path.join(path, filename), "wb")
-    f.write(imgdata)
-    f.close()
-    p.image = os.path.join(rel_path, filename)
+    r = requests.get(url)
+    imgobj = cStringIO.StringIO()
+    for chunk in r.iter_content(1024):
+        imgobj.write(chunk)
+    imgobj.seek(0)
+    files = {'image': ("image" + ext, imgobj)}
+    r = requests.post(settings.RETICULUM_BASE, files=files)
+    rhash = r.json()["hash"]
+
+    p.reticulum_key = rhash
+    p.extension = ext
     p.save()
     return p
 

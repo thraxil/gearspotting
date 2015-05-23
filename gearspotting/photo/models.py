@@ -91,7 +91,7 @@ class AddPhotoForm(ModelForm):
 class ImportPhotoForm(ModelForm):
     class Meta:
         model = Photo
-        exclude = ('image',)
+        exclude = ('image', 'reticulum_key', 'extension')
 
 
 class PhotoInline(generic.GenericTabularInline):
