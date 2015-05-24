@@ -28,10 +28,6 @@ django-guardian==1.2.5
 html2text==2014.4.5
 django-userena==1.4.0
 django-statsd-mozilla==0.3.15
-pycrypto==2.6.1
-ecdsa==0.11
-paramiko==1.15.2
-Fabric==1.10.1
 raven==5.1.1
 django-taggit==0.14.0
 django-taggit-templatetags==0.4.6dev

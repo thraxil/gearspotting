@@ -51,9 +51,6 @@ collectstatic: ./ve/bin/python validate
 compress: ./ve/bin/python validate
 	$(MANAGE) compress --settings=$(APP).settings_production
 
-deploy: ./ve/bin/python validate test
-	./ve/bin/fab deploy
-
 # run this one the very first time you check
 # this out on a new machine to set up dev
 # database, etc. You probably *DON'T* want
