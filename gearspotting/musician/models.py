@@ -73,3 +73,4 @@ class MusicianPhoto(models.Model):
 class MusicianForm(ModelForm):
     class Meta:
         model = Musician
+        exclude = []

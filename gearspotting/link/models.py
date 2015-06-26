@@ -24,5 +24,6 @@ class LinkInline(generic.GenericTabularInline):
 class LinkForm(ModelForm):
     class Meta:
         model = Link
+        exclude = []
 
 LinkFormset = generic.generic_inlineformset_factory(Link, extra=1)

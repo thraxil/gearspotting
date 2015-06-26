@@ -51,3 +51,4 @@ class Manufacturer(models.Model):
 class ManufacturerForm(ModelForm):
     class Meta:
         model = Manufacturer
+        exclude = []

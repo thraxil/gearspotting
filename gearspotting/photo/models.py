@@ -73,7 +73,7 @@ class Photo(models.Model):
 class AddPhotoForm(ModelForm):
     class Meta:
         model = Photo
-
+        exclude = []
 
 class ImportPhotoForm(ModelForm):
     class Meta:
