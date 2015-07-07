@@ -79,8 +79,6 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'django.contrib.admin',
     'taggit',
-    'template_utils',
-    'typogrify',
     'gearspotting.main',
     'gearspotting.musician',
     'gearspotting.gear',
