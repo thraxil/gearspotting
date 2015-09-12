@@ -98,6 +98,7 @@ INSTALLED_APPS = [
     'taggit_templatetags',
     'django_markwhat',
     'compressor',
+    'smoketest',
 ]
 
 ACCOUNT_ACTIVATION_DAYS = 7

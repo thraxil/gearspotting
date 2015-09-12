@@ -29,3 +29,4 @@ django-compressor==1.5
 boto==2.38.0
 django-storages-redux==1.2.3
 django-cacheds3storage==0.1.1
+django-smoketest==0.3.0
