@@ -7,6 +7,6 @@ COPY . /app/
 RUN /ve/bin/python manage.py test
 EXPOSE 8000
 ADD docker-run.sh /run.sh
-ENV APP countryx
+ENV APP gearspotting
 ENTRYPOINT ["/run.sh"]
 CMD ["run"]
