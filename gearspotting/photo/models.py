@@ -75,6 +75,7 @@ class AddPhotoForm(ModelForm):
         model = Photo
         exclude = []
 
+
 class ImportPhotoForm(ModelForm):
     class Meta:
         model = Photo

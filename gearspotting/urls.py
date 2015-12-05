@@ -2,8 +2,6 @@ from django.conf.urls import patterns, include
 from django.contrib import admin
 from django.conf import settings
 from django.contrib.sitemaps import GenericSitemap
-admin.autodiscover()
-
 from gearspotting.gear.feeds import GearFeed
 from gearspotting.musician.feeds import MusicianFeed
 from gearspotting.blog.feeds import BlogFeed
@@ -15,6 +13,8 @@ from gearspotting.photo.models import Photo
 from gearspotting.blog.models import Post
 
 import gearspotting.main.views as mainviews
+
+admin.autodiscover()
 
 gear_info_dict = {
     'queryset': Gear.objects.all(),
