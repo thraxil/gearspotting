@@ -3,7 +3,8 @@ from gearspotting.link.models import Link
 from gearspotting.gear.models import Gear
 from gearspotting.musician.models import Musician
 from gearspotting.photo.models import Photo
-from django.contrib.contenttypes import generic
+from django.contrib.contenttypes.fields import GenericRelation
+from django.contrib.contenttypes.admin import generic_inlineformset_factory
 from django.forms import ModelForm
 
 
@@ -11,7 +12,7 @@ class MusicianGear(models.Model):
     musician = models.ForeignKey(Musician)
     gear = models.ForeignKey(Gear)
     description = models.TextField(default="", blank=True)
-    links = generic.GenericRelation(Link)
+    links = GenericRelation(Link)
     added = models.DateTimeField(auto_now_add=True, editable=False)
     modified = models.DateTimeField(auto_now=True, editable=False)
 
@@ -22,7 +23,7 @@ class MusicianGear(models.Model):
         return "%s - %s" % (self.musician.name, self.gear.name)
 
     def links_formset(self):
-        LinkFormset = generic.generic_inlineformset_factory(Link, extra=1)
+        LinkFormset = generic_inlineformset_factory(Link, extra=1)
         return LinkFormset(instance=self)
 
     def first_photo(self):

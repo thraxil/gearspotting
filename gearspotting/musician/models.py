@@ -2,7 +2,8 @@ from django.db import models
 from gearspotting.link.models import Link
 from gearspotting.photo.models import Photo
 from django.forms import ModelForm
-from django.contrib.contenttypes import generic
+from django.contrib.contenttypes.fields import GenericRelation
+from django.contrib.contenttypes.admin import generic_inlineformset_factory
 from django.template.defaultfilters import slugify
 from django.forms.models import inlineformset_factory
 from taggit.managers import TaggableManager
@@ -12,7 +13,7 @@ class Musician(models.Model):
     name = models.CharField(default="", unique=True, max_length=256)
     slug = models.SlugField(max_length=256, editable=False)
     description = models.TextField(default="", blank=True)
-    links = generic.GenericRelation(Link)
+    links = GenericRelation(Link)
     tags = TaggableManager()
     added = models.DateTimeField(auto_now_add=True, editable=False)
     modified = models.DateTimeField(auto_now=True, editable=False)
@@ -27,7 +28,7 @@ class Musician(models.Model):
         return self.name
 
     def links_formset(self):
-        LinkFormset = generic.generic_inlineformset_factory(Link, extra=1)
+        LinkFormset = generic_inlineformset_factory(Link, extra=1)
         return LinkFormset(instance=self)
 
     def add_link_form(self):

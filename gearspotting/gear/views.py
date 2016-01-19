@@ -1,5 +1,5 @@
 from models import Gear, Link, Photo
-from django.contrib.contenttypes import generic
+from django.contrib.contenttypes.admin import generic_inlineformset_factory
 from django.views.generic.base import TemplateView
 
 from gearspotting.manufacturer.models import Manufacturer, ManufacturerForm
@@ -48,11 +48,11 @@ class EditLinksView(EditSomethingView):
     model = Gear
 
     def get_formset(self):
-        return generic.generic_inlineformset_factory(Link, extra=1)
+        return generic_inlineformset_factory(Link, extra=1)
 
 
 class EditPhotosView(EditSomethingView):
     model = Gear
 
     def get_formset(self):
-        generic.generic_inlineformset_factory(Photo, extra=1)
+        generic_inlineformset_factory(Photo, extra=1)

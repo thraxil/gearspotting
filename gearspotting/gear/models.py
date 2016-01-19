@@ -2,7 +2,8 @@ from django.db import models
 from gearspotting.manufacturer.models import Manufacturer
 from gearspotting.link.models import Link
 from gearspotting.photo.models import Photo
-from django.contrib.contenttypes import generic
+from django.contrib.contenttypes.fields import GenericRelation
+from django.contrib.contenttypes.admin import generic_inlineformset_factory
 from django.forms import ModelForm
 from django.template.defaultfilters import slugify
 from taggit.managers import TaggableManager
@@ -13,7 +14,7 @@ class Gear(models.Model):
     slug = models.SlugField(max_length=256, editable=False)
     manufacturer = models.ForeignKey(Manufacturer)
     description = models.TextField(default="", blank=True)
-    links = generic.GenericRelation(Link)
+    links = GenericRelation(Link)
     tags = TaggableManager()
     added = models.DateTimeField(auto_now_add=True, editable=False)
     modified = models.DateTimeField(auto_now=True, editable=False)
@@ -28,7 +29,7 @@ class Gear(models.Model):
         return self.manufacturer.name + ": " + self.name
 
     def links_formset(self):
-        LinkFormset = generic.generic_inlineformset_factory(Link, extra=1)
+        LinkFormset = generic_inlineformset_factory(Link, extra=1)
         return LinkFormset(instance=self)
 
     def save(self, *args, **kwargs):

@@ -1,5 +1,5 @@
 from django.db import models
-from django.contrib.contenttypes import generic
+from django.contrib.contenttypes.admin import GenericTabularInline
 from django.forms import ModelForm
 from django.conf import settings
 
@@ -82,5 +82,5 @@ class ImportPhotoForm(ModelForm):
         exclude = ('reticulum_key', 'extension')
 
 
-class PhotoInline(generic.GenericTabularInline):
+class PhotoInline(GenericTabularInline):
     model = Photo
