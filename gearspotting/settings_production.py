@@ -37,11 +37,6 @@ MEDIA_URL = S3_URL + '/media/'
 COMPRESS_STORAGE = 'cacheds3storage.CompressorS3BotoStorage'
 AWS_QUERYSTRING_AUTH = False
 
-if 'migrate' not in sys.argv:
-    INSTALLED_APPS = INSTALLED_APPS + [
-        'raven.contrib.django.raven_compat',
-    ]
-
 try:
     from local_settings import *
 except ImportError:

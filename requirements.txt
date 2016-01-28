@@ -20,7 +20,6 @@ django-guardian==1.4.1
 html2text==2016.1.8
 django-userena==1.5.1
 django-statsd-mozilla==0.3.16
-raven==5.10.0
 django-taggit==0.18.0
 django-taggit-templatetags==0.4.6dev
 django-markwhat==1.5
