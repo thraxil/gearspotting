@@ -1,4 +1,7 @@
-from django.conf.urls import patterns, include
+import django.views.static
+import django.contrib.sitemaps.views
+
+from django.conf.urls import include, url
 from django.contrib import admin
 from django.conf import settings
 from django.contrib.sitemaps import GenericSitemap
@@ -50,26 +53,24 @@ sitemaps = {
     'posts': GenericSitemap(post_info_dict, priority=0.6),
 }
 
-urlpatterns = patterns(
-    '',
-    (r'^$', mainviews.IndexView.as_view()),
-    (r'smoketest/', include('smoketest.urls')),
-    (r'^tag/$', mainviews.TagsView.as_view()),
-    (r'^search/$', mainviews.SearchView.as_view()),
-    (r'^accounts/', include('userena.urls')),
-    (r'^admin/', include(admin.site.urls)),
-    (r'^gear/', include('gearspotting.gear.urls')),
-    (r'^blog/', include('gearspotting.blog.urls')),
-    (r'^musician/', include('gearspotting.musician.urls')),
-    (r'^musiciangear/', include('gearspotting.musiciangear.urls')),
-    (r'^manufacturer/', include('gearspotting.manufacturer.urls')),
-    (r'^photos/', include('gearspotting.photo.urls')),
-    (r'^feeds/gear/$', GearFeed()),
-    (r'^feeds/musician/$', MusicianFeed()),
-    (r'^feeds/blog/$', BlogFeed()),
-    (r'^sitemap\.xml$',
-     'django.contrib.sitemaps.views.sitemap',
-     {'sitemaps': sitemaps}),
-    (r'^uploads/(?P<path>.*)$', 'django.views.static.serve',
-     {'document_root': settings.MEDIA_ROOT}),
-)
+urlpatterns = [
+    url(r'^$', mainviews.IndexView.as_view()),
+    url(r'smoketest/', include('smoketest.urls')),
+    url(r'^tag/$', mainviews.TagsView.as_view()),
+    url(r'^search/$', mainviews.SearchView.as_view()),
+    url(r'^accounts/', include('userena.urls')),
+    url(r'^admin/', include(admin.site.urls)),
+    url(r'^gear/', include('gearspotting.gear.urls')),
+    url(r'^blog/', include('gearspotting.blog.urls')),
+    url(r'^musician/', include('gearspotting.musician.urls')),
+    url(r'^musiciangear/', include('gearspotting.musiciangear.urls')),
+    url(r'^manufacturer/', include('gearspotting.manufacturer.urls')),
+    url(r'^photos/', include('gearspotting.photo.urls')),
+    url(r'^feeds/gear/$', GearFeed()),
+    url(r'^feeds/musician/$', MusicianFeed()),
+    url(r'^feeds/blog/$', BlogFeed()),
+    url(r'^sitemap\.xml$', django.contrib.sitemaps.views.sitemap,
+        {'sitemaps': sitemaps}),
+    url(r'^uploads/(?P<path>.*)$', django.views.static.serve,
+        {'document_root': settings.MEDIA_ROOT}),
+]
