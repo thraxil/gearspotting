@@ -1,4 +1,4 @@
-Django==1.8.10
+Django==1.8.17
 Markdown==2.6.6
 psycopg2==2.6.1
 Pillow==3.2.0
