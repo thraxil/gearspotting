@@ -28,4 +28,5 @@ class LinkForm(ModelForm):
         model = Link
         exclude = []
 
+
 LinkFormset = generic_inlineformset_factory(Link, extra=1)
