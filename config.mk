@@ -10,7 +10,8 @@ WHEEL_VERSION ?= 0.29.0
 REQUIREMENTS ?= requirements.txt
 VIRTUALENV ?= virtualenv.py
 SUPPORT_DIR ?= requirements/virtualenv_support/
-WHEELHOUSE ?= wheelhouse
+TAG ?= latest
+IMAGE ?= $(REPO)/$(APP):$(TAG)
 
 JS_FILES ?= media/js/
 
