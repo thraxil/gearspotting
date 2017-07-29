@@ -1,14 +1,14 @@
 Django==1.8.17
 Markdown==2.6.8
-psycopg2==2.6.2
-Pillow==4.0.0
+psycopg2==2.7.3
+Pillow==4.2.1
 coverage==4.3.4
 pep8==1.7.0
 pyflakes==1.5.0
 mccabe==0.6.1
 flake8==3.3.0
 statsd==3.2.1
-gunicorn==19.6.0
+gunicorn==19.7.1
 six==1.10.0
 requests==2.13.0
 python-dateutil==2.6.0
@@ -31,4 +31,4 @@ django-compressor==2.1
 boto==2.45.0
 django-storages-redux==1.3.2
 django-cacheds3storage==0.1.2
-django-smoketest==1.0.0
+django-smoketest==1.1.0
