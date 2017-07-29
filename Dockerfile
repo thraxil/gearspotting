@@ -6,6 +6,6 @@ COPY . /app/
 RUN VE=/ve/ MANAGE="/ve/bin/python manage.py" NODE_MODULES=/node/node_modules make all
 EXPOSE 8000
 ADD docker-run.sh /run.sh
-ENV APP sebastian
+ENV APP gearspotting
 ENTRYPOINT ["/run.sh"]
 CMD ["run"]
