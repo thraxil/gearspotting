@@ -136,12 +136,13 @@ try {
 def create_pull_exec(int i, String host) {
     cmd = { 
         node {
-            stage "Docker Pull - "+i
-            sh """
+            stage("Docker Pull - "+i) {
+                sh """
 ssh ${host} docker pull \${REPOSITORY}\$REPO/${APP}:\$TAG
 ssh ${host} cp /var/www/${APP}/TAG /var/www/${APP}/REVERT || true
 ssh ${host} "echo export TAG=\$TAG > /var/www/${APP}/TAG"
 """
+           }
         }
     }
     return cmd
