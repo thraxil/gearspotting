@@ -54,8 +54,9 @@ try {
         stage "Build"
         retry_backoff(5) { sh "docker pull ${REPO}/${APP}:latest" }				
         sh "make build" 
-        stage "Docker Push"
+        stage("Docker Push") {
         retry_backoff(5) { sh "docker push ${REPO}/${APP}:${TAG}" }
+				}
     }
 
     node {
