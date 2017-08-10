@@ -151,11 +151,12 @@ ssh ${host} "echo export TAG=\$TAG > /var/www/${APP}/TAG"
 def create_restart_web_exec(int i, String host) {
     cmd = { 
         node {
-            stage "Restart Gunicorn - "+i
-            sh """
+            stage("Restart Gunicorn - "+i) {
+                sh """
 ssh ${host} sudo stop ${APP} || ssh ${host} sudo systemctl stop ${APP}.service || true
 ssh ${host} sudo start ${APP} || ssh ${host} sudo systemctl start ${APP}.service
 """
+            }
         }
     }
     return cmd
