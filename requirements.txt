@@ -22,7 +22,7 @@ easy-thumbnails==2.4.1
 django-guardian==1.4.9
 html2text==2016.9.19
 django-userena==2.0.1
-django-statsd-mozilla==0.3.16
+django-statsd-mozilla==0.4.0
 django-taggit==0.22.1
 django-taggit-templatetags==0.4.6dev
 django-markwhat==1.5.1
