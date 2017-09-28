@@ -9,10 +9,10 @@ class Command(BaseCommand):
         dup_slugs = [s for s, c in collections.Counter(all_slugs).items()
                      if c > 1]
         for s in dup_slugs:
-            print(s)
+            print s
             gdupes = Gear.objects.filter(slug=s)
             keep = gdupes[0]
-            print(gdupes.count())
+            print gdupes.count()
             for g in gdupes[1:]:
                 for p in g.gearphoto_set.all():
                     p.gear = keep
