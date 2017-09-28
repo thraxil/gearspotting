@@ -17,7 +17,7 @@ class Photo(models.Model):
     modified = models.DateTimeField(auto_now=True, editable=False)
 
     def label(self):
-        return unicode(self.content_object)
+        return str(self.content_object)
 
     def get_absolute_url(self):
         return "/photos/%d/" % self.id
