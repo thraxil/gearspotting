@@ -1,6 +1,6 @@
 from django.contrib.syndication.views import Feed
 from django.utils.feedgenerator import Atom1Feed
-from models import Musician
+from .models import Musician
 
 
 class MusicianFeed(Feed):

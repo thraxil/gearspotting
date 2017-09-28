@@ -56,7 +56,6 @@ sitemaps = {
 urlpatterns = [
     url(r'^$', mainviews.IndexView.as_view()),
     url(r'smoketest/', include('smoketest.urls')),
-    url(r'^tag/$', mainviews.TagsView.as_view()),
     url(r'^search/$', mainviews.SearchView.as_view()),
     url(r'^accounts/', include('userena.urls')),
     url(r'^admin/', include(admin.site.urls)),

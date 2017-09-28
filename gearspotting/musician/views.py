@@ -1,4 +1,4 @@
-from models import Musician, Link, Photo
+from .models import Musician, Link, Photo
 from django.contrib.contenttypes.admin import generic_inlineformset_factory
 from django.forms.models import inlineformset_factory
 from django.views.generic.base import TemplateView

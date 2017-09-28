@@ -1,4 +1,4 @@
-from models import Manufacturer, Link
+from .models import Manufacturer, Link
 from django.contrib.contenttypes.admin import generic_inlineformset_factory
 
 from gearspotting.utils.views import AddSomethingView, EditSomethingView

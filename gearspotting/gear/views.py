@@ -1,4 +1,4 @@
-from models import Gear, Link, Photo
+from .models import Gear, Link, Photo
 from django.contrib.contenttypes.admin import generic_inlineformset_factory
 from django.views.generic.base import TemplateView
 

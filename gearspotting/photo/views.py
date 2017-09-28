@@ -6,7 +6,7 @@ from django.conf import settings
 import os
 import os.path
 import requests
-import cStringIO
+from io import StringIO as cStringIO
 import gearspotting.musician.models as musician
 import gearspotting.gear.models as gear
 import gearspotting.manufacturer.models as manmodels
