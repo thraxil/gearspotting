@@ -1,18 +1,8 @@
 {% extends "base.html" %}
-{% load taggit_extras %}
 {% block title %}musician tags{% endblock %}
 
 {% block content %}
 
-<h1>Tags</h1>
-
-{% get_tagcloud as cloud for 'musician.Musician' %}
-
-{% for tag in cloud %}
-<font size="{{ tag.weight }}">
-<a href="/musician/tag/{{tag}}/">{{tag}}</a>
-</font>
-{% endfor %}
-
+    <p>currently broken. sorry</p>
 
 {% endblock %}

@@ -98,7 +98,6 @@ INSTALLED_APPS = [
     'gearspotting.blog',
     'django_statsd',
     'gunicorn',
-    'taggit_templatetags',
     'django_markwhat',
     'compressor',
     'smoketest',
