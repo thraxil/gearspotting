@@ -41,17 +41,28 @@ MEDIA_URL = '/uploads/'
 ADMIN_MEDIA_PREFIX = '/media/'
 STATIC_URL = "/media/"
 SECRET_KEY = 'WHUHGASD%TYJMSAFDS'
-TEMPLATE_LOADERS = (
-    'django.template.loaders.filesystem.Loader',
-    'django.template.loaders.app_directories.Loader',
-)
 
-TEMPLATE_CONTEXT_PROCESSORS = (
-    'django.contrib.auth.context_processors.auth',
-    'django.core.context_processors.debug',
-    'django.core.context_processors.request',
-    'django.core.context_processors.static',
-)
+TEMPLATES = [
+    {
+        'BACKEND': 'django.template.backends.django.DjangoTemplates',
+        'DIRS':  [
+            "/var/www/gearspotting/gearspotting/templates/",
+            os.path.join(os.path.dirname(__file__), "templates"),
+        ],
+        'APP_DIRS': True,
+        'OPTIONS': {
+            'context_processors': [
+                'django.contrib.auth.context_processors.auth',
+                'django.template.context_processors.debug',
+                'django.template.context_processors.request',
+                'django.template.context_processors.media',
+                'django.template.context_processors.static',
+                'django.template.context_processors.tz',
+                'django.contrib.messages.context_processors.messages',
+            ],
+        },
+    },
+]
 
 MIDDLEWARE_CLASSES = (
     'django_statsd.middleware.GraphiteRequestTimingMiddleware',
@@ -63,11 +74,6 @@ MIDDLEWARE_CLASSES = (
 )
 
 ROOT_URLCONF = 'gearspotting.urls'
-
-TEMPLATE_DIRS = (
-    "/var/www/gearspotting/gearspotting/templates/",
-    os.path.join(os.path.dirname(__file__), "templates"),
-)
 
 INSTALLED_APPS = [
     'django.contrib.auth',
