@@ -19,6 +19,7 @@ urllib3==1.22
 chardet==3.0.4
 certifi==2017.7.27.1
 idna==2.6
+raven==6.6.0
 
 django-staticmedia==0.2.2
 django-bootstrap-form==3.1.0

@@ -99,6 +99,7 @@ INSTALLED_APPS = [
     'django_markwhat',
     'compressor',
     'smoketest',
+    'raven.contrib.django.raven_compat',
 ]
 
 ACCOUNT_ACTIVATION_DAYS = 7

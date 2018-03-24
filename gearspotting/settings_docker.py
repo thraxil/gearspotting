@@ -76,3 +76,10 @@ LOGGING = {
     'version': 1,
     'disable_existing_loggers': False,
 }
+
+RAVEN_DSN = os.environ.get('RAVEN_DSN', None)
+
+if RAVEN_DSN:
+    RAVEN_CONFIG = {
+        'dsn': RAVEN_DSN,
+    }
