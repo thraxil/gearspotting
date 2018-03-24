@@ -11,7 +11,7 @@ locals().update(
     common(
         app=app,
         base=base,
-        celery=True,
+        celery=False,
         INSTALLED_APPS=INSTALLED_APPS,
         STATIC_ROOT=STATIC_ROOT,
         MIDDLEWARE=MIDDLEWARE,
