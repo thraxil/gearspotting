@@ -28,7 +28,7 @@ django-guardian==1.4.9
 html2text==2018.1.9
 django-userena==2.0.1
 django-statsd-mozilla==0.4.0
-django-taggit==0.22.1
+django-taggit==0.22.2
 django-taggit-templatetags==0.4.6dev
 django-markwhat==1.5.1
 django-appconf==1.0.2
