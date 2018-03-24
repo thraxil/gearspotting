@@ -22,7 +22,7 @@ idna==2.6
 raven==6.6.0
 
 django-staticmedia==0.2.2
-django-bootstrap-form==3.1.0
+django-bootstrap-form==3.4
 easy-thumbnails==2.4.1
 django-guardian==1.4.9
 html2text==2016.9.19
