@@ -33,7 +33,7 @@ class AddPostView(View):
         )
         try:
             ping_google('/sitemap.xml')
-        except:
+        except Exception as e:
             pass
         return redirect("/blog/")
 

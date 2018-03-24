@@ -38,7 +38,7 @@ def url_to_filename(url):
 def mdirs(path):
     try:
         os.makedirs(path)
-    except:
+    except Exception as e:
         pass
 
 

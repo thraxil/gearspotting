@@ -22,9 +22,9 @@ class AddSomethingView(View):
         form = self.get_form(obj)
         f = form(request.POST, request.FILES)
         if f.is_valid():
-            l = f.save(commit=False)
-            l.content_object = obj
-            l.save()
+            v = f.save(commit=False)
+            v.content_object = obj
+            v.save()
             return HttpResponseRedirect(obj.get_absolute_url())
         data = dict(form=f)
         data[self.context_obj_name] = obj
