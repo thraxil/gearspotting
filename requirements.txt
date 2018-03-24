@@ -9,7 +9,7 @@ mccabe==0.6.1
 flake8==3.5.0
 statsd==3.2.2
 gunicorn==19.7.1
-six==1.10.0
+six==1.11.0
 requests==2.18.4
 python-dateutil==2.6.1
 enum34==1.1.6
