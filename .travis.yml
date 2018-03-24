@@ -1,0 +1,10 @@
+language: python
+python:
+  - "3.5"
+install:
+  - pip3 install -r requirements.txt
+  - pip3 install coveralls
+script:
+  - python3 manage.py test mithras
+  - coverage run --source=mithras manage.py test gearspotting
+after_success: coveralls
