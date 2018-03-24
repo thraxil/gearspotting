@@ -1,3 +1,4 @@
+# flake8: noqa
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
 
@@ -18,31 +19,31 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name='postmusician',
             name='musician',
-            field=models.ForeignKey(to='musician.Musician'),
+            field=models.ForeignKey(to='musician.Musician', on_delete=models.CASCADE),
             preserve_default=True,
         ),
         migrations.AddField(
             model_name='postmusician',
             name='post',
-            field=models.ForeignKey(to='blog.Post'),
+            field=models.ForeignKey(to='blog.Post', on_delete=models.CASCADE),
             preserve_default=True,
         ),
         migrations.AddField(
             model_name='postgear',
             name='gear',
-            field=models.ForeignKey(to='gear.Gear'),
+            field=models.ForeignKey(to='gear.Gear', on_delete=models.CASCADE),
             preserve_default=True,
         ),
         migrations.AddField(
             model_name='postgear',
             name='post',
-            field=models.ForeignKey(to='blog.Post'),
+            field=models.ForeignKey(to='blog.Post', on_delete=models.CASCADE),
             preserve_default=True,
         ),
         migrations.AddField(
             model_name='post',
             name='author',
-            field=models.ForeignKey(to=settings.AUTH_USER_MODEL),
+            field=models.ForeignKey(to=settings.AUTH_USER_MODEL, on_delete=models.CASCADE),
             preserve_default=True,
         ),
     ]

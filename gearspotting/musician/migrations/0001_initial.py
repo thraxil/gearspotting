@@ -34,8 +34,8 @@ class Migration(migrations.Migration):
             name='MusicianPhoto',
             fields=[
                 ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
-                ('musician', models.ForeignKey(to='musician.Musician')),
-                ('photo', models.ForeignKey(to='photo.Photo')),
+                ('musician', models.ForeignKey(to='musician.Musician', on_delete=models.CASCADE)),
+                ('photo', models.ForeignKey(to='photo.Photo', on_delete=models.CASCADE)),
             ],
             options={
             },

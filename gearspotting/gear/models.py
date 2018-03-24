@@ -12,7 +12,7 @@ from taggit.managers import TaggableManager
 class Gear(models.Model):
     name = models.CharField(default="", max_length=256)
     slug = models.SlugField(max_length=256, editable=False)
-    manufacturer = models.ForeignKey(Manufacturer)
+    manufacturer = models.ForeignKey(Manufacturer, on_delete=models.CASCADE)
     description = models.TextField(default="", blank=True)
     links = GenericRelation(Link)
     tags = TaggableManager()
@@ -54,8 +54,8 @@ class Gear(models.Model):
 
 
 class GearPhoto(models.Model):
-    gear = models.ForeignKey(Gear)
-    photo = models.ForeignKey(Photo)
+    gear = models.ForeignKey(Gear, on_delete=models.CASCADE)
+    photo = models.ForeignKey(Photo, on_delete=models.CASCADE)
 
 
 class AddGearForm(ModelForm):

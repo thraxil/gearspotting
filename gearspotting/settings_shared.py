@@ -87,9 +87,6 @@ INSTALLED_APPS = [
     'gearspotting.manufacturer',
     'gearspotting.musiciangear',
     'bootstrapform',
-    'easy_thumbnails',
-    'guardian',
-    'userena',
     'gearspotting.profile',
     'django.contrib.sitemaps',
     'gearspotting.blog',
@@ -133,14 +130,10 @@ SESSION_ENGINE = "django.contrib.sessions.backends.signed_cookies"
 SESSION_COOKIE_HTTPONLY = True
 
 AUTHENTICATION_BACKENDS = (
-    'userena.backends.UserenaAuthenticationBackend',
     'django.contrib.auth.backends.ModelBackend',  # default
-    'guardian.backends.ObjectPermissionBackend',
 )
 ANONYMOUS_USER_ID = -1
 AUTH_PROFILE_MODULE = 'profile.MyProfile'
-
-USERENA_DEFAULT_PRIVACY = "open"
 
 STATSD_CLIENT = 'statsd.client'
 STATSD_PREFIX = 'gearspotting'

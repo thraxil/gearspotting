@@ -7,7 +7,7 @@ import re
 
 
 class Post(models.Model):
-    author = models.ForeignKey(User)
+    author = models.ForeignKey(User, on_delete=models.CASCADE)
     title = models.CharField(max_length=256)
     slug = models.SlugField()
     body = models.TextField(blank=True, default="")
@@ -34,13 +34,13 @@ class Post(models.Model):
 
 
 class PostGear(models.Model):
-    post = models.ForeignKey(Post)
-    gear = models.ForeignKey(Gear)
+    post = models.ForeignKey(Post, on_delete=models.CASCADE)
+    gear = models.ForeignKey(Gear, on_delete=models.CASCADE)
 
 
 class PostMusician(models.Model):
-    post = models.ForeignKey(Post)
-    musician = models.ForeignKey(Musician)
+    post = models.ForeignKey(Post, on_delete=models.CASCADE)
+    musician = models.ForeignKey(Musician, on_delete=models.CASCADE)
 
 
 def link_text(text):

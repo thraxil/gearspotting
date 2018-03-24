@@ -24,7 +24,7 @@ class Migration(migrations.Migration):
                 ('description', models.TextField(default=b'', blank=True)),
                 ('added', models.DateTimeField(auto_now_add=True)),
                 ('modified', models.DateTimeField(auto_now=True)),
-                ('manufacturer', models.ForeignKey(to='manufacturer.Manufacturer')),
+                ('manufacturer', models.ForeignKey(to='manufacturer.Manufacturer', on_delete=models.CASCADE)),
                 ('tags', taggit.managers.TaggableManager(to='taggit.Tag', through='taggit.TaggedItem', help_text='A comma-separated list of tags.', verbose_name='Tags')),
             ],
             options={
@@ -36,8 +36,8 @@ class Migration(migrations.Migration):
             name='GearPhoto',
             fields=[
                 ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
-                ('gear', models.ForeignKey(to='gear.Gear')),
-                ('photo', models.ForeignKey(to='photo.Photo')),
+                ('gear', models.ForeignKey(to='gear.Gear', on_delete=models.CASCADE)),
+                ('photo', models.ForeignKey(to='photo.Photo', on_delete=models.CASCADE)),
             ],
             options={
             },

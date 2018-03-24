@@ -9,8 +9,8 @@ from django.forms import ModelForm
 
 
 class MusicianGear(models.Model):
-    musician = models.ForeignKey(Musician)
-    gear = models.ForeignKey(Gear)
+    musician = models.ForeignKey(Musician, on_delete=models.CASCADE)
+    gear = models.ForeignKey(Gear, on_delete=models.CASCADE)
     description = models.TextField(default="", blank=True)
     links = GenericRelation(Link)
     added = models.DateTimeField(auto_now_add=True, editable=False)
@@ -44,5 +44,5 @@ class MusicianGear(models.Model):
 
 
 class MusicianGearPhoto(models.Model):
-    musiciangear = models.ForeignKey(MusicianGear)
-    photo = models.ForeignKey(Photo)
+    musiciangear = models.ForeignKey(MusicianGear, on_delete=models.CASCADE)
+    photo = models.ForeignKey(Photo, on_delete=models.CASCADE)

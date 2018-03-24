@@ -1,4 +1,4 @@
-Django==1.8.17
+Django==2.0.3
 Markdown==2.6.11
 psycopg2-binary==2.7.4
 Pillow==5.0.0
@@ -20,13 +20,11 @@ chardet==3.0.4
 certifi==2018.1.18
 idna==2.6
 raven==6.6.0
+pytz==2018.3
 
 django-staticmedia==0.2.2
 django-bootstrap-form==3.4
-easy-thumbnails==2.5
-django-guardian==1.4.9
 html2text==2018.1.9
-django-userena==2.0.1
 django-statsd-mozilla==0.4.0
 django-taggit==0.22.2
 django-taggit-templatetags==0.4.6dev

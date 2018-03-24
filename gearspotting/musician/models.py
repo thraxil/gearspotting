@@ -67,8 +67,8 @@ class Musician(models.Model):
 
 
 class MusicianPhoto(models.Model):
-    musician = models.ForeignKey(Musician)
-    photo = models.ForeignKey(Photo)
+    musician = models.ForeignKey(Musician, on_delete=models.CASCADE)
+    photo = models.ForeignKey(Photo, on_delete=models.CASCADE)
 
 
 class MusicianForm(ModelForm):

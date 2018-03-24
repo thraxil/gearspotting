@@ -21,8 +21,8 @@ class Migration(migrations.Migration):
                 ('description', models.TextField(default=b'', blank=True)),
                 ('added', models.DateTimeField(auto_now_add=True)),
                 ('modified', models.DateTimeField(auto_now=True)),
-                ('gear', models.ForeignKey(to='gear.Gear')),
-                ('musician', models.ForeignKey(to='musician.Musician')),
+                ('gear', models.ForeignKey(to='gear.Gear', on_delete=models.CASCADE)),
+                ('musician', models.ForeignKey(to='musician.Musician', on_delete=models.CASCADE)),
             ],
             options={
             },
@@ -32,8 +32,8 @@ class Migration(migrations.Migration):
             name='MusicianGearPhoto',
             fields=[
                 ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
-                ('musiciangear', models.ForeignKey(to='musiciangear.MusicianGear')),
-                ('photo', models.ForeignKey(to='photo.Photo')),
+                ('musiciangear', models.ForeignKey(to='musiciangear.MusicianGear', on_delete=models.CASCADE)),
+                ('photo', models.ForeignKey(to='photo.Photo', on_delete=models.CASCADE)),
             ],
             options={
             },
