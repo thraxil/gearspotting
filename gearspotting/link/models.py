@@ -11,7 +11,7 @@ class Link(models.Model):
     url = models.URLField()
     description = models.TextField(blank=True, default="")
 
-    content_type = models.ForeignKey(ContentType)
+    content_type = models.ForeignKey(ContentType, on_delete=models.CASCADE)
     object_id = models.PositiveIntegerField()
     content_object = GenericForeignKey('content_type', 'object_id')
 
