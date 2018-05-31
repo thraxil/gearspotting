@@ -19,7 +19,7 @@ urllib3==1.22
 chardet==3.0.4
 certifi==2018.4.16
 idna==2.6
-raven==6.8.0
+raven==6.9.0
 pytz==2018.4
 
 django-staticmedia==0.2.2
