@@ -10,7 +10,7 @@ flake8==3.5.0
 statsd==3.2.2
 gunicorn==19.8.1
 six==1.11.0
-requests==2.19.0
+requests==2.19.1
 python-dateutil==2.7.3
 enum34==1.1.6
 configparser==3.5.0
