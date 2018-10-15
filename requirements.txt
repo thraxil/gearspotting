@@ -17,7 +17,7 @@ configparser==3.5.0
 pycodestyle==2.3.1
 urllib3==1.23
 chardet==3.0.4
-certifi==2018.8.24
+certifi==2018.10.15
 idna==2.7
 raven==6.9.0
 pytz==2018.5
