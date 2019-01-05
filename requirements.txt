@@ -1,4 +1,4 @@
-Django==2.1.4
+Django==2.1.5
 Markdown==2.6.11
 psycopg2-binary==2.7.6.1
 Pillow==5.4.0
