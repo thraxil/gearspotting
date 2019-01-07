@@ -23,7 +23,7 @@ chardet==3.0.4
 certifi==2018.11.29
 idna==2.8
 raven==6.10.0
-pytz==2018.7
+pytz==2018.9
 
 django-staticmedia==0.2.2
 django-bootstrap-form==3.4
