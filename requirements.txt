@@ -29,7 +29,7 @@ django-staticmedia==0.2.2
 django-bootstrap-form==3.4
 html2text==2018.1.9
 django-statsd-mozilla==0.4.0
-django-taggit==0.24.0
+django-taggit==1.0.0
 django-taggit-templatetags==0.4.6dev
 django-templatetag-sugar==1.0
 django-markwhat==1.6.1
