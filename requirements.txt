@@ -1,6 +1,6 @@
 Django==2.2
 Markdown==2.6.11 # pyup: <3.0
-psycopg2-binary==2.8
+psycopg2-binary==2.8.1
 Pillow==6.0.0
 coverage==4.5.3
 pep8==1.7.1
