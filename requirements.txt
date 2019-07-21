@@ -1,6 +1,6 @@
-Django==2.2.1
+Django==2.2.3
 Markdown==2.6.11 # pyup: <3.0
-psycopg2-binary==2.8.2
+psycopg2-binary==2.8.3
 Pillow==6.0.0
 coverage==4.5.3
 pep8==1.7.1
@@ -18,9 +18,9 @@ python-dateutil==2.8.0
 enum34==1.1.6
 configparser==3.7.4
 pycodestyle==2.5.0
-urllib3==1.25.2
+urllib3==1.25.3
 chardet==3.0.4
-certifi==2019.3.9
+certifi==2019.6.16
 idna==2.8
 raven==6.10.0
 pytz==2019.1
@@ -37,10 +37,10 @@ django-appconf==1.0.3
 django-compressor==2.2
 boto==2.49.0
 django-storages==1.7.1
-django-cacheds3storage==0.1.2
+django-cacheds3storage==0.2.1
 django-smoketest==1.1.0
 django-debug-toolbar==1.11
-django-waffle==0.16.0
+django-waffle==0.17.0
 django-jenkins==0.110.0
 sqlparse==0.3.0
 
