@@ -42,8 +42,11 @@ boto==2.49.0
 django-storages==1.8
 django-cacheds3storage==0.2.1
 django-smoketest==1.1.0
-django-debug-toolbar==1.11
+
+django-debug-toolbar==2.1
+
 django-waffle==0.19.0
+
 django-jenkins==0.110.0
 sqlparse==0.3.0
 
