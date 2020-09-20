@@ -52,4 +52,4 @@ django-waffle==2.0.0
 django-jenkins==0.110.0
 sqlparse==0.3.1
 
-thraxilsettings==3.2.2
+thraxilsettings==3.3.1
