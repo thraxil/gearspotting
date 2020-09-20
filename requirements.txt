@@ -45,7 +45,7 @@ boto3==1.15.1
 
 django-smoketest==1.1.2
 
-django-debug-toolbar==2.2
+django-debug-toolbar==3.0
 
 django-waffle==2.0.0
 
