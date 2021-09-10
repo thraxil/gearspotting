@@ -50,6 +50,6 @@ django-debug-toolbar==3.2.2
 django-waffle==2.2.1
 
 django-jenkins==0.110.0
-sqlparse==0.4.1
+sqlparse==0.4.2
 
 thraxilsettings==3.3.1
