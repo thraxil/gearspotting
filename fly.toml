@@ -1,0 +1,48 @@
+# fly.toml file generated for gearspotting on 2021-10-30T09:41:54+01:00
+
+app = "gearspotting"
+
+kill_signal = "SIGINT"
+kill_timeout = 5
+processes = []
+
+[env]
+  ALLOWED_HOSTS=".gearspotting.com,gearspotting.fly.dev"
+  DB_USER="gearspotting_g71436m30vxnr0ep"
+  DB_PORT="5432"
+  DB_HOST="thraxil-postgres.internal"
+  AWS_S3_CUSTOM_DOMAIN="d2l0eqxka0mdmr.cloudfront.net"
+  AWS_STORAGE_BUCKET_NAME="thraxil-gearspotting-static-prod"
+
+[deploy]
+  release_command = "/run.sh migrate && /run.sh collectstatic && /run.sh compress"
+
+[experimental]
+  allowed_public_ports = []
+  auto_rollback = true
+
+[[services]]
+  http_checks = []
+  internal_port = 8000
+  processes = ["app"]
+  protocol = "tcp"
+  script_checks = []
+
+  [services.concurrency]
+    hard_limit = 25
+    soft_limit = 20
+    type = "connections"
+
+  [[services.ports]]
+    handlers = ["http"]
+    port = 80
+
+  [[services.ports]]
+    handlers = ["tls", "http"]
+    port = 443
+
+  [[services.tcp_checks]]
+    grace_period = "1s"
+    interval = "15s"
+    restart_limit = 0
+    timeout = "2s"
