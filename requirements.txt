@@ -43,7 +43,7 @@ django-storages==1.12.3
 
 boto3==1.20.49
 
-django-smoketest==1.1.2
+django-smoketest==1.2.0
 
 django-debug-toolbar==3.2.4
 
