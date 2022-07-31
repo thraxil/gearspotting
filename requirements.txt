@@ -7,7 +7,7 @@ psycopg2-binary==2.9.1
 
 coverage==6.4.2
 pep8==1.7.1
-pyflakes==2.4.0
+pyflakes==2.5.0
 mccabe==0.6.0
 flake8==4.0.1
 statsd==3.3.0
