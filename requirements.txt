@@ -41,7 +41,7 @@ django-compressor==4.0
 
 django-storages==1.13.1
 
-boto3==1.25.3
+boto3==1.25.4
 
 django-smoketest==1.2.0
 
