@@ -16,3 +16,4 @@ locals().update(
         STATIC_ROOT=STATIC_ROOT,
         MIDDLEWARE=MIDDLEWARE,
     ))
+COMPRESS_OFFLINE_MANIFEST_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
