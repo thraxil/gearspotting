@@ -1,13 +1,16 @@
-from gearspotting.gear.models import Gear
 import collections
+
 from django.core.management.base import BaseCommand
+
+from gearspotting.gear.models import Gear
 
 
 class Command(BaseCommand):
     def handle(self, *args, **kwargs):
         all_slugs = [g.slug for g in Gear.objects.all()]
-        dup_slugs = [s for s, c in collections.Counter(all_slugs).items()
-                     if c > 1]
+        dup_slugs = [
+            s for s, c in collections.Counter(all_slugs).items() if c > 1
+        ]
         for s in dup_slugs:
             print(s)
             gdupes = Gear.objects.filter(slug=s)

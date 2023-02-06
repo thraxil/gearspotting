@@ -1,23 +1,25 @@
-from gearspotting.photo.models import ImportPhotoForm
+import os
+import os.path
+import re
+from io import StringIO as cStringIO
+
+import requests
+from django.conf import settings
 from django.http import HttpResponseRedirect
 from django.shortcuts import render
 from django.views.generic.base import View
-from django.conf import settings
-import os
-import os.path
-import requests
-from io import StringIO as cStringIO
-import gearspotting.musician.models as musician
+
 import gearspotting.gear.models as gear
 import gearspotting.manufacturer.models as manmodels
-import re
+import gearspotting.musician.models as musician
+from gearspotting.photo.models import ImportPhotoForm
 
 
 def clean_filename(filename):
     filename = filename.replace("%20", "_")
     filename = filename.replace("%25", "_")
-    filename = filename.replace(' ', '_')
-    filename = filename.replace('%', '_')
+    filename = filename.replace(" ", "_")
+    filename = filename.replace("%", "_")
     (base, ext) = os.path.splitext(filename)
     base = base[:75]
     filename = base + ext
@@ -29,48 +31,47 @@ def url_to_filename(url):
         url = url.replace(" ", "%20")
     filename = url.split("/")[-1]
     if "?" in filename:
-        filename = re.sub(r'(\?.*)$', '', filename)
+        filename = re.sub(r"(\?.*)$", "", filename)
     if "#" in filename:
-        filename = re.sub(r'(\#.*)$', '', filename)
+        filename = re.sub(r"(\#.*)$", "", filename)
     return filename
 
 
 def mdirs(path):
     try:
         os.makedirs(path)
-    except Exception:
+    except Exception:  # nosec
         pass
 
 
 def make_musicians_and_mphotos(text, p):
-    for line in text.split('\n'):
+    for line in text.split("\n"):
         mline = line.strip()
         if not mline:
             continue
-        m, created = musician.models.Musician.objects.get_or_create(
-            name=mline)
-        musician.models.MusicianPhoto.objects.create(
-            musician=m, photo=p)
+        m, created = musician.models.Musician.objects.get_or_create(name=mline)
+        musician.models.MusicianPhoto.objects.create(musician=m, photo=p)
 
 
 def process_gearline(line, p):
     gearline = line.strip()
     if not gearline:
         return
-    split_char = ' '
-    if ':' in gearline:
-        split_char = ':'
+    split_char = " "
+    if ":" in gearline:
+        split_char = ":"
     if split_char not in gearline:
         return
     parts = gearline.split(split_char)
     manufacturer_name = parts[0].strip()
-    gear_name = ' '.join(parts[1:]).strip()
+    gear_name = " ".join(parts[1:]).strip()
 
-    (manufacturer,
-     created) = manmodels.Manufacturer.objects.get_or_create(
-         name=manufacturer_name)
+    (manufacturer, created) = manmodels.Manufacturer.objects.get_or_create(
+        name=manufacturer_name
+    )
     g, created = gear.models.Gear.objects.get_or_create(
-        manufacturer=manufacturer, name=gear_name)
+        manufacturer=manufacturer, name=gear_name
+    )
     gear.models.GearPhoto.objects.create(gear=g, photo=p)
 
 
@@ -84,7 +85,7 @@ def save_image(form, url):
     for chunk in r.iter_content(1024):
         imgobj.write(chunk)
     imgobj.seek(0)
-    files = {'image': ("image" + ext, imgobj)}
+    files = {"image": ("image" + ext, imgobj)}
     r = requests.post(settings.RETICULUM_BASE, files=files)
     rhash = r.json()["hash"]
 
@@ -95,21 +96,22 @@ def save_image(form, url):
 
 
 class ImportPhotoView(View):
-    template_name = 'photo/import_photo.html'
+    template_name = "photo/import_photo.html"
 
     def get(self, request):
         form = ImportPhotoForm()
         return render(
-            request, self.template_name,
-            dict(url=request.GET.get('url', ''),
-                 form=form))
+            request,
+            self.template_name,
+            dict(url=request.GET.get("url", ""), form=form),
+        )
 
     def post(self, request):
         form = ImportPhotoForm(request.POST, request.FILES)
         if form.is_valid():
-            p = save_image(form, request.POST.get('url', ''))
-            make_musicians_and_mphotos(request.POST.get('musicians', ''), p)
+            p = save_image(form, request.POST.get("url", ""))
+            make_musicians_and_mphotos(request.POST.get("musicians", ""), p)
 
-            for line in request.POST.get('gear', '').split('\n'):
+            for line in request.POST.get("gear", "").split("\n"):
                 process_gearline(line, p)
             return HttpResponseRedirect(p.get_absolute_url())

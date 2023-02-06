@@ -1,5 +1,5 @@
-from django.shortcuts import get_object_or_404, render
 from django.http import HttpResponseRedirect
+from django.shortcuts import get_object_or_404, render
 from django.views.generic.base import View
 
 
@@ -12,10 +12,7 @@ class AddSomethingView(View):
         f = form()
         data = dict(form=f)
         data[self.context_obj_name] = obj
-        return render(
-            request,
-            self.template_name,
-            data)
+        return render(request, self.template_name, data)
 
     def post(self, request, slug):
         obj = get_object_or_404(self.model, slug=slug)
@@ -28,9 +25,7 @@ class AddSomethingView(View):
             return HttpResponseRedirect(obj.get_absolute_url())
         data = dict(form=f)
         data[self.context_obj_name] = obj
-        return render(
-            request, self.template_name,
-            data)
+        return render(request, self.template_name, data)
 
 
 class EditSomethingView(View):

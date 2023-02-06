@@ -1,10 +1,10 @@
-from .models import Post
 from django.contrib.auth.models import User
-from django.shortcuts import get_object_or_404
-from django.shortcuts import render, redirect
-from django.template.defaultfilters import slugify
 from django.contrib.sitemaps import ping_google
+from django.shortcuts import get_object_or_404, redirect, render
+from django.template.defaultfilters import slugify
 from django.views.generic.base import TemplateView, View
+
+from .models import Post
 
 
 class IndexView(TemplateView):
@@ -21,19 +21,19 @@ class AddPostView(View):
         return render(request, self.template_name, dict())
 
     def post(self, request):
-        if not request.POST.get('body', False):
+        if not request.POST.get("body", False):
             return redirect("/blog/post/")
-        title = request.POST.get('title', 'no title')
+        title = request.POST.get("title", "no title")
         slug = slugify(title)[:50]
         Post.objects.create(
             author=request.user,
-            body=request.POST.get('body', ''),
+            body=request.POST.get("body", ""),
             title=title,
             slug=slug,
         )
         try:
-            ping_google('/sitemap.xml')
-        except Exception:
+            ping_google("/sitemap.xml")
+        except Exception:  # nosec
             pass
         return redirect("/blog/")
 

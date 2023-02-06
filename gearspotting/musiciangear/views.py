@@ -1,6 +1,8 @@
-from .models import MusicianGear, Link, Photo
 from django.contrib.contenttypes.admin import generic_inlineformset_factory
+
 from gearspotting.utils.views import AddSomethingView, EditSomethingView
+
+from .models import Link, MusicianGear, Photo
 
 
 class AddLinkView(AddSomethingView):

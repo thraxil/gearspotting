@@ -1,10 +1,11 @@
 # flake8: noqa
-from .settings_shared import *
-from thraxilsettings.docker import common
 import os
 import os.path
 
-app = 'gearspotting'
+from .settings_shared import *  # isort:skip
+from thraxilsettings.docker import common  # isort:skip
+
+app = "gearspotting"
 base = os.path.dirname(__file__)
 
 locals().update(
@@ -15,5 +16,6 @@ locals().update(
         INSTALLED_APPS=INSTALLED_APPS,
         STATIC_ROOT=STATIC_ROOT,
         MIDDLEWARE=MIDDLEWARE,
-    ))
-COMPRESS_OFFLINE_MANIFEST_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
+    )
+)
+COMPRESS_OFFLINE_MANIFEST_STORAGE = "storages.backends.s3boto3.S3Boto3Storage"

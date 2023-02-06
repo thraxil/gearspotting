@@ -1,12 +1,13 @@
-from django.db import models
-from gearspotting.manufacturer.models import Manufacturer
-from gearspotting.link.models import Link
-from gearspotting.photo.models import Photo
-from django.contrib.contenttypes.fields import GenericRelation
 from django.contrib.contenttypes.admin import generic_inlineformset_factory
+from django.contrib.contenttypes.fields import GenericRelation
+from django.db import models
 from django.forms import ModelForm
 from django.template.defaultfilters import slugify
 from taggit.managers import TaggableManager
+
+from gearspotting.link.models import Link
+from gearspotting.manufacturer.models import Manufacturer
+from gearspotting.photo.models import Photo
 
 
 class Gear(models.Model):
@@ -20,7 +21,10 @@ class Gear(models.Model):
     modified = models.DateTimeField(auto_now=True, editable=False)
 
     class Meta:
-        ordering = ["manufacturer__name", "name", ]
+        ordering = [
+            "manufacturer__name",
+            "name",
+        ]
 
     def get_absolute_url(self):
         return "/gear/%s/" % self.slug
@@ -49,7 +53,8 @@ class Gear(models.Model):
         class LinkForm(ModelForm):
             class Meta:
                 model = Link
-                exclude = ('content_object', 'content_type', 'object_id')
+                exclude = ("content_object", "content_type", "object_id")
+
         return LinkForm
 
 
@@ -61,4 +66,4 @@ class GearPhoto(models.Model):
 class AddGearForm(ModelForm):
     class Meta:
         model = Gear
-        exclude = ('manufacturer',)
+        exclude = ("manufacturer",)

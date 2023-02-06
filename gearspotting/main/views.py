@@ -1,7 +1,8 @@
 from django.views.generic.base import TemplateView
+
+from gearspotting.blog.models import Post
 from gearspotting.gear.models import Gear
 from gearspotting.musician.models import Musician
-from gearspotting.blog.models import Post
 
 
 class IndexView(TemplateView):
@@ -23,7 +24,7 @@ class SearchView(TemplateView):
     template_name = "main/search.html"
 
     def get_context_data(self):
-        q = self.request.GET.get('q', None)
+        q = self.request.GET.get("q", None)
         results = dict()
         if q is not None:
             results["gear"] = Gear.objects.filter(name__icontains=q)

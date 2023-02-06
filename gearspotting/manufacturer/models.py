@@ -1,9 +1,10 @@
-from django.db import models
-from gearspotting.link.models import Link
-from django.forms import ModelForm
-from django.contrib.contenttypes.fields import GenericRelation
 from django.contrib.contenttypes.admin import generic_inlineformset_factory
+from django.contrib.contenttypes.fields import GenericRelation
+from django.db import models
+from django.forms import ModelForm
 from django.template.defaultfilters import slugify
+
+from gearspotting.link.models import Link
 
 
 class Manufacturer(models.Model):
@@ -15,7 +16,9 @@ class Manufacturer(models.Model):
     modified = models.DateTimeField(auto_now=True, editable=False)
 
     class Meta:
-        ordering = ["name", ]
+        ordering = [
+            "name",
+        ]
 
     def get_absolute_url(self):
         return "/manufacturer/%s/" % self.slug
@@ -33,13 +36,15 @@ class Manufacturer(models.Model):
 
     def add_gear_form(self):
         from gearspotting.gear.models import AddGearForm
+
         return AddGearForm
 
     def add_link_form(self):
         class LinkForm(ModelForm):
             class Meta:
                 model = Link
-                exclude = ('content_object', 'content_type', 'object_id')
+                exclude = ("content_object", "content_type", "object_id")
+
         return LinkForm
 
     def gear_count(self):

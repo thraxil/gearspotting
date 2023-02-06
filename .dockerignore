@@ -6,3 +6,4 @@ reports
 deploy
 shell.nix
 .envrc
+.tox

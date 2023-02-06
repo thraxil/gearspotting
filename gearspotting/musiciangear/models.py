@@ -1,11 +1,12 @@
+from django.contrib.contenttypes.admin import generic_inlineformset_factory
+from django.contrib.contenttypes.fields import GenericRelation
 from django.db import models
-from gearspotting.link.models import Link
+from django.forms import ModelForm
+
 from gearspotting.gear.models import Gear
+from gearspotting.link.models import Link
 from gearspotting.musician.models import Musician
 from gearspotting.photo.models import Photo
-from django.contrib.contenttypes.fields import GenericRelation
-from django.contrib.contenttypes.admin import generic_inlineformset_factory
-from django.forms import ModelForm
 
 
 class MusicianGear(models.Model):
@@ -39,7 +40,8 @@ class MusicianGear(models.Model):
         class LinkForm(ModelForm):
             class Meta:
                 model = Link
-                exclude = ('content_object', 'content_type', 'object_id')
+                exclude = ("content_object", "content_type", "object_id")
+
         return LinkForm
 
 

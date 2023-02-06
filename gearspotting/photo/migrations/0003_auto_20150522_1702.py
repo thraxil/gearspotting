@@ -1,9 +1,11 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
-from django.db import migrations
-from django.conf import settings
-import requests
+
 import os
+
+import requests
+from django.conf import settings
+from django.db import migrations
 
 
 def upload_to_reticulum(apps, schema_editor):

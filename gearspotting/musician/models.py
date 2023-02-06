@@ -1,12 +1,13 @@
+from django.contrib.contenttypes.admin import generic_inlineformset_factory
+from django.contrib.contenttypes.fields import GenericRelation
 from django.db import models
+from django.forms import ModelForm
+from django.forms.models import inlineformset_factory
+from django.template.defaultfilters import slugify
+from taggit.managers import TaggableManager
+
 from gearspotting.link.models import Link
 from gearspotting.photo.models import Photo
-from django.forms import ModelForm
-from django.contrib.contenttypes.fields import GenericRelation
-from django.contrib.contenttypes.admin import generic_inlineformset_factory
-from django.template.defaultfilters import slugify
-from django.forms.models import inlineformset_factory
-from taggit.managers import TaggableManager
 
 
 class Musician(models.Model):
@@ -19,7 +20,9 @@ class Musician(models.Model):
     modified = models.DateTimeField(auto_now=True, editable=False)
 
     class Meta:
-        ordering = ["name", ]
+        ordering = [
+            "name",
+        ]
 
     def get_absolute_url(self):
         return "/musician/%s/" % self.slug
@@ -35,7 +38,8 @@ class Musician(models.Model):
         class LinkForm(ModelForm):
             class Meta:
                 model = Link
-                exclude = ('content_object', 'content_type', 'object_id')
+                exclude = ("content_object", "content_type", "object_id")
+
         return LinkForm
 
     def add_gear_form(self):
@@ -44,7 +48,8 @@ class Musician(models.Model):
         class GearForm(ModelForm):
             class Meta:
                 model = MusicianGear
-                exclude = ('musician')
+                exclude = "musician"
+
         return GearForm
 
     def save(self, *args, **kwargs):
@@ -53,6 +58,7 @@ class Musician(models.Model):
 
     def gear_formset(self):
         from gearspotting.musiciangear.models import MusicianGear
+
         GearFormSet = inlineformset_factory(Musician, MusicianGear, extra=1)
         return GearFormSet(instance=self)
 

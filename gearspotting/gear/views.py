@@ -1,33 +1,37 @@
-from .models import Gear, Link, Photo
 from django.contrib.contenttypes.admin import generic_inlineformset_factory
 from django.views.generic.base import TemplateView
 
 from gearspotting.manufacturer.models import Manufacturer, ManufacturerForm
 from gearspotting.utils.views import AddSomethingView, EditSomethingView
 
+from .models import Gear, Link, Photo
+
 
 class GearTagView(TemplateView):
     template_name = "gear/gear_tag_list.html"
 
     def get_context_data(self, tag=""):
-        return dict(tag=tag,
-                    gear_list=Gear.objects.filter(tags__name__in=[tag]))
+        return dict(
+            tag=tag, gear_list=Gear.objects.filter(tags__name__in=[tag])
+        )
 
 
 class IndexView(TemplateView):
-    template_name = 'gear/index.html'
+    template_name = "gear/index.html"
 
     def get_context_data(self):
-        return dict(manufacturers=Manufacturer.objects.all(),
-                    add_manufacturer_form=ManufacturerForm())
+        return dict(
+            manufacturers=Manufacturer.objects.all(),
+            add_manufacturer_form=ManufacturerForm(),
+        )
 
 
 class TagsView(TemplateView):
-    template_name = 'gear/tags.html'
+    template_name = "gear/tags.html"
 
 
 class AddLinkView(AddSomethingView):
-    template_name = 'gear/add_link.html'
+    template_name = "gear/add_link.html"
     model = Gear
     context_obj_name = "gear"
 
@@ -36,7 +40,7 @@ class AddLinkView(AddSomethingView):
 
 
 class AddPhotoView(AddSomethingView):
-    template_name = 'gear/add_photo.html'
+    template_name = "gear/add_photo.html"
     model = Gear
     context_obj_name = "gear"
 

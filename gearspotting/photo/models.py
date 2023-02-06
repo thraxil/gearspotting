@@ -1,7 +1,7 @@
-from django.db import models
-from django.contrib.contenttypes.admin import GenericTabularInline
-from django.forms import ModelForm
 from django.conf import settings
+from django.contrib.contenttypes.admin import GenericTabularInline
+from django.db import models
+from django.forms import ModelForm
 
 
 class Photo(models.Model):
@@ -35,39 +35,44 @@ class Photo(models.Model):
         return [g.musiciangear for g in self.musiciangearphoto_set.all()]
 
     def get_full_src(self):
-        return ("%simage/%s/full/%d%s" % (
+        return "%simage/%s/full/%d%s" % (
             settings.RETICULUM_PUBLIC_BASE,
             self.reticulum_key,
             self.id,
-            self.extension))
+            self.extension,
+        )
 
     def get_1024_src(self):
-        return ("%simage/%s/1024w1024h/%d%s" % (
+        return "%simage/%s/1024w1024h/%d%s" % (
             settings.RETICULUM_PUBLIC_BASE,
             self.reticulum_key,
             self.id,
-            self.extension))
+            self.extension,
+        )
 
     def get_300_src(self):
-        return ("%simage/%s/300w300h/%d%s" % (
+        return "%simage/%s/300w300h/%d%s" % (
             settings.RETICULUM_PUBLIC_BASE,
             self.reticulum_key,
             self.id,
-            self.extension))
+            self.extension,
+        )
 
     def get_200_src(self):
-        return ("%simage/%s/200w200h/%d%s" % (
+        return "%simage/%s/200w200h/%d%s" % (
             settings.RETICULUM_PUBLIC_BASE,
             self.reticulum_key,
             self.id,
-            self.extension))
+            self.extension,
+        )
 
     def get_100h_src(self):
-        return ("%simage/%s/100h/%d%s" % (
+        return "%simage/%s/100h/%d%s" % (
             settings.RETICULUM_PUBLIC_BASE,
             self.reticulum_key,
             self.id,
-            self.extension))
+            self.extension,
+        )
 
 
 class AddPhotoForm(ModelForm):
@@ -79,7 +84,7 @@ class AddPhotoForm(ModelForm):
 class ImportPhotoForm(ModelForm):
     class Meta:
         model = Photo
-        exclude = ('reticulum_key', 'extension')
+        exclude = ("reticulum_key", "extension")
 
 
 class PhotoInline(GenericTabularInline):

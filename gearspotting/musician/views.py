@@ -1,16 +1,19 @@
-from .models import Musician, Link, Photo
 from django.contrib.contenttypes.admin import generic_inlineformset_factory
 from django.forms.models import inlineformset_factory
 from django.views.generic.base import TemplateView
+
 from gearspotting.utils.views import AddSomethingView, EditSomethingView
+
+from .models import Link, Musician, Photo
 
 
 class MusicianTagView(TemplateView):
     template_name = "musician/musician_tag_list.html"
 
     def get_context_data(self, tag=""):
-        return dict(tag=tag,
-                    musicians=Musician.objects.filter(tags__name__in=[tag]))
+        return dict(
+            tag=tag, musicians=Musician.objects.filter(tags__name__in=[tag])
+        )
 
 
 class TagsView(TemplateView):
@@ -18,7 +21,7 @@ class TagsView(TemplateView):
 
 
 class AddLinkView(AddSomethingView):
-    template_name = 'musician/add_link.html'
+    template_name = "musician/add_link.html"
     model = Musician
     context_obj_name = "musician"
 
@@ -63,4 +66,5 @@ class EditGearView(EditSomethingView):
 
     def get_formset(self):
         from musiciangear.models import MusicianGear
+
         return inlineformset_factory(Musician, MusicianGear, extra=1)
