@@ -1,5 +1,6 @@
 import re
 
+import markdown
 from django.contrib.auth.models import User
 from django.db import models
 from django.template.defaultfilters import slugify
@@ -13,6 +14,7 @@ class Post(models.Model):
     title = models.CharField(max_length=256)
     slug = models.SlugField()
     body = models.TextField(blank=True, default="")
+    body_html = models.TextField(blank=True, default="")
     published = models.DateTimeField(auto_now_add=True)
     modified = models.DateTimeField(auto_now=True)
 
@@ -33,6 +35,10 @@ class Post(models.Model):
 
     def linked_body(self):
         return link_text(self.body)
+
+    def render_body(self):
+        self.body_html = markdown.markdown(self.linked_body)
+        self.save()
 
 
 class PostGear(models.Model):
