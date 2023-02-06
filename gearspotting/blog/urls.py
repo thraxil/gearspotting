@@ -1,11 +1,11 @@
-from django.conf.urls import url
+from django.urls import re_path
 
 from .views import AddPostView, IndexView, PostView
 
 urlpatterns = [
-    url(r"^$", IndexView.as_view()),
-    url(r"^post/$", AddPostView.as_view()),
-    url(
+    re_path(r"^$", IndexView.as_view()),
+    re_path(r"^post/$", AddPostView.as_view()),
+    re_path(
         (
             r"(?P<year>\d+)/(?P<month>\d+)/(?P<day>\d+)/"
             r"(?P<username>\w+)/(?P<slug>[\w\-]+)/$"

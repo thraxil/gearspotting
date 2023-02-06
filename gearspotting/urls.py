@@ -1,9 +1,9 @@
 import django.contrib.sitemaps.views
 import django.views.static
 from django.conf import settings
-from django.conf.urls import include, url
 from django.contrib import admin
 from django.contrib.sitemaps import GenericSitemap
+from django.urls import include, re_path
 
 import gearspotting.main.views as mainviews
 from gearspotting.blog.feeds import BlogFeed
@@ -53,24 +53,24 @@ sitemaps = {
 }
 
 urlpatterns = [
-    url(r"^$", mainviews.IndexView.as_view()),
-    url(r"smoketest/", include("smoketest.urls")),
-    url(r"^search/$", mainviews.SearchView.as_view()),
-    url(r"^gear/", include("gearspotting.gear.urls")),
-    url(r"^blog/", include("gearspotting.blog.urls")),
-    url(r"^musician/", include("gearspotting.musician.urls")),
-    url(r"^musiciangear/", include("gearspotting.musiciangear.urls")),
-    url(r"^manufacturer/", include("gearspotting.manufacturer.urls")),
-    url(r"^photos/", include("gearspotting.photo.urls")),
-    url(r"^feeds/gear/$", GearFeed()),
-    url(r"^feeds/musician/$", MusicianFeed()),
-    url(r"^feeds/blog/$", BlogFeed()),
-    url(
+    re_path(r"^$", mainviews.IndexView.as_view()),
+    re_path(r"smoketest/", include("smoketest.urls")),
+    re_path(r"^search/$", mainviews.SearchView.as_view()),
+    re_path(r"^gear/", include("gearspotting.gear.urls")),
+    re_path(r"^blog/", include("gearspotting.blog.urls")),
+    re_path(r"^musician/", include("gearspotting.musician.urls")),
+    re_path(r"^musiciangear/", include("gearspotting.musiciangear.urls")),
+    re_path(r"^manufacturer/", include("gearspotting.manufacturer.urls")),
+    re_path(r"^photos/", include("gearspotting.photo.urls")),
+    re_path(r"^feeds/gear/$", GearFeed()),
+    re_path(r"^feeds/musician/$", MusicianFeed()),
+    re_path(r"^feeds/blog/$", BlogFeed()),
+    re_path(
         r"^sitemap\.xml$",
         django.contrib.sitemaps.views.sitemap,
         {"sitemaps": sitemaps},
     ),
-    url(
+    re_path(
         r"^uploads/(?P<path>.*)$",
         django.views.static.serve,
         {"document_root": settings.MEDIA_ROOT},

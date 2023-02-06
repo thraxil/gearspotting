@@ -1,4 +1,4 @@
-from django.conf.urls import url
+from django.urls import re_path
 from django.views.generic.detail import DetailView
 
 from gearspotting.photo.models import Photo
@@ -9,6 +9,6 @@ info_dict = {
 }
 
 urlpatterns = [
-    url(r"^(?P<pk>\d+)/$", DetailView.as_view(model=Photo)),
-    url(r"^import/$", ImportPhotoView.as_view()),
+    re_path(r"^(?P<pk>\d+)/$", DetailView.as_view(model=Photo)),
+    re_path(r"^import/$", ImportPhotoView.as_view()),
 ]
