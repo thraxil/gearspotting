@@ -1,5 +1,4 @@
 {% extends "base.html" %}
-{% load markup %}
 {% block title %}Photo{% endblock %}
 {% block subhead %}Photo{% endblock %}
 
@@ -10,7 +9,7 @@
 <dl class="dl-horizontal">
 {% if object.caption %}
 	<dt>caption</dt>
-	<dd>{{object.caption|markdown}}</dd>
+	<dd>{{object.caption_html|safe}}</dd>
 {% endif %}
 	<dt>Added</dt>
 	<dd>{{object.added|date}}</dd>

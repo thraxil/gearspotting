@@ -1,5 +1,4 @@
 {% extends "base.html" %}
-{% load markup %}
 
 {% block title %}Musician: {{object.name}}{% endblock %}
 {% block subhead %}<a href="/musician/">Musician</a>: <span itemprop="name">{{object.name}}</span>{% endblock %}
@@ -25,7 +24,7 @@
 		<dl class="dl-horizontal">
 			{% if object.description %}
 			<dt>Description</dt>
-			<dd itemprop="description">{{object.description|markdown}}</dd>
+			<dd itemprop="description">{{object.description_html|safe}}</dd>
 			{% endif %}
 			<dt>Added</dt>
 			<dd>{{object.added|date}}</dd>

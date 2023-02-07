@@ -1,5 +1,4 @@
 {% extends "base.html" %}
-{% load markup %}
 
 {% block title %}Manufacturer: {{object.name}}{% endblock %}
 {% block subhead %}<a href="/manufacturer/">Manufacturer</a>: {{object.name}}{% endblock %}
@@ -17,7 +16,7 @@
 	<div class="span9">
 		<dl class="dl-horizontal">
 			<dt>Description</dt>
-			<dd>{{object.description|markdown}}</dd>
+			<dd>{{object.description_html|safe}}</dd>
 
 			<dt>Added</dt>
 			<dd>{{object.added|date}}</dd>
