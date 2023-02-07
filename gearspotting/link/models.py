@@ -10,6 +10,7 @@ class Link(models.Model):
     title = models.CharField(max_length=256)
     url = models.URLField()
     description = models.TextField(blank=True, default="")
+    description_html = models.TextField(blank=True, default="")
 
     content_type = models.ForeignKey(ContentType, on_delete=models.CASCADE)
     object_id = models.PositiveIntegerField()
