@@ -48,4 +48,4 @@ django-waffle==3.0.0
 
 sqlparse==0.4.3
 
-thraxilsettings==5.0.0
+thraxilsettings==5.1.0
