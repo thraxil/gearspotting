@@ -11,6 +11,7 @@ class Manufacturer(models.Model):
     name = models.CharField(default="", unique=True, max_length=256)
     slug = models.SlugField(max_length=256, editable=False)
     description = models.TextField(default="", blank=True)
+    description_html = models.TextField(default="", blank=True)
     links = GenericRelation(Link)
     added = models.DateTimeField(auto_now_add=True, editable=False)
     modified = models.DateTimeField(auto_now=True, editable=False)
