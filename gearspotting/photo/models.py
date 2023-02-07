@@ -10,6 +10,7 @@ class Photo(models.Model):
     extension = models.CharField(max_length=256, default="jpg")
 
     caption = models.TextField(blank=True, default="")
+    caption_html = models.TextField(blank=True, default="")
     source_name = models.CharField(max_length=256, blank=True, default="")
     source_url = models.URLField(blank=True)
 
