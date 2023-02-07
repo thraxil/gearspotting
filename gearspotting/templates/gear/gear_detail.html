@@ -1,5 +1,4 @@
 {% extends "base.html" %}
-{% load markup %}
 
 {% block title %}Gear: {{object.manufacturer.name}} {{object.name}}{% endblock %}
 {% block subhead %}<a href="/gear/">Gear</a>: <a href="{{object.manufacturer.get_absolute_url}}"><span itemprop="manufacturer">{{object.manufacturer.name}}</span></a>
@@ -35,7 +34,7 @@
 
 {% if object.description %}
 		<dt>Description</dt>
-		<dd itemprop="description">{{object.description|markdown}}</dd>
+		<dd itemprop="description">{{object.description_html|safe}}</dd>
 {% endif %}
 
 {% if object.tags.count %}
