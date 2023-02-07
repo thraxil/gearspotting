@@ -15,6 +15,7 @@ class Gear(models.Model):
     slug = models.SlugField(max_length=256, editable=False)
     manufacturer = models.ForeignKey(Manufacturer, on_delete=models.CASCADE)
     description = models.TextField(default="", blank=True)
+    description_html = models.TextField(default="", blank=True)
     links = GenericRelation(Link)
     tags = TaggableManager()
     added = models.DateTimeField(auto_now_add=True, editable=False)
