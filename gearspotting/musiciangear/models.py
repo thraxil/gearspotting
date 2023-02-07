@@ -13,6 +13,7 @@ class MusicianGear(models.Model):
     musician = models.ForeignKey(Musician, on_delete=models.CASCADE)
     gear = models.ForeignKey(Gear, on_delete=models.CASCADE)
     description = models.TextField(default="", blank=True)
+    description_html = models.TextField(default="", blank=True)
     links = GenericRelation(Link)
     added = models.DateTimeField(auto_now_add=True, editable=False)
     modified = models.DateTimeField(auto_now=True, editable=False)
