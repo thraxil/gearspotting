@@ -1,5 +1,4 @@
 {% extends "base.html" %}
-{% load markup %}
 
 {% block title %}{{object.gear.name}} used by {{object.musician.name}}{% endblock %}
 {% block subhead %}
@@ -30,7 +29,7 @@
 			<dd><a href="{{object.gear.manufacturer.get_absolute_url}}">{{object.gear.manufacturer.name}}</a></dd>
 {% if object.description %}
 			<dt>Description</dt>
-			<dd>{{object.description|markdown}}</dd>
+			<dd>{{object.description_html|safe}}</dd>
 {% endif %}
 			<dt>Added</dt>
 			<dd>{{object.added|date}}</dd>

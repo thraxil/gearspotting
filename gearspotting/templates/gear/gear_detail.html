@@ -92,7 +92,7 @@
 		<dl class="dl-horizontal">
       {% for musiciangear in object.musiciangear_set.all %}
 	<dt><a href="{{musiciangear.get_absolute_url}}">{{musiciangear.musician.name}}</a></dt>
-	<dd>{{musiciangear.description|markdown}}</dd>
+	<dd>{{musiciangear.description_html|safe}}</dd>
       {% endfor %}
 	</dl>
 	</div>
