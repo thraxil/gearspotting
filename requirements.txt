@@ -3,7 +3,7 @@ Markdown==3.4.4
 
 Pillow==10.0.1
 
-psycopg2-binary==2.9.6
+psycopg2-binary==2.9.8
 
 coverage==7.3.1
 pep8==1.7.1
