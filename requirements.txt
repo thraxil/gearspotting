@@ -1,5 +1,5 @@
 Django==4.2.6
-Markdown==3.4.4
+Markdown==3.5
 
 Pillow==10.0.1
 
