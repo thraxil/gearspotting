@@ -19,7 +19,7 @@ six==1.16.0
 python-dateutil==2.8.2
 enum34==1.1.10
 configparser==6.0.0
-pycodestyle==2.9.1
+pycodestyle==2.11.1
 urllib3==1.26.17
 chardet==5.2.0
 certifi==2023.7.22
