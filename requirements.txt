@@ -1,7 +1,7 @@
 Django==4.2.6
 Markdown==3.5
 
-Pillow==10.0.1
+Pillow==10.1.0
 
 psycopg2-binary==2.9.9
 
