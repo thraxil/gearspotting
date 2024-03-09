@@ -91,7 +91,6 @@ INSTALLED_APPS = [
     "django.contrib.messages",
     "django.contrib.staticfiles",
     "django.contrib.admin",
-    "compressor",
     "debug_toolbar",
     "waffle",
     "smoketest",
@@ -117,7 +116,6 @@ STATIC_ROOT = ""
 STATICFILES_FINDERS = [
     "django.contrib.staticfiles.finders.FileSystemFinder",
     "django.contrib.staticfiles.finders.AppDirectoriesFinder",
-    "compressor.finders.CompressorFinder",
 ]
 
 INTERNAL_IPS = ["127.0.0.1"]
@@ -146,14 +144,6 @@ DEFAULT_FROM_EMAIL = SERVER_EMAIL
 # put any static media here to override app served static media
 STATICMEDIA_MOUNTS = [
     ("/sitemedia", "sitemedia"),
-]
-
-COMPRESS_URL = "/media/"
-COMPRESS_ROOT = "media/"
-
-COMPRESS_CSS_FILTERS = [
-    "compressor.filters.css_default.CssAbsoluteFilter",
-    "compressor.filters.cssmin.CSSMinFilter",
 ]
 
 SESSION_ENGINE = "django.contrib.sessions.backends.signed_cookies"
