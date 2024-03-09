@@ -9,11 +9,6 @@ app = "gearspotting"
 base = os.path.dirname(__file__)
 celery = False
 
-# have to pull in anything that we'll be changing
-STATIC_ROOT = kwargs["STATIC_ROOT"]
-INSTALLED_APPS = kwargs["INSTALLED_APPS"]
-MIDDLEWARE = kwargs["MIDDLEWARE"]
-
 # required settings:
 SECRET_KEY = os.environ["SECRET_KEY"]
 CELERY_BROKER_URL = None
