@@ -1,5 +1,4 @@
 from django.contrib.auth.models import User
-from django.contrib.sitemaps import ping_google
 from django.shortcuts import get_object_or_404, redirect, render
 from django.template.defaultfilters import slugify
 from django.views.generic.base import TemplateView, View
@@ -31,10 +30,6 @@ class AddPostView(View):
             title=title,
             slug=slug,
         )
-        try:
-            ping_google("/sitemap.xml")
-        except Exception:  # nosec
-            pass
         return redirect("/blog/")
 
 

@@ -21,7 +21,6 @@ INSTALLED_APPS += [  # noqa
     "gearspotting.musiciangear",
     "bootstrapform",
     "gearspotting.profile",
-    "django.contrib.sitemaps",
     "gearspotting.blog",
 ]
 

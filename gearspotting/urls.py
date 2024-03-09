@@ -1,8 +1,6 @@
-import django.contrib.sitemaps.views
 import django.views.static
 from django.conf import settings
 from django.contrib import admin
-from django.contrib.sitemaps import GenericSitemap
 from django.urls import include, re_path
 
 import gearspotting.main.views as mainviews
@@ -43,15 +41,6 @@ post_info_dict = {
     "date_field": "modified",
 }
 
-sitemaps = {
-    "gear": GenericSitemap(gear_info_dict, priority=0.6),
-    "musicians": GenericSitemap(musician_info_dict, priority=0.6),
-    "musiciangears": GenericSitemap(musiciangear_info_dict, priority=0.6),
-    "manufacturers": GenericSitemap(manufacturer_info_dict, priority=0.6),
-    "photos": GenericSitemap(photo_info_dict, priority=0.6),
-    "posts": GenericSitemap(post_info_dict, priority=0.6),
-}
-
 urlpatterns = [
     re_path(r"^$", mainviews.IndexView.as_view()),
     re_path(r"smoketest/", include("smoketest.urls")),
@@ -65,11 +54,6 @@ urlpatterns = [
     re_path(r"^feeds/gear/$", GearFeed()),
     re_path(r"^feeds/musician/$", MusicianFeed()),
     re_path(r"^feeds/blog/$", BlogFeed()),
-    re_path(
-        r"^sitemap\.xml$",
-        django.contrib.sitemaps.views.sitemap,
-        {"sitemaps": sitemaps},
-    ),
     re_path(
         r"^uploads/(?P<path>.*)$",
         django.views.static.serve,
