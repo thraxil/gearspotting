@@ -72,11 +72,6 @@ if AWS_S3_CUSTOM_DOMAIN:
     # static data, e.g. css, js, etc.
     STATICFILES_STORAGE = "storages.backends.s3boto3.S3Boto3Storage"
     STATIC_URL = "https://%s/media/" % AWS_S3_CUSTOM_DOMAIN
-    COMPRESS_ENABLED = True
-    COMPRESS_OFFLINE = True
-    COMPRESS_ROOT = STATIC_ROOT
-    COMPRESS_URL = STATIC_URL
-    COMPRESS_STORAGE = "storages.backends.s3boto3.S3Boto3Storage"
 
 
 LOGGING = {
@@ -93,5 +88,3 @@ if RAVEN_DSN:
     RAVEN_CONFIG = {
         "dsn": RAVEN_DSN,
     }
-
-COMPRESS_OFFLINE_MANIFEST_STORAGE = "storages.backends.s3boto3.S3Boto3Storage"
