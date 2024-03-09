@@ -4,10 +4,16 @@ from django.views.generic.edit import CreateView, DeleteView, UpdateView
 from django.views.generic.list import ListView
 
 from gearspotting.musician.models import Musician, MusicianForm
-from gearspotting.musician.views import (AddGearView, AddLinkView,
-                                         AddPhotoView, EditGearView,
-                                         EditLinksView, EditPhotosView,
-                                         MusicianTagView, TagsView)
+from gearspotting.musician.views import (
+    AddGearView,
+    AddLinkView,
+    AddPhotoView,
+    EditGearView,
+    EditLinksView,
+    EditPhotosView,
+    MusicianTagView,
+    TagsView,
+)
 
 urlpatterns = [
     re_path(r"^$", ListView.as_view(model=Musician)),

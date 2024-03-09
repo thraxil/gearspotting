@@ -4,8 +4,11 @@ from django.views.generic.edit import CreateView, DeleteView, UpdateView
 from django.views.generic.list import ListView
 
 from gearspotting.manufacturer.models import Manufacturer, ManufacturerForm
-from gearspotting.manufacturer.views import (AddGearView, AddLinkView,
-                                             EditLinksView)
+from gearspotting.manufacturer.views import (
+    AddGearView,
+    AddLinkView,
+    EditLinksView,
+)
 
 urlpatterns = [
     re_path(r"^$", ListView.as_view(model=Manufacturer)),

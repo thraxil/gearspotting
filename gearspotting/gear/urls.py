@@ -3,9 +3,15 @@ from django.views.generic.detail import DetailView
 from django.views.generic.edit import CreateView, DeleteView, UpdateView
 
 from gearspotting.gear.models import Gear
-from gearspotting.gear.views import (AddLinkView, AddPhotoView, EditLinksView,
-                                     EditPhotosView, GearTagView, IndexView,
-                                     TagsView)
+from gearspotting.gear.views import (
+    AddLinkView,
+    AddPhotoView,
+    EditLinksView,
+    EditPhotosView,
+    GearTagView,
+    IndexView,
+    TagsView,
+)
 
 info_dict = {
     "queryset": Gear.objects.all(),
