@@ -36,7 +36,7 @@ django-templatetag-sugar==1.0
 django-appconf==1.0.5
 django-compressor==4.0
 
-django-storages==1.13.2
+django-storages==1.14.2
 
 boto3==1.26.101
 
