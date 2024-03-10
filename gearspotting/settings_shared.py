@@ -157,7 +157,7 @@ LOGGING = {
     "disable_existing_loggers": True,
 }
 
-RETICULUM_BASE = "http://reticulum.thraxil.org/"
+RETICULUM_BASE = "https://reticulum.thraxil.org/"
 RETICULUM_PUBLIC_BASE = "https://d2f33fmhbh7cs9.cloudfront.net/"
 DEFAULT_AUTO_FIELD = "django.db.models.AutoField"
 

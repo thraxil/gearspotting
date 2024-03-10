@@ -3,7 +3,7 @@
 {% block title %}Musician: {{object.name}}{% endblock %}
 {% block subhead %}<a href="/musician/">Musician</a>: <span itemprop="name">{{object.name}}</span>{% endblock %}
 
-{% block containerextra %}itemscope itemtype="http://schema.org/Person"{% endblock %}
+{% block containerextra %}itemscope itemtype="https://schema.org/Person"{% endblock %}
 
 {% block content %}
     {% if user.is_authenticated %}<p class="editlink"><a href="update/" >edit</a><br />
