@@ -15,9 +15,9 @@ $(JS_SENTINAL): package.json
 	npm install
 	touch $(JS_SENTINAL)
 
-media/js/main-built.js: $(JS_SENTINAL) build.js media/js/src media/js/libs
+static/js/main-built.js: $(JS_SENTINAL) build.js static/js/src static/js/libs
 	$(REQUIREJS) -o build.js
 
-js: media/js/main-built.js
+js: static/js/main-built.js
 
 .PHONY: js

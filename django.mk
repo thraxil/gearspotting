@@ -28,7 +28,7 @@ shell: $(SENTINAL)
 
 clean:
 	rm -rf ve
-	rm -rf media/CACHE
+	rm -rf static/CACHE
 	rm -rf reports
 	rm celerybeat-schedule
 	rm .coverage

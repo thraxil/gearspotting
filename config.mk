@@ -9,7 +9,7 @@ REQUIREMENTS ?= requirements.txt
 TAG ?= latest
 IMAGE ?= $(REPO)/$(APP):$(TAG)
 
-JS_FILES ?= media/js/
+JS_FILES ?= static/js/
 
 ifeq ($(TAG), undefined)
 	IMAGE ?= $(REPO)/$(APP)
