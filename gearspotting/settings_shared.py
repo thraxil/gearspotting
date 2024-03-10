@@ -1,8 +1,9 @@
 # Django settings for gearspotting project.
 import os.path
 import sys
+from pathlib import Path
 
-base = os.path.dirname(__file__)
+base = Path(__file__).resolve().parent.parent
 app = "gearspotting"
 
 DEBUG = True
@@ -51,31 +52,36 @@ TEMPLATES = [
     {
         "BACKEND": "django.template.backends.django.DjangoTemplates",
         "DIRS": [
-            "/var/www/" + app + "/templates/",
-            os.path.join(base, "templates"),
+            os.path.join(base, "gearspotting/templates"),
         ],
-        "APP_DIRS": True,
         "OPTIONS": {
             "context_processors": [
-                "django.contrib.auth.context_processors.auth",
                 "django.template.context_processors.debug",
                 "django.template.context_processors.request",
-                "django.template.context_processors.media",
-                "django.template.context_processors.static",
-                "django.template.context_processors.tz",
+                "django.contrib.auth.context_processors.auth",
                 "django.contrib.messages.context_processors.messages",
+            ],
+            "loaders": [
+                (
+                    "django.template.loaders.cached.Loader",
+                    [
+                        "django.template.loaders.filesystem.Loader",
+                        "django.template.loaders.app_directories.Loader",
+                    ],
+                ),
+                "django.template.loaders.app_directories.Loader",
             ],
         },
     },
 ]
-
 MIDDLEWARE = [
+    "whitenoise.middleware.WhiteNoiseMiddleware",
     "django.middleware.common.CommonMiddleware",
     "django.middleware.csrf.CsrfViewMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
     "django.contrib.auth.middleware.AuthenticationMiddleware",
     "django.contrib.flatpages.middleware.FlatpageFallbackMiddleware",
-    "debug_toolbar.middleware.DebugToolbarMiddleware",
+    #    "debug_toolbar.middleware.DebugToolbarMiddleware",
     "waffle.middleware.WaffleMiddleware",
     "django.contrib.messages.middleware.MessageMiddleware",
 ]
@@ -91,7 +97,7 @@ INSTALLED_APPS = [
     "django.contrib.messages",
     "django.contrib.staticfiles",
     "django.contrib.admin",
-    "debug_toolbar",
+    #    "debug_toolbar",
     "waffle",
     "smoketest",
     "gunicorn",
@@ -108,11 +114,11 @@ INSTALLED_APPS = [
     "gearspotting.blog",
 ]
 
-STATIC_URL = "/media/"
+STATIC_URL = "/static/"
 STATICFILES_DIRS = [
-    os.path.abspath(os.path.join(base, "../media/")),
+    os.path.join(base, "static"),
 ]
-STATIC_ROOT = ""
+STATIC_ROOT = os.path.join(base, "staticfiles")
 STATICFILES_FINDERS = [
     "django.contrib.staticfiles.finders.FileSystemFinder",
     "django.contrib.staticfiles.finders.AppDirectoriesFinder",
@@ -141,10 +147,6 @@ EMAIL_HOST = "localhost"
 SERVER_EMAIL = app + "@thraxil.org"
 DEFAULT_FROM_EMAIL = SERVER_EMAIL
 
-# put any static media here to override app served static media
-STATICMEDIA_MOUNTS = [
-    ("/sitemedia", "sitemedia"),
-]
 
 SESSION_ENGINE = "django.contrib.sessions.backends.signed_cookies"
 SESSION_COOKIE_HTTPONLY = True
@@ -158,3 +160,5 @@ LOGGING = {
 RETICULUM_BASE = "http://reticulum.thraxil.org/"
 RETICULUM_PUBLIC_BASE = "https://d2f33fmhbh7cs9.cloudfront.net/"
 DEFAULT_AUTO_FIELD = "django.db.models.AutoField"
+
+# STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
