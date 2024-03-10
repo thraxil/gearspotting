@@ -5,17 +5,14 @@ if [[ -z "${PORT}" ]]; then
     export PORT=8000
 fi
 
+if [[ "$SETTINGS" ]]; then
+    export DJANGO_SETTINGS_MODULE="$APP.$SETTINGS"
+else
+    export DJANGO_SETTINGS_MODULE="$APP.settings_docker"
+fi
+
 if [ "$1" == "migrate" ]; then
     exec python manage.py migrate
-fi
-
-if [ "$1" == "sync_roles" ]; then
-    exec python manage.py all_tenants_command sync_roles --reset_user_permissions
-fi
-
-if [ "$1" == "tenant_sync_roles" ]; then
-    shift
-    exec python manage.py tenant_command sync_roles --reset_user_permissions --schema=$1
 fi
 
 if [ "$1" == "static" ]; then
@@ -33,7 +30,7 @@ if [ "$1" == "manage" ]; then
 fi
 
 if [ "$1" == "run" ]; then
-    export OTEL_SERVICE_NAME=platform
-    export OTEL_EXPORTER_OTLP_ENDPOINT="https://api.honeycomb.io"
-    exec opentelemetry-instrument gunicorn --bind 0.0.0.0:$PORT --workers 1 --threads 8 --timeout 0 -c gunicorn.config.py config.wsgi:application
+    exec gunicorn --env DJANGO_SETTINGS_MODULE=$DJANGO_SETTINGS_MODULE $APP.wsgi:application -b 0.0.0.0:8000 -w 3 --max-requests=1000 --max-requests-jitter=50 \
+	--access-logfile=- --error-logfile=-
+
 fi
