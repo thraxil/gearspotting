@@ -8,13 +8,9 @@ from sentry_sdk.integrations.django import DjangoIntegration
 from .settings_shared import *  # isort:skip
 
 app = "gearspotting"
-celery = False
 
 # required settings:
-SECRET_KEY = os.environ["SECRET_KEY"]
-CELERY_BROKER_URL = None
-if celery:
-    CELERY_BROKER_URL = os.environ["BROKER_URL"]
+SECRET_KEY = os.environ.get("SECRET_KEY", "")
 
 # optional/defaulted settings
 DB_NAME = os.environ.get("DB_NAME", app)
