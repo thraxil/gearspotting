@@ -14,6 +14,7 @@
             buildInputs = [
               pkgs.flyctl
               pkgs.ruff
+	      pkgs.postgresql
               (pkgs.python310.withPackages (p: [
                 p.tox
                 p.pip-tools
