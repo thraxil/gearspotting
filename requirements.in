@@ -6,8 +6,8 @@ django-bootstrap-form==3.4
 django-taggit==5.0.1
 django-taggit-templatetags==0.4.6dev
 django-smoketest==1.2.1
-django-debug-toolbar==4.3.0
 django-waffle==4.1.0
 sentry-sdk==2.8.0
 whitenoise==6.6.0
 requests==2.32.0
+django-debug-toolbar==4.4.5

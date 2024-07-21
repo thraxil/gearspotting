@@ -1,7 +1,7 @@
 import django.views.static
 from django.conf import settings
 from django.contrib import admin
-from django.urls import include, re_path
+from django.urls import include, path, re_path
 
 import gearspotting.main.views as mainviews
 from gearspotting.blog.feeds import BlogFeed
@@ -59,4 +59,5 @@ urlpatterns = [
         django.views.static.serve,
         {"document_root": settings.MEDIA_ROOT},
     ),
+    path("__debug__/", include("debug_toolbar.urls")),
 ]

@@ -20,8 +20,9 @@ class IndexView(TemplateView):
     template_name = "gear/index.html"
 
     def get_context_data(self):
+        manufacturers = Manufacturer.objects.all().prefetch_related("gear_set")
         return dict(
-            manufacturers=Manufacturer.objects.all(),
+            manufacturers=manufacturers,
             add_manufacturer_form=ManufacturerForm(),
         )
 

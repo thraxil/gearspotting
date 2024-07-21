@@ -81,7 +81,7 @@ MIDDLEWARE = [
     "django.contrib.sessions.middleware.SessionMiddleware",
     "django.contrib.auth.middleware.AuthenticationMiddleware",
     "django.contrib.flatpages.middleware.FlatpageFallbackMiddleware",
-    #    "debug_toolbar.middleware.DebugToolbarMiddleware",
+    "debug_toolbar.middleware.DebugToolbarMiddleware",
     "waffle.middleware.WaffleMiddleware",
     "django.contrib.messages.middleware.MessageMiddleware",
 ]
@@ -97,7 +97,7 @@ INSTALLED_APPS = [
     "django.contrib.messages",
     "django.contrib.staticfiles",
     "django.contrib.admin",
-    #    "debug_toolbar",
+    "debug_toolbar",
     "waffle",
     "smoketest",
     "gunicorn",

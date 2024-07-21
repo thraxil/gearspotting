@@ -120,9 +120,9 @@ django==5.0.7 \
 django-bootstrap-form==3.4 \
     --hash=sha256:de3f7893e515352834d446c441c0cb861637f92cebbe59d8229469c6cd3dc640
     # via -r requirements.in
-django-debug-toolbar==4.3.0 \
-    --hash=sha256:0b0dddee5ea29b9cb678593bc0d7a6d76b21d7799cb68e091a2148341a80f3c4 \
-    --hash=sha256:e09b7dcb8417b743234dfc57c95a7c1d1d87a88844abd13b4c5387f807b31bf6
+django-debug-toolbar==4.4.5 \
+    --hash=sha256:8298ce966b4c8fc71430082dd4739ef2badb5f867734e1973a413c4ab2ea81b7 \
+    --hash=sha256:91425606673ee674d780f7aeedf3595c264eb382dcf41f55c6779577900904c0
     # via -r requirements.in
 django-smoketest==1.2.1 \
     --hash=sha256:6fc0b6603dd69ce20f341b0498ca25c39251a0380d0cf1f115eeba834a2330fe \
