@@ -1,7 +1,7 @@
 Django==5.0.13
 Markdown==3.5.2
 psycopg2==2.9.9
-gunicorn==22.0.0
+gunicorn==23.0.0
 django-bootstrap-form==3.4
 django-taggit==5.0.1
 django-taggit-templatetags==0.4.6dev
