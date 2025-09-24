@@ -80,13 +80,13 @@ def save_image(form, url):
     filename = url_to_filename(url)
     ext = os.path.splitext(filename)[1].lower()
 
-    r = requests.get(url)
+    r = requests.get(url, timeout=10)
     imgobj = cStringIO.StringIO()
     for chunk in r.iter_content(1024):
         imgobj.write(chunk)
     imgobj.seek(0)
     files = {"image": ("image" + ext, imgobj)}
-    r = requests.post(settings.RETICULUM_BASE, files=files)
+    r = requests.post(settings.RETICULUM_BASE, files=files, timeout=10)
     rhash = r.json()["hash"]
 
     p.reticulum_key = rhash
