@@ -1,4 +1,4 @@
-Django==5.1.10
+Django==5.1.13
 Markdown==3.5.2
 psycopg2==2.9.9
 gunicorn==23.0.0
