@@ -102,15 +102,15 @@ sdist = { url = "https://files.pythonhosted.org/packages/c7/3d/4ec51e3816d3bd595
 
 [[package]]
 name = "django-debug-toolbar"
-version = "4.4.5"
+version = "6.0.0"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
     { name = "django" },
     { name = "sqlparse" },
 ]
-sdist = { url = "https://files.pythonhosted.org/packages/47/d3/2dd7043ae476e400341bdf88825dfc32fb7539476d335dfc336860daca35/django_debug_toolbar-4.4.5.tar.gz", hash = "sha256:8298ce966b4c8fc71430082dd4739ef2badb5f867734e1973a413c4ab2ea81b7", size = 272503, upload-time = "2024-07-05T14:25:51.898Z" }
+sdist = { url = "https://files.pythonhosted.org/packages/c5/d5/5fc90234532088aeec5faa48d5b09951cc7eab6626030ed427d3bd8cd9bc/django_debug_toolbar-6.0.0.tar.gz", hash = "sha256:6eb9fa6f4a5884bf04004700ffb5a44043f1fff38784447fc52c1633448c8c14", size = 305331, upload-time = "2025-07-25T13:11:48.68Z" }
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/04/8a/08b202313897412b823738d391e25aedac39f0561e0222da6d66007fded9/django_debug_toolbar-4.4.5-py3-none-any.whl", hash = "sha256:91425606673ee674d780f7aeedf3595c264eb382dcf41f55c6779577900904c0", size = 229580, upload-time = "2024-07-05T14:26:17.345Z" },
+    { url = "https://files.pythonhosted.org/packages/05/b5/4724a8c18fcc5b09dca7b7a0e70c34208317bb110075ad12484d6588ae91/django_debug_toolbar-6.0.0-py3-none-any.whl", hash = "sha256:0cf2cac5c307b77d6e143c914e5c6592df53ffe34642d93929e5ef095ae56841", size = 266967, upload-time = "2025-07-25T13:11:47.265Z" },
 ]
 
 [[package]]
@@ -237,7 +237,7 @@ dev = [
 requires-dist = [
     { name = "django", specifier = "==5.1.13" },
     { name = "django-bootstrap-form", specifier = "==3.4" },
-    { name = "django-debug-toolbar", specifier = "==4.4.5" },
+    { name = "django-debug-toolbar", specifier = "==6.0.0" },
     { name = "django-smoketest", specifier = "==1.2.1" },
     { name = "django-taggit", specifier = "==5.0.1" },
     { name = "django-taggit-templatetags", specifier = "==0.4.6.dev0" },
