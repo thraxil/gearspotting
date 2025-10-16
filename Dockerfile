@@ -1,4 +1,4 @@
-FROM python:3.10-slim
+FROM python:3.10-slim@sha256:621488956f7e14ca249420e37dbecd59f669a8776bef0429aa89a4ebd8c6de9e
 RUN apt-get update \
     && apt-get -y install libpq-dev gcc python3-dev
 
