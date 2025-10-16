@@ -13,12 +13,9 @@
           {
             buildInputs = [
               pkgs.flyctl
-              pkgs.ruff
-	      pkgs.postgresql
-              (pkgs.python310.withPackages (p: [
-                p.tox
-                p.pip-tools
-                p.psycopg2
+              pkgs.postgresql
+              pkgs.uv
+              (pkgs.python312.withPackages (p: [
               ]))
             ];
           };

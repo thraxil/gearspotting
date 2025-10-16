@@ -1,0 +1,65 @@
+[project]
+name = "gearspotting"
+version = "0.1.0"
+description = "gear"
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = [
+"setuptools",
+"Django==5.1.13",
+"Markdown==3.9",
+"psycopg==3.2.10",
+"gunicorn==23.0.0",
+"django-bootstrap-form==3.4",
+"django-taggit==5.0.1",
+"django-taggit-templatetags==0.4.6dev",
+"django-smoketest==1.2.1",
+"django-waffle==4.1.0",
+"sentry-sdk==2.42.0",
+"whitenoise==6.11.0",
+"requests==2.32.5",
+"django-debug-toolbar==4.4.5",
+]
+[dependency-groups]
+dev = [
+"mypy==1.11.1",
+"typing-extensions==4.15.0",
+"mypy-extensions==1.1.0",
+"django-stubs[compatible-mypy]==5.0.4",
+"ruff==0.14.0",
+]
+
+[tool.mypy]
+plugins = [
+    "mypy_django_plugin.main",
+    ]
+ignore_missing_imports = true
+namespace_packages = true
+warn_unused_configs = true
+warn_redundant_casts = true
+warn_unused_ignores = true
+strict_equality = true
+check_untyped_defs = true
+# disallow_subclassing_any = true
+disallow_untyped_decorators = true
+# disallow_any_generics = true
+
+disallow_untyped_calls = true
+disallow_incomplete_defs = true
+disallow_untyped_defs = true
+
+no_implicit_reexport = true
+warn_return_any = true
+exclude = [
+    'tests',
+]
+
+[tool.django-stubs]
+django_settings_module = "gearspotting.settings"
+
+[tool.ruff]
+exclude = ["migrations"]
+line-length = 79
+
+[tool.ruff.lint.mccabe]
+max-complexity = 5
