@@ -8,6 +8,6 @@ django-taggit-templatetags==0.4.6dev
 django-smoketest==1.2.1
 django-waffle==4.1.0
 sentry-sdk==2.42.0
-whitenoise==6.6.0
+whitenoise==6.11.0
 requests==2.32.5
 django-debug-toolbar==4.4.5
