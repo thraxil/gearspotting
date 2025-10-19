@@ -95,12 +95,13 @@
 	{% endfor %}
 	{% endif %}
 
-{% comment %}
-	{% tags_for_object musiciangear.gear as geartags %}
-	{% if geartags %}
-	<p class="geartags pull-right">
-      {% for tag in geartags %}<a href="{% url 'gear_tag_detail' tag %}">{{tag}}</a> {% endfor %}</p>
-	{% endif %}{% endcomment %}
+	{% if musiciangear.gear.geartag_set.count %}
+	    <p class="geartags pull-right">
+                {% for tag in musician.gear.geartag_set.all %}
+                    <a href="{% url 'gear_tag_detail' tag.tag.slug %}">{{tag.tag.name}}</a>
+                {% endfor %}
+            </p>
+	{% endif %}
       </td>
       </tr>
       {% endfor %}

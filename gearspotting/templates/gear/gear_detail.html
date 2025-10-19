@@ -37,10 +37,10 @@
 		<dd itemprop="description">{{object.description_html|safe}}</dd>
 {% endif %}
 
-{% if object.tags.count %}
+{% if object.geartag_set.count %}
 		<dt>Tags</dt>
 		<dd>
-      {% for tag in object.tags.all %}<a href="{% url 'gear_tag_detail' tag %}">{{tag}}</a> {% endfor %}
+      {% for gt in object.geartag_set.all %}<a href="{% url 'gear_tag_detail' gt.tag.slug %}">{{gt.tag.name}}</a> {% endfor %}
 		</dd>
 {% endif %}
 
