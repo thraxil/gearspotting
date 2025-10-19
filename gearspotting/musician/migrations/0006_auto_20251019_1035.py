@@ -19,8 +19,17 @@ def taggit_tags(apps, schema_editor):
     Tag = apps.get_model("tag", "Tag")
     for m in Musician.objects.all():
         for t in TaggedItem.objects.filter(object_id=m.id, content_type_id=ct.id):
-            tag = Tag.objects.get(name=t.tag.name)
-            MusicianTag.objects.create(musician=m, tag=tag)
+            try:
+                tag = Tag.objects.get(name=t.tag.name)
+                print("found tag")
+            except:
+                tag = Tag.objects.create(name=t.tag.name, slug=t.tag.slug)
+                print("created tag")
+            if MusicianTag.objects.filter(musician=m, tag=tag).count() == 0:
+                print(m.name, tag.name)
+                MusicianTag.objects.create(musician=m, tag=tag)
+            else:
+                print("already have it")
 
 
 class Migration(migrations.Migration):
