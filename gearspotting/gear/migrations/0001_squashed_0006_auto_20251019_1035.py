@@ -6,9 +6,6 @@ from django.db import migrations, models
 
 
 class Migration(migrations.Migration):
-
-    replaces = [('gear', '0001_initial'), ('gear', '0002_auto_20170928_1353'), ('gear', '0003_gear_description_html'), ('gear', '0004_auto_20230207_1022'), ('gear', '0005_geartag'), ('gear', '0006_auto_20251019_1035')]
-
     initial = True
 
     dependencies = [

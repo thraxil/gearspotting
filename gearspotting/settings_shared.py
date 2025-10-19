@@ -101,7 +101,6 @@ INSTALLED_APPS = [
     "waffle",
     "smoketest",
     "gunicorn",
-    "taggit",
     "gearspotting.main",
     "gearspotting.musician",
     "gearspotting.gear",

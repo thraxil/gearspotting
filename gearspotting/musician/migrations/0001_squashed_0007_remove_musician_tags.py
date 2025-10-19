@@ -12,9 +12,6 @@ from django.db import migrations, models
 # gearspotting.musician.migrations.0006_auto_20251019_1035
 
 class Migration(migrations.Migration):
-
-    replaces = [('musician', '0001_initial'), ('musician', '0002_auto_20170928_1353'), ('musician', '0003_musician_description_html'), ('musician', '0004_auto_20230207_1100'), ('musician', '0005_musiciantag'), ('musician', '0006_auto_20251019_1035'), ('musician', '0007_remove_musician_tags')]
-
     initial = True
 
     dependencies = [
