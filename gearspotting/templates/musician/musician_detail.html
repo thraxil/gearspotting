@@ -31,10 +31,10 @@
 			<dt>Modified</dt>
 			<dd>{{object.modified|date}}</dd>
 
-			{% if object.tags %}
+			{% if object.musiciantag_set.count %}
     <dt>Tags</dt>
 		<dd>
-      {% for tag in object.tags.all %}<a href="{% url 'musician_tag_detail' tag %}">{{tag}}</a> {% endfor %}
+      {% for mt in object.musiciantag_set.all %}<a href="{% url 'musician_tag_detail' mt.tag.slug %}">{{mt.tag.name}}</a> {% endfor %}
 		</dd>
 {% endif %}
 

@@ -1,7 +1,9 @@
 from django.contrib.contenttypes.admin import generic_inlineformset_factory
 from django.forms.models import inlineformset_factory
+from django.shortcuts import get_object_or_404
 from django.views.generic.base import TemplateView
 
+from gearspotting.tag.models import Tag
 from gearspotting.utils.views import AddSomethingView, EditSomethingView
 
 from .models import Link, Musician, Photo
@@ -11,8 +13,9 @@ class MusicianTagView(TemplateView):
     template_name = "musician/musician_tag_list.html"
 
     def get_context_data(self, tag=""):
+        t = get_object_or_404(Tag, slug=tag)
         return dict(
-            tag=tag, musicians=Musician.objects.filter(tags__name__in=[tag])
+            tag=tag, musicians=[mt.musician for mt in t.musiciantag_set.all()]
         )
 
 
