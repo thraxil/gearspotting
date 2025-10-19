@@ -112,6 +112,7 @@ INSTALLED_APPS = [
     "bootstrapform",
     "gearspotting.profile",
     "gearspotting.blog",
+    "gearspotting.tag",
 ]
 
 STATIC_URL = "/static/"
