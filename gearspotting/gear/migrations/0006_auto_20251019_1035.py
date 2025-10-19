@@ -19,7 +19,10 @@ def taggit_tags(apps, schema_editor):
     Tag = apps.get_model("tag", "Tag")
     for g in Gear.objects.all():
         for t in TaggedItem.objects.filter(object_id=g.id, content_type_id=ct.id):
-            tag = Tag.objects.get(name=t.tag.name)
+            try:
+                tag = Tag.objects.get(name=t.tag.name)
+            except:
+                tag = Tag.objects.create(name=t.tag.name, slug=t.tag.slug)
             GearTag.objects.create(gear=g, tag=tag)
 
 
