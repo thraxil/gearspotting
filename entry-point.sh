@@ -12,6 +12,7 @@ else
 fi
 
 if [ "$1" == "migrate" ]; then
+    echo "running migrations"
     exec uv run manage.py migrate
 fi
 
