@@ -8,6 +8,7 @@ from taggit.managers import TaggableManager
 
 from gearspotting.link.models import Link
 from gearspotting.photo.models import Photo
+from gearspotting.tag.models import Tag
 
 
 class Musician(models.Model):
@@ -76,6 +77,11 @@ class Musician(models.Model):
 class MusicianPhoto(models.Model):
     musician = models.ForeignKey(Musician, on_delete=models.CASCADE)
     photo = models.ForeignKey(Photo, on_delete=models.CASCADE)
+
+
+class MusicianTag(models.Model):
+    musician = models.ForeignKey(Musician, on_delete=models.CASCADE)
+    tag = models.ForeignKey(Tag, on_delete=models.CASCADE)
 
 
 class MusicianForm(ModelForm):
