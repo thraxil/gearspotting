@@ -8,6 +8,7 @@ from taggit.managers import TaggableManager
 from gearspotting.link.models import Link
 from gearspotting.manufacturer.models import Manufacturer
 from gearspotting.photo.models import Photo
+from gearspotting.tag.models import Tag
 
 
 class Gear(models.Model):
@@ -62,6 +63,11 @@ class Gear(models.Model):
 class GearPhoto(models.Model):
     gear = models.ForeignKey(Gear, on_delete=models.CASCADE)
     photo = models.ForeignKey(Photo, on_delete=models.CASCADE)
+
+
+class GearTag(models.Model):
+    gear = models.ForeignKey(Gear, on_delete=models.CASCADE)
+    tag = models.ForeignKey(Tag, on_delete=models.CASCADE)
 
 
 class AddGearForm(ModelForm):
