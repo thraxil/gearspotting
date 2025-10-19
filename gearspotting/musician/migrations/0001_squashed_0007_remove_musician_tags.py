@@ -5,16 +5,7 @@ import django.db.models.deletion
 from django.db import migrations, models
 
 
-# Functions from the following migrations need manual copying.
-# Move them and any dependencies into this file, then update the
-# RunPython operations to refer to the local versions:
-# gearspotting.musician.migrations.0004_auto_20230207_1100
-# gearspotting.musician.migrations.0006_auto_20251019_1035
-
 class Migration(migrations.Migration):
-
-    replaces = [('musician', '0001_initial'), ('musician', '0002_auto_20170928_1353'), ('musician', '0003_musician_description_html'), ('musician', '0004_auto_20230207_1100'), ('musician', '0005_musiciantag'), ('musician', '0006_auto_20251019_1035'), ('musician', '0007_remove_musician_tags')]
-
     initial = True
 
     dependencies = [
