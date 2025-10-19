@@ -3,7 +3,6 @@ from django.contrib.contenttypes.fields import GenericRelation
 from django.db import models
 from django.forms import ModelForm
 from django.template.defaultfilters import slugify
-from taggit.managers import TaggableManager
 
 from gearspotting.link.models import Link
 from gearspotting.manufacturer.models import Manufacturer
@@ -18,7 +17,6 @@ class Gear(models.Model):
     description = models.TextField(default="", blank=True)
     description_html = models.TextField(default="", blank=True)
     links = GenericRelation(Link)
-    tags = TaggableManager()
     added = models.DateTimeField(auto_now_add=True, editable=False)
     modified = models.DateTimeField(auto_now=True, editable=False)
 
