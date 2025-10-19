@@ -23,6 +23,7 @@ def taggit_tags(apps, schema_editor):
                 tag = Tag.objects.get(name=t.tag.name)
             except:
                 tag = Tag.objects.create(name=t.tag.name, slug=t.tag.slug)
+            print(g.name, tag.name)
             GearTag.objects.create(gear=g, tag=tag)
 
 
