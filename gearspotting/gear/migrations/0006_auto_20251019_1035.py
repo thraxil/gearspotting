@@ -21,10 +21,15 @@ def taggit_tags(apps, schema_editor):
         for t in TaggedItem.objects.filter(object_id=g.id, content_type_id=ct.id):
             try:
                 tag = Tag.objects.get(name=t.tag.name)
+                print("found tag")
             except:
                 tag = Tag.objects.create(name=t.tag.name, slug=t.tag.slug)
-            print(g.name, tag.name)
-            GearTag.objects.create(gear=g, tag=tag)
+                print("created tag")
+            if GearTag.objects.filter(gear=g, tag=tag).count() == 0:
+                print(g.name, tag.name)
+                GearTag.objects.create(gear=g, tag=tag)
+            else:
+                print("already have it")
 
 
 class Migration(migrations.Migration):
