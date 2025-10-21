@@ -14,7 +14,10 @@ class GearTagView(TemplateView):
 
     def get_context_data(self, tag=""):
         t = get_object_or_404(Tag, slug=tag)
-        return dict(tag=tag, gear_list=[gt.gear for gt in t.geartag_set.all()])
+        geartags = t.geartag_set.all().prefetch_related(
+            "gear", "gear__manufacturer"
+        )
+        return dict(tag=tag, gear_list=geartags)
 
 
 class IndexView(TemplateView):
