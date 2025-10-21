@@ -16,9 +16,9 @@
 
 <div class="row">
     <div id="mainimage" class="span3">
-{% if object.gearphoto_set.count %}
+        {% if photos %}
     <img itemprop="image" class="img-rounded"
- src="{{ object.first_photo.get_300_src }}" />
+ src="{{ photos.0.photo.get_300_src }}" />
 {% endif %}
     </div>
 <div class="span9">
@@ -77,7 +77,7 @@
     title="{{photo.photo.caption}}">
 			<img
 				 class="img-polaroid"
-				 src="{{ object.first_photo.get_100h_src }}" /></a>
+				 src="{{ photo.photo.get_100h_src }}" /></a>
     {% endfor %}
 	</div>
 </div>
