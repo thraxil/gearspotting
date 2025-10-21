@@ -2,11 +2,16 @@ from django.contrib.contenttypes.admin import generic_inlineformset_factory
 from django.forms.models import inlineformset_factory
 from django.shortcuts import get_object_or_404
 from django.views.generic.base import TemplateView
+from django.views.generic.detail import DetailView
 
 from gearspotting.tag.models import Tag
 from gearspotting.utils.views import AddSomethingView, EditSomethingView
 
 from .models import Link, Musician, Photo
+
+
+class MusicianDetailView(DetailView):
+    model = Musician
 
 
 class MusicianTagView(TemplateView):

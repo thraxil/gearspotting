@@ -1,5 +1,4 @@
 from django.urls import re_path
-from django.views.generic.detail import DetailView
 from django.views.generic.edit import CreateView, DeleteView, UpdateView
 from django.views.generic.list import ListView
 
@@ -11,6 +10,7 @@ from gearspotting.musician.views import (
     EditGearView,
     EditLinksView,
     EditPhotosView,
+    MusicianDetailView,
     MusicianTagView,
     TagsView,
 )
@@ -38,5 +38,5 @@ urlpatterns = [
     re_path(r"^(?P<slug>[^/]+)/edit_links/?$", EditLinksView.as_view()),
     re_path(r"^(?P<slug>[^/]+)/edit_photos/?$", EditPhotosView.as_view()),
     re_path(r"^(?P<slug>[^/]+)/edit_gear/?$", EditGearView.as_view()),
-    re_path(r"^(?P<slug>[^/]+)/$", DetailView.as_view(model=Musician)),
+    re_path(r"^(?P<slug>[^/]+)/$", MusicianDetailView.as_view()),
 ]
