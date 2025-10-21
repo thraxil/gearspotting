@@ -65,14 +65,14 @@
 </div>
     {% endif %}
 
-    {% if object.gearphoto_set.count %}
+    {% if photos %}
 <div class="row">
 	<div class="span3">
     <h3>Photos</h3>
 		{% if user.is_authenticated %}<p class="editlink"><a href="update/#photos">edit</a></p>{% endif %}
 	</div>
 	<div class="span9">
-    {% for photo in object.gearphoto_set.all %}
+    {% for photo in photos %}
     <a href="{{photo.photo.get_absolute_url}}"
     title="{{photo.photo.caption}}">
 			<img

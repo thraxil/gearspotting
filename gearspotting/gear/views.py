@@ -1,6 +1,7 @@
 from django.contrib.contenttypes.admin import generic_inlineformset_factory
 from django.shortcuts import get_object_or_404
 from django.views.generic.base import TemplateView
+from django.views.generic.detail import DetailView
 
 from gearspotting.manufacturer.models import Manufacturer, ManufacturerForm
 from gearspotting.tag.models import Tag
@@ -28,6 +29,18 @@ class IndexView(TemplateView):
         return dict(
             manufacturers=manufacturers,
             add_manufacturer_form=ManufacturerForm(),
+        )
+
+
+class GearDetailView(DetailView):
+    slug_field = "slug"
+    model = Gear
+
+    def get_context_data(self, **kwargs):
+        photos = self.object.gearphoto_set.all().prefetch_related("photo")
+        return dict(
+            photos=photos,
+            object=self.object,
         )
 
 
