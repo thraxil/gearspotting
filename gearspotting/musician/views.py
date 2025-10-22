@@ -19,9 +19,8 @@ class MusicianTagView(TemplateView):
 
     def get_context_data(self, tag=""):
         t = get_object_or_404(Tag, slug=tag)
-        return dict(
-            tag=tag, musicians=[mt.musician for mt in t.musiciantag_set.all()]
-        )
+        musicians = t.musiciantag_set.all().prefetch_related("musician")
+        return dict(tag=tag, musicians=musicians)
 
 
 class TagsView(TemplateView):

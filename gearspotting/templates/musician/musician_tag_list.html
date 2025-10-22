@@ -9,8 +9,8 @@
 
 {% if musicians %}
     <ul>
-    {% for musician in musicians %}
-        <li><a href="{{ musician.get_absolute_url }}">{{ musician.name }}</a></li>
+    {% for mt in musicians %}
+        <li><a href="{{ mt.musician.get_absolute_url }}">{{ mt.musician.name }}</a></li>
     {% endfor %}
     </ul>
 {% else %}
