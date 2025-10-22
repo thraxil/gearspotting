@@ -15,9 +15,8 @@
 
 <div class="row">
 	<div class="span3">
-    {% if object.musicianphotos.count %}
-    <img itemprop="image" class="img-rounded"
- src="{{ object.first_photo.get_200_src }}" />
+    {% if photos.count %}
+    <img itemprop="image" class="img-rounded" src="{{ photos.0.photo.get_200_src }}" />
     {% endif %}
 	</div>
 	<div class="span9">
@@ -31,13 +30,14 @@
 			<dt>Modified</dt>
 			<dd>{{object.modified|date}}</dd>
 
-			{% if object.musiciantag_set.count %}
-    <dt>Tags</dt>
-		<dd>
-      {% for mt in object.musiciantag_set.all %}<a href="{% url 'musician_tag_detail' mt.tag.slug %}">{{mt.tag.name}}</a> {% endfor %}
-		</dd>
-{% endif %}
-
+			{% if tags.count %}
+                            <dt>Tags</dt>
+		            <dd>
+                                {% for mt in tags %}
+                                    <a href="{% url 'musician_tag_detail' mt.tag.slug %}">{{mt.tag.name}}</a>
+                                {% endfor %}
+		            </dd>
+                        {% endif %}
 		</dl>
 	</div>
 </div>
@@ -58,14 +58,14 @@
 </div>
 {% endif %}
 
-{% if object.musicianphoto_set.count %}
+{% if photos.count %}
 <div class="row">
 	<div class="span3">
     <h3>Photos</h3>
     {% if user.is_authenticated %}<p class="editlink"><a href="update/#photos">edit</a>{% endif %}
 	</div>
 	<div class="span9">
-      {% for photo in object.musicianphoto_set.all %}
+      {% for photo in photos %}
       <a href="{{photo.photo.get_absolute_url}}"
       title="{{photo.photo.caption}}"><img class="img-polaroid"
  src="{{ photo.photo.get_100h_src }}" /></a>
@@ -74,7 +74,7 @@
 </div>
 {% endif %}
 
-{% if object.musiciangear_set.count %}
+{% if gear.count %}
 <div class="row">
 	<div class="span3">
     <h3>Gear</h3>
@@ -82,7 +82,7 @@
 	</div>
 	<div class="span9">
 	<table class="table table-striped table-bordered table-condensed">
-      {% for musiciangear in object.musiciangear_set.all %}
+      {% for musiciangear in gear %}
       <tr>
       <td><a href="{{musiciangear.get_absolute_url}}"><b>{{musiciangear.gear.manufacturer.name}}
       {{musiciangear.gear.name}}</b></a> {{musiciangear.description}}
@@ -90,8 +90,7 @@
 	{% if musiciangear.musiciangearphoto_set.count %}
 	{% for photo in musiciangear.musiciangearphoto_set.all %}
 	<a href="{{photo.photo.get_absolute_url}}"
-	title="{{photo.photo.caption}}"><img class="img-polaroid"
- src="{{ photo.photo.get_100h_src }}" /></a></div>
+	title="{{photo.photo.caption}}"><img class="img-polaroid" src="{{ photo.photo.get_100h_src }}" /></a></div>
 	{% endfor %}
 	{% endif %}
 

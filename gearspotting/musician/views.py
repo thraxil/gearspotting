@@ -13,6 +13,21 @@ from .models import Link, Musician, Photo
 class MusicianDetailView(DetailView):
     model = Musician
 
+    def get_context_data(self, **kwargs):
+        data = super().get_context_data(**kwargs)
+        data["tags"] = self.object.musiciantag_set.all().prefetch_related(
+            "tag"
+        )
+        data["gear"] = self.object.musiciangear_set.all().prefetch_related(
+            "gear",
+            "gear__manufacturer",
+        )
+
+        data["photos"] = self.object.musicianphoto_set.all().prefetch_related(
+            "photo"
+        )
+        return data
+
 
 class MusicianTagView(TemplateView):
     template_name = "musician/musician_tag_list.html"
