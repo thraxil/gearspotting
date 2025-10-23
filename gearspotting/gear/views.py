@@ -7,7 +7,7 @@ from gearspotting.manufacturer.models import Manufacturer, ManufacturerForm
 from gearspotting.tag.models import Tag
 from gearspotting.utils.views import AddSomethingView, EditSomethingView
 
-from .models import Gear, Link, Photo
+from .models import Gear, GearTag, Link, Photo
 
 
 class GearTagView(TemplateView):
@@ -46,6 +46,14 @@ class GearDetailView(DetailView):
 
 class TagsView(TemplateView):
     template_name = "gear/tags.html"
+
+    def get_context_data(self):
+        tags = (
+            Tag.objects.filter(geartag__isnull=False)
+            .distinct()
+            .order_by("name")
+        )
+        return dict(tags=tags)
 
 
 class AddLinkView(AddSomethingView):

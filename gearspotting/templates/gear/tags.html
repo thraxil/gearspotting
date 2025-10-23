@@ -5,6 +5,10 @@
 
 <h1>Tags</h1>
 
-<p>currently broken. sorry</p>
+<ul>
+    {% for tag in tags %}
+        <li><a href="{% url 'gear_tag_detail' tag.slug %}">{{tag.name}}</a></li>
+{% endfor %}
+</ul>
 
 {% endblock %}
