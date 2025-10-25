@@ -41,6 +41,14 @@ class MusicianTagView(TemplateView):
 class TagsView(TemplateView):
     template_name = "musician/tags.html"
 
+    def get_context_data(self):
+        tags = (
+            Tag.objects.filter(musiciantag__isnull=False)
+            .distinct()
+            .order_by("name")
+        )
+        return dict(tags=tags)
+
 
 class AddLinkView(AddSomethingView):
     template_name = "musician/add_link.html"
