@@ -79,16 +79,16 @@ wheels = [
 
 [[package]]
 name = "django"
-version = "5.1.13"
+version = "5.1.14"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
     { name = "asgiref" },
     { name = "sqlparse" },
     { name = "tzdata", marker = "sys_platform == 'win32'" },
 ]
-sdist = { url = "https://files.pythonhosted.org/packages/bb/57/ad9905d03a2ee39064ee7ba69f8e2790db4a7ffaef9c54f95e7a8f2cb0a1/django-5.1.13.tar.gz", hash = "sha256:543ff21679f15e80edfc01fe7ea35f8291b6d4ea589433882913626a7c1cf929", size = 10742756, upload-time = "2025-10-01T14:25:41.187Z" }
+sdist = { url = "https://files.pythonhosted.org/packages/6e/f9/284077f0e61f633e5279518a9ac5924ade4bef12bc841174ca48c57f2438/django-5.1.14.tar.gz", hash = "sha256:b98409fb31fdd6e8c3a6ba2eef3415cc5c0020057b43b21ba7af6eff5f014831", size = 10720998, upload-time = "2025-11-05T14:07:56.294Z" }
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/6c/f2/4b39467b74de9bb698c95232011e97dc848f490baae8d78c2e58848c4562/django-5.1.13-py3-none-any.whl", hash = "sha256:06f257f79dc4c17f3f9e23b106a4c5ed1335abecbe731e83c598c941d14fbeed", size = 8277515, upload-time = "2025-10-01T14:25:28.65Z" },
+    { url = "https://files.pythonhosted.org/packages/e3/67/8839eb1d70b5688b7375dce24ccf216e6ab25ee9e6361f22973520d13cd4/django-5.1.14-py3-none-any.whl", hash = "sha256:2a4b9c20404fd1bf50aaaa5542a19d860594cba1354f688f642feb271b91df27", size = 8260068, upload-time = "2025-11-05T14:07:53.26Z" },
 ]
 
 [[package]]
@@ -188,12 +188,12 @@ dev = [
 
 [package.metadata]
 requires-dist = [
-    { name = "django", specifier = "==5.1.13" },
+    { name = "django", specifier = "==5.1.14" },
     { name = "django-bootstrap-form", specifier = "==3.4" },
     { name = "django-debug-toolbar", specifier = "==6.1.0" },
     { name = "django-smoketest", specifier = "==1.2.1" },
     { name = "gunicorn", specifier = "==23.0.0" },
-    { name = "markdown", specifier = "==3.9" },
+    { name = "markdown", specifier = "==3.10" },
     { name = "psycopg", specifier = "==3.2.12" },
     { name = "requests", specifier = "==2.32.5" },
     { name = "sentry-sdk", specifier = "==2.43.0" },
@@ -233,11 +233,11 @@ wheels = [
 
 [[package]]
 name = "markdown"
-version = "3.9"
+version = "3.10"
 source = { registry = "https://pypi.org/simple" }
-sdist = { url = "https://files.pythonhosted.org/packages/8d/37/02347f6d6d8279247a5837082ebc26fc0d5aaeaf75aa013fcbb433c777ab/markdown-3.9.tar.gz", hash = "sha256:d2900fe1782bd33bdbbd56859defef70c2e78fc46668f8eb9df3128138f2cb6a", size = 364585, upload-time = "2025-09-04T20:25:22.885Z" }
+sdist = { url = "https://files.pythonhosted.org/packages/7d/ab/7dd27d9d863b3376fcf23a5a13cb5d024aed1db46f963f1b5735ae43b3be/markdown-3.10.tar.gz", hash = "sha256:37062d4f2aa4b2b6b32aefb80faa300f82cc790cb949a35b8caede34f2b68c0e", size = 364931, upload-time = "2025-11-03T19:51:15.007Z" }
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/70/ae/44c4a6a4cbb496d93c6257954260fe3a6e91b7bed2240e5dad2a717f5111/markdown-3.9-py3-none-any.whl", hash = "sha256:9f4d91ed810864ea88a6f32c07ba8bee1346c0cc1f6b1f9f6c822f2a9667d280", size = 107441, upload-time = "2025-09-04T20:25:21.784Z" },
+    { url = "https://files.pythonhosted.org/packages/70/81/54e3ce63502cd085a0c556652a4e1b919c45a446bd1e5300e10c44c8c521/markdown-3.10-py3-none-any.whl", hash = "sha256:b5b99d6951e2e4948d939255596523444c0e677c669700b1d17aa4a8a464cb7c", size = 107678, upload-time = "2025-11-03T19:51:13.887Z" },
 ]
 
 [[package]]
