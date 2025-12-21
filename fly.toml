@@ -9,9 +9,9 @@ swap_size_mb = 512
 
 [env]
   ALLOWED_HOSTS=".gearspotting.com,gearspotting.fly.dev"
-  DB_USER="gearspotting_g71436m30vxnr0ep"
+  DB_USER="gearspotting"
   DB_PORT="5432"
-  DB_HOST="thraxil-postgres.internal"
+  DB_HOST="pgbouncer.z7y24odj642ogqd1.flympg.net"
   AWS_S3_CUSTOM_DOMAIN="d2l0eqxka0mdmr.cloudfront.net"
   AWS_STORAGE_BUCKET_NAME="thraxil-gearspotting-static-prod"
 
