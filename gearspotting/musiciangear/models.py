@@ -14,6 +14,9 @@ if TYPE_CHECKING:
     from django.forms.models import BaseInlineFormSet
 
 
+from django.urls import reverse
+
+
 class MusicianGear(models.Model):
     musician = models.ForeignKey(Musician, on_delete=models.CASCADE)
     gear = models.ForeignKey(Gear, on_delete=models.CASCADE)
@@ -24,7 +27,7 @@ class MusicianGear(models.Model):
     modified = models.DateTimeField(auto_now=True, editable=False)
 
     def get_absolute_url(self) -> str:
-        return f"/musiciangear/{self.id}/"
+        return reverse("musiciangear:musiciangear_detail", args=[self.pk])
 
     def __str__(self) -> str:
         return f"{self.musician.name} - {self.gear.name}"

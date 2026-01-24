@@ -4,7 +4,7 @@
 
 {% block content %}
 
-    <h1><a href="/musician/tag/">Tag</a>: {{tag}} {% if user.is_authenticated %}{% endif %}</h1>
+    <h1><a href="{% url 'musician:musician_tags' %}">Tag</a>: {{tag}} {% if user.is_authenticated %}{% endif %}</h1>
     
 
 {% if musicians %}

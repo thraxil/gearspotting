@@ -23,19 +23,19 @@
 				href="{% static "bootstrap/css/bootstrap.min.css" %}">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link href="{% static "bootstrap/css/bootstrap-responsive.min.css" %}" rel="stylesheet">
-	<link rel="stylesheet" href="{% static "css/main.css" %}>
+	<link rel="stylesheet" href="{% static "css/main.css" %}">
 	<link rel="stylesheet" media="handheld" href="{% static "css/handheld.css?v=2" %}">
 	<script src="{% static "js/libs/modernizr-1.7.min.js" %}"></script>
 
 	<link rel="shortcut icon" href="{% static "img/favicon.ico" %}" type="image/x-icon" />
 
-	<link href="/feeds/gear/" type="application/atom+xml"
+	<link href="{% url 'gear_feed' %}" type="application/atom+xml"
 	rel="alternate" title="Atom feed of new Gear" />
 
-	<link href="/feeds/musician/" type="application/atom+xml"
+	<link href="{% url 'musician_feed' %}" type="application/atom+xml"
 	rel="alternate" title="Atom feed of new Musicians" />
 
-	<link href="/feeds/blog/" type="application/atom+xml"
+	<link href="{% url 'blog_feed' %}" type="application/atom+xml"
 	rel="alternate" title="Atom feed of Blog Posts" />
 
 <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.3/themes/base/jquery-ui.css" type="text/css" 
@@ -56,8 +56,8 @@ media="all" />
   		<div class="navbar-inner">
         <a class="brand" href="/">Gearspotting.com</a>
         <ul class="nav">
-          <li><a href="/gear/">Gear</a></li>
-          <li><a href="/musician/">Musicians</a></li>
+          <li><a href="{% url 'gear:gear_index' %}">Gear</a></li>
+          <li><a href="{% url 'musician:musician_index' %}">Musicians</a></li>
           <li><a href="/tag/">Tags</a></li>
           <li><a href="/blog/">Blog</a></li>
         </ul>

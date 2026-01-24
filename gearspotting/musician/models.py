@@ -15,6 +15,9 @@ if TYPE_CHECKING:
     from django.forms.models import BaseInlineFormSet
 
 
+from django.urls import reverse
+
+
 class Musician(models.Model):
     name = models.CharField(default="", unique=True, max_length=256)
     slug = models.SlugField(max_length=256, editable=False)
@@ -30,7 +33,7 @@ class Musician(models.Model):
         ]
 
     def get_absolute_url(self) -> str:
-        return f"/musician/{self.slug}/"
+        return reverse("musician:musician_detail", args=[self.slug])
 
     def __str__(self) -> str:
         return self.name

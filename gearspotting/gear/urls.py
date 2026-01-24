@@ -1,4 +1,4 @@
-from django.urls import path, re_path
+from django.urls import path, reverse_lazy
 from django.views.generic.edit import CreateView, DeleteView, UpdateView
 
 from gearspotting.gear.models import Gear
@@ -13,12 +13,13 @@ from gearspotting.gear.views import (
     TagsView,
 )
 
+app_name = "gear"
 info_dict = {
     "queryset": Gear.objects.all(),
 }
 
 urlpatterns = [
-    re_path(r"^$", IndexView.as_view(), name="gear_index"),
+    path("", IndexView.as_view(), name="gear_index"),
     path(
         "create/",
         CreateView.as_view(
@@ -26,10 +27,8 @@ urlpatterns = [
         ),
         name="gear_create",
     ),
-    re_path(
-        r"^tag/(?P<tag>[^/]+)/$", GearTagView.as_view(), name="gear_tag_detail"
-    ),
-    re_path(r"^tag/$", TagsView.as_view(), name="gear_tags"),
+    path("tag/<str:tag>/", GearTagView.as_view(), name="gear_tag_detail"),
+    path("tag/", TagsView.as_view(), name="gear_tags"),
     path(
         "<slug:slug>/update/",
         UpdateView.as_view(
@@ -39,12 +38,24 @@ urlpatterns = [
     ),
     path(
         "<slug:slug>/delete/",
-        DeleteView.as_view(model=Gear, success_url="/gear/"),
+        DeleteView.as_view(
+            model=Gear, success_url=reverse_lazy("gear:gear_index")
+        ),
         name="gear_delete",
     ),
-    re_path(r"^(?P<slug>[^/]+)/$", GearDetailView.as_view()),
-    re_path(r"^(?P<slug>[^/]+)/edit_links/?$", EditLinksView.as_view()),
-    re_path(r"^(?P<slug>[^/]+)/edit_photos/?$", EditPhotosView.as_view()),
-    re_path(r"^(?P<slug>[^/]+)/add_link/$", AddLinkView.as_view()),
-    re_path(r"^(?P<slug>[^/]+)/add_photo/$", AddPhotoView.as_view()),
+    path("<slug:slug>/", GearDetailView.as_view(), name="gear_detail"),
+    path(
+        "<slug:slug>/edit_links/",
+        EditLinksView.as_view(),
+        name="gear_edit_links",
+    ),
+    path(
+        "<slug:slug>/edit_photos/",
+        EditPhotosView.as_view(),
+        name="gear_edit_photos",
+    ),
+    path("<slug:slug>/add_link/", AddLinkView.as_view(), name="gear_add_link"),
+    path(
+        "<slug:slug>/add_photo/", AddPhotoView.as_view(), name="gear_add_photo"
+    ),
 ]

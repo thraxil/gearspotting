@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 
 {% block title %}{{tag}}{% endblock %}
-{% block subhead %}<a href="/gear/tag/">Tag</a>: {{tag}}{% endblock %}
+{% block subhead %}<a href="{% url 'gear:gear_tags' %}">Tag</a>: {{tag}}{% endblock %}
 
 {% block content %}
 

@@ -1,7 +1,7 @@
 import django.views.static
 from django.conf import settings
 from django.contrib import admin
-from django.urls import include, path, re_path
+from django.urls import include, path
 
 import gearspotting.main.views as mainviews
 from gearspotting.blog.feeds import BlogFeed
@@ -42,22 +42,32 @@ post_info_dict = {
 }
 
 urlpatterns = [
-    re_path(r"^$", mainviews.IndexView.as_view()),
-    re_path(r"smoketest/", include("smoketest.urls")),
-    re_path(r"^search/$", mainviews.SearchView.as_view()),
-    re_path(r"^gear/", include("gearspotting.gear.urls")),
-    re_path(r"^blog/", include("gearspotting.blog.urls")),
-    re_path(r"^musician/", include("gearspotting.musician.urls")),
-    re_path(r"^musiciangear/", include("gearspotting.musiciangear.urls")),
-    re_path(r"^manufacturer/", include("gearspotting.manufacturer.urls")),
-    re_path(r"^photos/", include("gearspotting.photo.urls")),
-    re_path(r"^feeds/gear/$", GearFeed()),
-    re_path(r"^feeds/musician/$", MusicianFeed()),
-    re_path(r"^feeds/blog/$", BlogFeed()),
-    re_path(
-        r"^uploads/(?P<path>.*)$",
+    path("", mainviews.IndexView.as_view(), name="index"),
+    path("smoketest/", include("smoketest.urls")),
+    path("search/", mainviews.SearchView.as_view(), name="search"),
+    path("gear/", include("gearspotting.gear.urls", namespace="gear")),
+    path("blog/", include("gearspotting.blog.urls", namespace="blog")),
+    path(
+        "musician/",
+        include("gearspotting.musician.urls", namespace="musician"),
+    ),
+    path(
+        "musiciangear/",
+        include("gearspotting.musiciangear.urls", namespace="musiciangear"),
+    ),
+    path(
+        "manufacturer/",
+        include("gearspotting.manufacturer.urls", namespace="manufacturer"),
+    ),
+    path("photos/", include("gearspotting.photo.urls", namespace="photo")),
+    path("feeds/gear/", GearFeed(), name="gear_feed"),
+    path("feeds/musician/", MusicianFeed(), name="musician_feed"),
+    path("feeds/blog/", BlogFeed(), name="blog_feed"),
+    path(
+        "uploads/<path:path>/",
         django.views.static.serve,
         {"document_root": settings.MEDIA_ROOT},
+        name="uploads",
     ),
     path("__debug__/", include("debug_toolbar.urls")),
 ]

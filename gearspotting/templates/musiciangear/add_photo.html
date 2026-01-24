@@ -1,4 +1,4 @@
-<form action="{{musiciangear.get_absolute_url}}add_photo/"
+<form action="{% url 'musiciangear:musiciangear_add_photo' pk=musiciangear.pk %}"
 method="post" enctype="multipart/form-encoded">
 <table>
 {{form.as_table}}

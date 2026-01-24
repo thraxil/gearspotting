@@ -4,6 +4,7 @@ from django.conf import settings
 from django.contrib.contenttypes.admin import GenericTabularInline
 from django.db import models
 from django.forms import ModelForm
+from django.urls import reverse
 
 if TYPE_CHECKING:
     from gearspotting.gear.models import Gear
@@ -28,7 +29,7 @@ class Photo(models.Model):
         return str(self.content_object)  # type: ignore
 
     def get_absolute_url(self) -> str:
-        return f"/photos/{self.id}/"
+        return reverse("photo:photo_detail", args=[self.id])
 
     def type_display(self) -> str:
         return "Photo"

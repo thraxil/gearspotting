@@ -1,15 +1,15 @@
 {% extends "base.html" %}
 
 {% block title %}Musician: {{object.name}}{% endblock %}
-{% block subhead %}<a href="/musician/">Musician</a>: <span itemprop="name">{{object.name}}</span>{% endblock %}
+{% block subhead %}<a href="{% url 'musician:musician_index' %}">Musician</a>: <span itemprop="name">{{object.name}}</span>{% endblock %}
 
 {% block containerextra %}itemscope itemtype="https://schema.org/Person"{% endblock %}
 
 {% block content %}
-    {% if user.is_authenticated %}<p class="editlink"><a href="update/" >edit</a><br />
-  <a href="add_link/" rel="facebox">add link</a><br />
-  <a href="add_photo/" rel="facebox">add photo</a><br />
-  <a href="add_gear/" rel="facebox">add gear</a>
+    {% if user.is_authenticated %}<p class="editlink"><a href="{% url 'musician:musician_update' object.slug %}" >edit</a><br />
+  <a href="{% url 'musician:musician_add_link' object.slug %}" rel="facebox">add link</a><br />
+  <a href="{% url 'musician:musician_add_photo' object.slug %}" rel="facebox">add photo</a><br />
+  <a href="{% url 'musician:musician_add_gear' object.slug %}" rel="facebox">add gear</a>
     </p>{% endif %}
     
 
@@ -34,7 +34,7 @@
                             <dt>Tags</dt>
 		            <dd>
                                 {% for mt in tags %}
-                                    <a href="{% url 'musician_tag_detail' mt.tag.slug %}">{{mt.tag.name}}</a>
+                                    <a href="{% url 'musician:musician_tag_detail' mt.tag.slug %}">{{mt.tag.name}}</a>
                                 {% endfor %}
 		            </dd>
                         {% endif %}
@@ -46,7 +46,7 @@
 <div class="row">
 	<div class="span3">
 		<h3>Links</h3>
-      {% if user.is_authenticated %}<p class="editlink"><a href="update/#links">edit</a></p>{% endif %}
+      {% if user.is_authenticated %}<p class="editlink"><a href="{% url 'musician:musician_update' object.slug %}#links">edit</a></p>{% endif %}
 	</div>
 	<div class="span9">
     <dl class="dl-horizontal">
@@ -62,7 +62,7 @@
 <div class="row">
 	<div class="span3">
     <h3>Photos</h3>
-    {% if user.is_authenticated %}<p class="editlink"><a href="update/#photos">edit</a>{% endif %}
+    {% if user.is_authenticated %}<p class="editlink"><a href="{% url 'musician:musician_update' object.slug %}#photos">edit</a>{% endif %}
 	</div>
 	<div class="span9">
       {% for photo in photos %}
@@ -78,7 +78,7 @@
 <div class="row">
 	<div class="span3">
     <h3>Gear</h3>
-    {% if user.is_authenticated %}<p class="editlink"><a href="update/#gear">edit</a></p>{% endif %}
+    {% if user.is_authenticated %}<p class="editlink"><a href="{% url 'musician:musician_update' object.slug %}#gear">edit</a></p>{% endif %}
 	</div>
 	<div class="span9">
 	<table class="table table-striped table-bordered table-condensed">
@@ -96,8 +96,8 @@
 
 	{% if musiciangear.gear.geartag_set.count %}
 	    <p class="geartags pull-right">
-                {% for tag in musician.gear.geartag_set.all %}
-                    <a href="{% url 'gear_tag_detail' tag.tag.slug %}">{{tag.tag.name}}</a>
+                {% for tag in musiciangear.gear.geartag_set.all %}
+                    <a href="{% url 'gear:gear_tag_detail' tag.tag.slug %}">{{tag.tag.name}}</a>
                 {% endfor %}
             </p>
 	{% endif %}

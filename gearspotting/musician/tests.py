@@ -22,7 +22,7 @@ class MusicianViewsTestCase(TestCase):
         )
 
     def test_list_view(self):
-        response = self.client.get("/musician/")
+        response = self.client.get(reverse("musician:musician_index"))
         self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed(response, "musician/musician_list.html")
         self.assertIn(self.musician, response.context["object_list"])
@@ -35,30 +35,32 @@ class MusicianViewsTestCase(TestCase):
 
     def test_create_view(self):
         self.client.login(username="testuser", password="testpassword")
-        response = self.client.get("/musician/create/")
+        response = self.client.get(reverse("musician:musician_create"))
         self.assertEqual(response.status_code, 200)
         response = self.client.post(
-            "/musician/create/", {"name": "Jimmy Page"}
+            reverse("musician:musician_create"), {"name": "Jimmy Page"}
         )
         self.assertEqual(response.status_code, 302)
         self.assertTrue(Musician.objects.filter(name="Jimmy Page").exists())
 
     def test_update_view(self):
         self.client.login(username="testuser", password="testpassword")
-        url = f"/musician/{self.musician.slug}/update/"
+        url = reverse("musician:musician_update", args=[self.musician.slug])
         response = self.client.post(url, {"name": "Jimi Hendrix Updated"})
         self.musician.refresh_from_db()
         self.assertRedirects(response, self.musician.get_absolute_url())
         self.assertEqual(self.musician.name, "Jimi Hendrix Updated")
 
     def test_tags_view(self):
-        response = self.client.get("/musician/tag/")
+        response = self.client.get(reverse("musician:musician_tags"))
         self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed(response, "musician/tags.html")
         self.assertIn(self.tag, response.context["tags"])
 
     def test_musician_tag_view(self):
-        url = reverse("musician_tag_detail", kwargs={"tag": self.tag.slug})
+        url = reverse(
+            "musician:musician_tag_detail", kwargs={"tag": self.tag.slug}
+        )
         response = self.client.get(url)
         self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed(response, "musician/musician_tag_list.html")
@@ -66,7 +68,7 @@ class MusicianViewsTestCase(TestCase):
 
     def test_add_link_view(self):
         self.client.login(username="testuser", password="testpassword")
-        url = f"/musician/{self.musician.slug}/add_link/"
+        url = reverse("musician:musician_add_link", args=[self.musician.slug])
         response = self.client.get(url)
         self.assertEqual(response.status_code, 200)
         response = self.client.post(
@@ -77,20 +79,20 @@ class MusicianViewsTestCase(TestCase):
 
     def test_delete_view_post(self):
         self.client.login(username="testuser", password="testpassword")
-        url = f"/musician/{self.musician.slug}/delete/"
+        url = reverse("musician:musician_delete", args=[self.musician.slug])
         response = self.client.post(url)
-        self.assertRedirects(response, "/musician/")
+        self.assertRedirects(response, reverse("musician:musician_index"))
         self.assertFalse(Musician.objects.filter(pk=self.musician.pk).exists())
 
     def test_add_photo_view_get(self):
         self.client.login(username="testuser", password="testpassword")
-        url = f"/musician/{self.musician.slug}/add_photo/"
+        url = reverse("musician:musician_add_photo", args=[self.musician.slug])
         response = self.client.get(url)
         self.assertEqual(response.status_code, 200)
 
     def test_add_gear_view_post(self):
         self.client.login(username="testuser", password="testpassword")
-        url = f"/musician/{self.musician.slug}/add_gear/"
+        url = reverse("musician:musician_add_gear", args=[self.musician.slug])
         response = self.client.post(url, {"gear": self.gear.id})
         self.assertRedirects(response, self.musician.get_absolute_url())
         self.assertEqual(self.musician.musiciangear_set.count(), 1)

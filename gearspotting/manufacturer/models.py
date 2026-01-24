@@ -5,6 +5,7 @@ from django.contrib.contenttypes.forms import generic_inlineformset_factory
 from django.db import models
 from django.forms import ModelForm
 from django.template.defaultfilters import slugify
+from django.urls import reverse
 
 from gearspotting.link.models import Link
 
@@ -27,7 +28,7 @@ class Manufacturer(models.Model):
         ]
 
     def get_absolute_url(self) -> str:
-        return f"/manufacturer/{self.slug}/"
+        return reverse("manufacturer:manufacturer_detail", args=[self.slug])
 
     def __str__(self) -> str:
         return self.name

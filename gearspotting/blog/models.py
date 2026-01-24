@@ -1,9 +1,11 @@
 import re
+from typing import Any
 
 import markdown
 from django.contrib.auth.models import User
 from django.db import models
 from django.template.defaultfilters import slugify
+from django.urls import reverse
 
 from gearspotting.gear.models import Gear
 from gearspotting.musician.models import Musician
@@ -25,7 +27,21 @@ class Post(models.Model):
         return self.title
 
     def get_absolute_url(self) -> str:
-        return f"/blog/{self.published.year:04d}/{self.published.month:02d}/{self.published.day:02d}/{self.author.username}/{self.slug}/"
+        return reverse(
+            "blog:blog_post_detail",
+            args=[
+                self.published.year,
+                self.published.month,
+                self.published.day,
+                self.author.username,
+                self.slug,
+            ],
+        )
+
+    def save(self, *args: Any, **kwargs: Any) -> None:
+        if not self.slug:
+            self.slug = slugify(self.title)
+        super(Post, self).save(*args, **kwargs)
 
     def linked_body(self) -> str:
         return link_text(self.body)
@@ -65,12 +81,12 @@ def link_text(text: str) -> str:
             if parts[0].lower() == "gear":
                 manufacturer_name = parts[1]
                 gear_name = parts[2]
-                part = f'<a href="/gear/{slugify(gear_name)}/">{manufacturer_name} {gear_name}</a>'
+                part = f'<a href="{reverse("gear:gear_detail", args=[slugify(gear_name)])}">{manufacturer_name} {gear_name}</a>'
             if parts[0].lower() == "manufacturer":
                 manufacturer_name = parts[1]
-                part = f'<a href="/manufacturer/{slugify(manufacturer_name)}/">{manufacturer_name}</a>'
+                part = f'<a href="{reverse("manufacturer:manufacturer_detail", args=[slugify(manufacturer_name)])}">{manufacturer_name}</a>'
             if parts[0].lower() == "musician":
                 musician_name = parts[1]
-                part = f'<a href="/musician/{slugify(musician_name)}/">{musician_name}</a>'
+                part = f'<a href="{reverse("musician:musician_detail", args=[slugify(musician_name)])}">{musician_name}</a>'
         results.append(part)
     return "".join(results)

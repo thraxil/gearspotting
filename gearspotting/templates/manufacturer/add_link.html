@@ -1,4 +1,4 @@
-<form action="{{manufacturer.get_absolute_url}}add_link/"
+<form action="{% url 'manufacturer:manufacturer_add_link' slug=manufacturer.slug %}"
 method="post">
 <table>
 {{form.as_table}}

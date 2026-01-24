@@ -5,6 +5,7 @@ from django.contrib.contenttypes.forms import generic_inlineformset_factory
 from django.db import models
 from django.forms import ModelForm
 from django.template.defaultfilters import slugify
+from django.urls import reverse
 
 from gearspotting.link.models import Link
 from gearspotting.manufacturer.models import Manufacturer
@@ -13,6 +14,9 @@ from gearspotting.tag.models import Tag
 
 if TYPE_CHECKING:
     from django.forms.models import BaseInlineFormSet
+
+
+from django.urls import reverse
 
 
 class Gear(models.Model):
@@ -32,7 +36,7 @@ class Gear(models.Model):
         ]
 
     def get_absolute_url(self) -> str:
-        return f"/gear/{self.slug}/"
+        return reverse("gear:gear_detail", args=[self.slug])
 
     def __str__(self) -> str:
         return f"{self.manufacturer.name}: {self.name}"

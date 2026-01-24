@@ -22,7 +22,7 @@ class GearViewsTestCase(TestCase):
         GearTag.objects.create(gear=self.gear, tag=self.tag)
 
     def test_index_view(self):
-        response = self.client.get(reverse("gear_index"))
+        response = self.client.get(reverse("gear:gear_index"))
         self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed(response, "gear/index.html")
 
@@ -33,13 +33,13 @@ class GearViewsTestCase(TestCase):
         self.assertEqual(response.context["object"], self.gear)
 
     def test_tags_view(self):
-        response = self.client.get(reverse("gear_tags"))
+        response = self.client.get(reverse("gear:gear_tags"))
         self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed(response, "gear/tags.html")
         self.assertContains(response, self.tag.name)
 
     def test_gear_tag_view(self):
-        url = reverse("gear_tag_detail", kwargs={"tag": self.tag.slug})
+        url = reverse("gear:gear_tag_detail", kwargs={"tag": self.tag.slug})
         response = self.client.get(url)
         self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed(response, "gear/gear_tag_list.html")
@@ -48,7 +48,7 @@ class GearViewsTestCase(TestCase):
     def test_create_gear_view_post(self):
         self.client.login(username="testuser", password="testpassword")
         response = self.client.post(
-            reverse("gear_create"),
+            reverse("gear:gear_create"),
             {
                 "name": "Telecaster",
                 "manufacturer": self.manufacturer.id,
@@ -64,7 +64,7 @@ class GearViewsTestCase(TestCase):
 
     def test_update_gear_view(self):
         self.client.login(username="testuser", password="testpassword")
-        url = reverse("gear_update", kwargs={"slug": self.gear.slug})
+        url = reverse("gear:gear_update", kwargs={"slug": self.gear.slug})
         response = self.client.post(
             url,
             {
@@ -79,17 +79,17 @@ class GearViewsTestCase(TestCase):
 
     def test_delete_gear_view(self):
         self.client.login(username="testuser", password="testpassword")
-        url = reverse("gear_delete", kwargs={"slug": self.gear.slug})
+        url = reverse("gear:gear_delete", kwargs={"slug": self.gear.slug})
         response = self.client.get(url)
         self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed(response, "gear/gear_confirm_delete.html")
         response = self.client.post(url)
-        self.assertRedirects(response, "/gear/")
+        self.assertRedirects(response, reverse("gear:gear_index"))
         self.assertFalse(Gear.objects.filter(pk=self.gear.pk).exists())
 
     def test_add_link_view(self):
         self.client.login(username="testuser", password="testpassword")
-        url = f"/gear/{self.gear.slug}/add_link/"
+        url = reverse("gear:gear_add_link", kwargs={"slug": self.gear.slug})
         response = self.client.get(url)
         self.assertEqual(response.status_code, 200)
         response = self.client.post(
@@ -100,6 +100,6 @@ class GearViewsTestCase(TestCase):
 
     def test_add_photo_view_get(self):
         self.client.login(username="testuser", password="testpassword")
-        url = f"/gear/{self.gear.slug}/add_photo/"
+        url = reverse("gear:gear_add_photo", kwargs={"slug": self.gear.slug})
         response = self.client.get(url)
         self.assertEqual(response.status_code, 200)

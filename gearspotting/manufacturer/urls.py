@@ -1,4 +1,4 @@
-from django.urls import re_path
+from django.urls import path, reverse_lazy
 from django.views.generic.detail import DetailView
 from django.views.generic.edit import CreateView, DeleteView, UpdateView
 from django.views.generic.list import ListView
@@ -10,22 +10,45 @@ from gearspotting.manufacturer.views import (
     EditLinksView,
 )
 
+app_name = "manufacturer"
 urlpatterns = [
-    re_path(r"^$", ListView.as_view(model=Manufacturer)),
-    re_path(
-        r"^create/?$",
+    path("", ListView.as_view(model=Manufacturer), name="manufacturer_index"),
+    path(
+        "create/",
         CreateView.as_view(model=Manufacturer, form_class=ManufacturerForm),
+        name="manufacturer_create",
     ),
-    re_path(
-        r"^(?P<slug>[^/]+)/update/?$",
+    path(
+        "<slug:slug>/update/",
         UpdateView.as_view(model=Manufacturer, form_class=ManufacturerForm),
+        name="manufacturer_update",
     ),
-    re_path(
-        r"^(?P<slug>[^/]+)/delete/?$",
-        DeleteView.as_view(model=Manufacturer, success_url="/manufacturer/"),
+    path(
+        "<slug:slug>/delete/",
+        DeleteView.as_view(
+            model=Manufacturer,
+            success_url=reverse_lazy("manufacturer:manufacturer_index"),
+        ),
+        name="manufacturer_delete",
     ),
-    re_path(r"^(?P<slug>[^/]+)/edit_links/?$", EditLinksView.as_view()),
-    re_path(r"^(?P<slug>[^/]+)/add_gear/$", AddGearView.as_view()),
-    re_path(r"^(?P<slug>[^/]+)/$", DetailView.as_view(model=Manufacturer)),
-    re_path(r"^(?P<slug>[^/]+)/add_link/$", AddLinkView.as_view()),
+    path(
+        "<slug:slug>/edit_links/",
+        EditLinksView.as_view(),
+        name="manufacturer_edit_links",
+    ),
+    path(
+        "<slug:slug>/add_gear/",
+        AddGearView.as_view(),
+        name="manufacturer_add_gear",
+    ),
+    path(
+        "<slug:slug>/",
+        DetailView.as_view(model=Manufacturer),
+        name="manufacturer_detail",
+    ),
+    path(
+        "<slug:slug>/add_link/",
+        AddLinkView.as_view(),
+        name="manufacturer_add_link",
+    ),
 ]

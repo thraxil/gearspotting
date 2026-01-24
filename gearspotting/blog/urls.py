@@ -1,15 +1,14 @@
-from django.urls import re_path
+from django.urls import path
 
 from .views import AddPostView, IndexView, PostView
 
+app_name = "blog"
 urlpatterns = [
-    re_path(r"^$", IndexView.as_view()),
-    re_path(r"^post/$", AddPostView.as_view()),
-    re_path(
-        (
-            r"(?P<year>\d+)/(?P<month>\d+)/(?P<day>\d+)/"
-            r"(?P<username>\w+)/(?P<slug>[\w\-]+)/$"
-        ),
+    path("", IndexView.as_view(), name="blog_index"),
+    path("post/", AddPostView.as_view(), name="blog_add_post"),
+    path(
+        "<int:year>/<int:month>/<int:day>/<str:username>/<slug:slug>/",
         PostView.as_view(),
+        name="blog_post_detail",
     ),
 ]

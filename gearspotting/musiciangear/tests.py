@@ -1,5 +1,6 @@
 from django.contrib.auth.models import User
 from django.test import TestCase
+from django.urls import reverse
 
 from gearspotting.gear.models import Gear
 from gearspotting.manufacturer.models import Manufacturer
@@ -22,7 +23,7 @@ class MusicianGearViewsTestCase(TestCase):
         )
 
     def test_list_view(self):
-        response = self.client.get("/musiciangear/")
+        response = self.client.get(reverse("musiciangear:musiciangear_index"))
         self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed(
             response, "musiciangear/musiciangear_list.html"
@@ -39,10 +40,10 @@ class MusicianGearViewsTestCase(TestCase):
 
     def test_create_view(self):
         self.client.login(username="testuser", password="testpassword")
-        response = self.client.get("/musiciangear/create/")
+        response = self.client.get(reverse("musiciangear:musiciangear_create"))
         self.assertEqual(response.status_code, 200)
         response = self.client.post(
-            "/musiciangear/create/",
+            reverse("musiciangear:musiciangear_create"),
             {
                 "musician": self.musician.id,
                 "gear": self.gear.id,
@@ -56,7 +57,9 @@ class MusicianGearViewsTestCase(TestCase):
 
     def test_update_view(self):
         self.client.login(username="testuser", password="testpassword")
-        url = f"/musiciangear/{self.musiciangear.id}/update/"
+        url = reverse(
+            "musiciangear:musiciangear_update", args=[self.musiciangear.id]
+        )
         response = self.client.post(
             url,
             {
@@ -71,16 +74,22 @@ class MusicianGearViewsTestCase(TestCase):
 
     def test_delete_view(self):
         self.client.login(username="testuser", password="testpassword")
-        url = f"/musiciangear/{self.musiciangear.id}/delete/"
+        url = reverse(
+            "musiciangear:musiciangear_delete", args=[self.musiciangear.id]
+        )
         response = self.client.post(url)
-        self.assertRedirects(response, "/musiciangear/")
+        self.assertRedirects(
+            response, reverse("musiciangear:musiciangear_index")
+        )
         self.assertFalse(
             MusicianGear.objects.filter(pk=self.musiciangear.pk).exists()
         )
 
     def test_add_link_view(self):
         self.client.login(username="testuser", password="testpassword")
-        url = f"/musiciangear/{self.musiciangear.id}/add_link/"
+        url = reverse(
+            "musiciangear:musiciangear_add_link", args=[self.musiciangear.id]
+        )
         response = self.client.get(url)
         self.assertEqual(response.status_code, 200)
         response = self.client.post(

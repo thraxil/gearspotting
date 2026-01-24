@@ -1,4 +1,4 @@
-from django.urls import re_path
+from django.urls import path, reverse_lazy
 from django.views.generic.detail import DetailView
 from django.views.generic.edit import CreateView, DeleteView, UpdateView
 from django.views.generic.list import ListView
@@ -11,27 +11,54 @@ from gearspotting.musiciangear.views import (
     EditPhotosView,
 )
 
+app_name = "musiciangear"
 urlpatterns = [
-    re_path(r"^$", ListView.as_view(model=MusicianGear)),
-    re_path(
-        r"^create/?$",
+    path("", ListView.as_view(model=MusicianGear), name="musiciangear_index"),
+    path(
+        "create/",
         CreateView.as_view(
             model=MusicianGear, fields=["musician", "gear", "description"]
         ),
+        name="musiciangear_create",
     ),
-    re_path(
-        r"^(?P<pk>\d+)/update/?$",
+    path(
+        "<int:pk>/update/",
         UpdateView.as_view(
             model=MusicianGear, fields=["musician", "gear", "description"]
         ),
+        name="musiciangear_update",
     ),
-    re_path(
-        r"^(?P<pk>\d+)/delete/?$",
-        DeleteView.as_view(model=MusicianGear, success_url="/musiciangear/"),
+    path(
+        "<int:pk>/delete/",
+        DeleteView.as_view(
+            model=MusicianGear,
+            success_url=reverse_lazy("musiciangear:musiciangear_index"),
+        ),
+        name="musiciangear_delete",
     ),
-    re_path(r"^(?P<pk>\d+)/$", DetailView.as_view(model=MusicianGear)),
-    re_path(r"^(?P<pk>\d+)/edit_links/?$", EditLinksView.as_view()),
-    re_path(r"^(?P<pk>\d+)/edit_photos/?$", EditPhotosView.as_view()),
-    re_path(r"^(?P<pk>\d+)/add_link/$", AddLinkView.as_view()),
-    re_path(r"^(?P<pk>\d+)/add_photo/$", AddPhotoView.as_view()),
+    path(
+        "<int:pk>/",
+        DetailView.as_view(model=MusicianGear),
+        name="musiciangear_detail",
+    ),
+    path(
+        "<int:pk>/edit_links/",
+        EditLinksView.as_view(),
+        name="musiciangear_edit_links",
+    ),
+    path(
+        "<int:pk>/edit_photos/",
+        EditPhotosView.as_view(),
+        name="musiciangear_edit_photos",
+    ),
+    path(
+        "<int:pk>/add_link/",
+        AddLinkView.as_view(),
+        name="musiciangear_add_link",
+    ),
+    path(
+        "<int:pk>/add_photo/",
+        AddPhotoView.as_view(),
+        name="musiciangear_add_photo",
+    ),
 ]
