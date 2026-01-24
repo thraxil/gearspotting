@@ -45,6 +45,14 @@ class MusicianGear(models.Model):
 
         return LinkForm
 
+    def add_photo_form(self):
+        class PhotoForm(ModelForm):
+            class Meta:
+                model = Photo
+                exclude = ("content_object", "content_type", "object_id")
+
+        return PhotoForm
+
 
 class MusicianGearPhoto(models.Model):
     musiciangear = models.ForeignKey(MusicianGear, on_delete=models.CASCADE)

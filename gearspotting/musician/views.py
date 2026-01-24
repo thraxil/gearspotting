@@ -1,7 +1,8 @@
 from django.contrib.contenttypes.admin import generic_inlineformset_factory
 from django.forms.models import inlineformset_factory
-from django.shortcuts import get_object_or_404
-from django.views.generic.base import TemplateView
+from django.http import HttpResponseRedirect
+from django.shortcuts import get_object_or_404, render
+from django.views.generic.base import TemplateView, View
 from django.views.generic.detail import DetailView
 
 from gearspotting.tag.models import Tag
@@ -68,13 +69,25 @@ class AddPhotoView(AddSomethingView):
         return musician.add_photo_form()
 
 
-class AddGearView(AddSomethingView):
+class AddGearView(View):
     template_name = "musician/add_gear.html"
     model = Musician
-    context_obj_name = "musician"
 
-    def get_form(self, musician):
-        return musician.add_gear_form()
+    def get(self, request, slug):
+        musician = get_object_or_404(self.model, slug=slug)
+        form = musician.add_gear_form()()
+        return render(request, self.template_name, {"form": form, "musician": musician})
+
+    def post(self, request, slug):
+        musician = get_object_or_404(self.model, slug=slug)
+        Form = musician.add_gear_form()
+        form = Form(request.POST)
+        if form.is_valid():
+            musiciangear = form.save(commit=False)
+            musiciangear.musician = musician
+            musiciangear.save()
+            return HttpResponseRedirect(musician.get_absolute_url())
+        return render(request, self.template_name, {"form": form, "musician": musician})
 
 
 class EditLinksView(EditSomethingView):

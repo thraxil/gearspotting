@@ -57,6 +57,15 @@ class Gear(models.Model):
 
         return LinkForm
 
+    def add_photo_form(self):
+        class PhotoForm(ModelForm):
+            class Meta:
+                model = Photo
+                exclude = ("content_object", "content_type", "object_id")
+
+        return PhotoForm
+
+
 
 class GearPhoto(models.Model):
     gear = models.ForeignKey(Gear, on_delete=models.CASCADE)

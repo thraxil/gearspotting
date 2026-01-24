@@ -1,7 +1,7 @@
 import os
 import os.path
 import re
-from io import StringIO as cStringIO
+from io import BytesIO
 
 import requests
 from django.conf import settings
@@ -49,8 +49,8 @@ def make_musicians_and_mphotos(text, p):
         mline = line.strip()
         if not mline:
             continue
-        m, created = musician.models.Musician.objects.get_or_create(name=mline)
-        musician.models.MusicianPhoto.objects.create(musician=m, photo=p)
+        m, created = musician.Musician.objects.get_or_create(name=mline)
+        musician.MusicianPhoto.objects.create(musician=m, photo=p)
 
 
 def process_gearline(line, p):
@@ -69,10 +69,10 @@ def process_gearline(line, p):
     (manufacturer, created) = manmodels.Manufacturer.objects.get_or_create(
         name=manufacturer_name
     )
-    g, created = gear.models.Gear.objects.get_or_create(
+    g, created = gear.Gear.objects.get_or_create(
         manufacturer=manufacturer, name=gear_name
     )
-    gear.models.GearPhoto.objects.create(gear=g, photo=p)
+    gear.GearPhoto.objects.create(gear=g, photo=p)
 
 
 def save_image(form, url):
@@ -81,7 +81,7 @@ def save_image(form, url):
     ext = os.path.splitext(filename)[1].lower()
 
     r = requests.get(url, timeout=10)
-    imgobj = cStringIO.StringIO()
+    imgobj = BytesIO()
     for chunk in r.iter_content(1024):
         imgobj.write(chunk)
     imgobj.seek(0)

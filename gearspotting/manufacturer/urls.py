@@ -21,7 +21,7 @@ urlpatterns = [
         UpdateView.as_view(model=Manufacturer, form_class=ManufacturerForm),
     ),
     re_path(
-        r"^(?P<slug>[^/]+)/delete/?$", DeleteView.as_view(model=Manufacturer)
+        r"^(?P<slug>[^/]+)/delete/?$", DeleteView.as_view(model=Manufacturer, success_url="/manufacturer/")
     ),
     re_path(r"^(?P<slug>[^/]+)/edit_links/?$", EditLinksView.as_view()),
     re_path(r"^(?P<slug>[^/]+)/add_gear/$", AddGearView.as_view()),
