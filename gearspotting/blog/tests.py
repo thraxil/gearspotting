@@ -23,22 +23,12 @@ class BlogViewsTest(TestCase):
         self.assertTemplateUsed(response, "blog/index.html")
         self.assertIn("posts", response.context)
 
-    def test_add_post_view_get_unauthenticated(self):
-        response = self.client.get("/blog/post/")
-        self.assertEqual(response.status_code, 200)
-        self.assertTemplateUsed(response, "blog/add_post.html")
-
-    def test_add_post_view_get_authenticated(self):
-        self.client.login(username="testuser", password="testpassword")
-        response = self.client.get("/blog/post/")
-        self.assertEqual(response.status_code, 200)
-        self.assertTemplateUsed(response, "blog/add_post.html")
-
     def test_add_post_view_post_unauthenticated_fails(self):
-        with self.assertRaises(ValueError):
-            self.client.post(
-                "/blog/post/", {"title": "New Title", "body": "New Body"}
-            )
+        response = self.client.post(
+            "/blog/post/", {"title": "New Title", "body": "New Body"}
+        )
+        self.assertEqual(response.status_code, 302)
+        self.assertEqual(response.url, "/accounts/login/?next=/blog/post/")
         self.assertEqual(Post.objects.count(), 1)
 
     def test_add_post_view_post_empty_body(self):

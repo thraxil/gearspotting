@@ -1,11 +1,12 @@
-from django.contrib.contenttypes.admin import generic_inlineformset_factory
+from django.contrib.contenttypes.forms import generic_inlineformset_factory
 from django.http import HttpResponseRedirect
 from django.shortcuts import get_object_or_404, render
 from django.views.generic.base import View
 
+from gearspotting.link.models import Link
 from gearspotting.utils.views import AddSomethingView, EditSomethingView
 
-from .models import Link, Manufacturer
+from .models import Manufacturer
 
 
 class AddLinkView(AddSomethingView):

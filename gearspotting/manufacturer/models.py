@@ -1,10 +1,15 @@
-from django.contrib.contenttypes.admin import generic_inlineformset_factory
+from typing import TYPE_CHECKING, Any, Type
+
 from django.contrib.contenttypes.fields import GenericRelation
+from django.contrib.contenttypes.forms import generic_inlineformset_factory
 from django.db import models
 from django.forms import ModelForm
 from django.template.defaultfilters import slugify
 
 from gearspotting.link.models import Link
+
+if TYPE_CHECKING:
+    from django.forms.models import BaseInlineFormSet
 
 
 class Manufacturer(models.Model):
@@ -21,41 +26,45 @@ class Manufacturer(models.Model):
             "name",
         ]
 
-    def get_absolute_url(self):
-        return "/manufacturer/%s/" % self.slug
+    def get_absolute_url(self) -> str:
+        return f"/manufacturer/{self.slug}/"
 
-    def __unicode__(self):
+    def __str__(self) -> str:
         return self.name
 
     def links_formset(self):
-        LinkFormset = generic_inlineformset_factory(Link, extra=1)
-        return LinkFormset(instance=self)
+        LinkFormset = generic_inlineformset_factory(Link, extra=1)  # type: ignore
+        return LinkFormset
 
-    def save(self, *args, **kwargs):
+    def save(self, *args: Any, **kwargs: Any) -> None:
         self.slug = slugify(self.name)[:256]
-        super(Manufacturer, self).save(*args, **kwargs)
+        super().save(*args, **kwargs)
 
-    def add_gear_form(self):
+    def add_gear_form(self) -> Type[ModelForm]:
         from gearspotting.gear.models import AddGearForm
 
         return AddGearForm
 
-    def add_link_form(self):
+    def add_link_form(self) -> Type[ModelForm]:
         class LinkForm(ModelForm):
             class Meta:
                 model = Link
-                exclude = ("content_object", "content_type", "object_id")
+                exclude: list[str] = [
+                    "content_object",
+                    "content_type",
+                    "object_id",
+                ]
 
         return LinkForm
 
-    def gear_count(self):
+    def gear_count(self) -> int:
         return self.gear_set.all().count()
 
-    def type_display(self):
+    def type_display(self) -> str:
         return "Manufacturer"
 
 
 class ManufacturerForm(ModelForm):
     class Meta:
         model = Manufacturer
-        exclude = []
+        exclude: list[str] = []

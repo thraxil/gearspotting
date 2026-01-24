@@ -1,5 +1,7 @@
-from django.contrib.contenttypes.admin import generic_inlineformset_factory
+from typing import TYPE_CHECKING, Any, Optional, Type
+
 from django.contrib.contenttypes.fields import GenericRelation
+from django.contrib.contenttypes.forms import generic_inlineformset_factory
 from django.db import models
 from django.forms import ModelForm
 from django.forms.models import inlineformset_factory
@@ -8,6 +10,9 @@ from django.template.defaultfilters import slugify
 from gearspotting.link.models import Link
 from gearspotting.photo.models import Photo
 from gearspotting.tag.models import Tag
+
+if TYPE_CHECKING:
+    from django.forms.models import BaseInlineFormSet
 
 
 class Musician(models.Model):
@@ -24,17 +29,17 @@ class Musician(models.Model):
             "name",
         ]
 
-    def get_absolute_url(self):
-        return "/musician/%s/" % self.slug
+    def get_absolute_url(self) -> str:
+        return f"/musician/{self.slug}/"
 
-    def __unicode__(self):
+    def __str__(self) -> str:
         return self.name
 
     def links_formset(self):
-        LinkFormset = generic_inlineformset_factory(Link, extra=1)
+        LinkFormset = generic_inlineformset_factory(Link, extra=1)  # type: ignore
         return LinkFormset(instance=self)
 
-    def add_link_form(self):
+    def add_link_form(self) -> Type[ModelForm]:
         class LinkForm(ModelForm):
             class Meta:
                 model = Link
@@ -42,7 +47,7 @@ class Musician(models.Model):
 
         return LinkForm
 
-    def add_gear_form(self):
+    def add_gear_form(self) -> Type[ModelForm]:
         from gearspotting.musiciangear.models import MusicianGear
 
         class GearForm(ModelForm):
@@ -52,7 +57,7 @@ class Musician(models.Model):
 
         return GearForm
 
-    def add_photo_form(self):
+    def add_photo_form(self) -> Type[ModelForm]:
         class PhotoForm(ModelForm):
             class Meta:
                 model = Photo
@@ -60,23 +65,25 @@ class Musician(models.Model):
 
         return PhotoForm
 
-    def save(self, *args, **kwargs):
+    def save(self, *args: Any, **kwargs: Any) -> None:
         self.slug = slugify(self.name)[:256]
-        super(Musician, self).save(*args, **kwargs)
+        super().save(*args, **kwargs)
 
     def gear_formset(self):
         from gearspotting.musiciangear.models import MusicianGear
 
-        GearFormSet = inlineformset_factory(Musician, MusicianGear, extra=1)
+        GearFormSet: Any = inlineformset_factory(
+            Musician, MusicianGear, extra=1
+        )
         return GearFormSet(instance=self)
 
-    def first_photo(self):
-        if self.musicianphotos.count() > 0:
-            return self.musicianphotos.all()[0].photo
+    def first_photo(self) -> Optional[Photo]:
+        if self.musicianphoto_set.count() > 0:
+            return self.musicianphoto_set.all()[0].photo
         else:
             return None
 
-    def type_display(self):
+    def type_display(self) -> str:
         return "Musician"
 
 
@@ -93,4 +100,4 @@ class MusicianTag(models.Model):
 class MusicianForm(ModelForm):
     class Meta:
         model = Musician
-        exclude = []
+        exclude: list[str] = []

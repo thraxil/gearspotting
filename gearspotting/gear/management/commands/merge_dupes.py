@@ -1,4 +1,5 @@
 import collections
+from typing import Any
 
 from django.core.management.base import BaseCommand
 
@@ -6,7 +7,7 @@ from gearspotting.gear.models import Gear
 
 
 class Command(BaseCommand):
-    def handle(self, *args, **kwargs):
+    def handle(self, *args: Any, **kwargs: Any) -> None:
         all_slugs = [g.slug for g in Gear.objects.all()]
         dup_slugs = [
             s for s, c in collections.Counter(all_slugs).items() if c > 1

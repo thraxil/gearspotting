@@ -1,5 +1,7 @@
-from django.contrib.contenttypes.admin import generic_inlineformset_factory
+from typing import TYPE_CHECKING, Any, Optional, Type
+
 from django.contrib.contenttypes.fields import GenericRelation
+from django.contrib.contenttypes.forms import generic_inlineformset_factory
 from django.db import models
 from django.forms import ModelForm
 
@@ -7,6 +9,9 @@ from gearspotting.gear.models import Gear
 from gearspotting.link.models import Link
 from gearspotting.musician.models import Musician
 from gearspotting.photo.models import Photo
+
+if TYPE_CHECKING:
+    from django.forms.models import BaseInlineFormSet
 
 
 class MusicianGear(models.Model):
@@ -18,26 +23,26 @@ class MusicianGear(models.Model):
     added = models.DateTimeField(auto_now_add=True, editable=False)
     modified = models.DateTimeField(auto_now=True, editable=False)
 
-    def get_absolute_url(self):
-        return "/musiciangear/%d/" % self.id
+    def get_absolute_url(self) -> str:
+        return f"/musiciangear/{self.id}/"
 
-    def __unicode__(self):
-        return "%s - %s" % (self.musician.name, self.gear.name)
+    def __str__(self) -> str:
+        return f"{self.musician.name} - {self.gear.name}"
 
     def links_formset(self):
-        LinkFormset = generic_inlineformset_factory(Link, extra=1)
+        LinkFormset = generic_inlineformset_factory(Link, extra=1)  # type: ignore
         return LinkFormset(instance=self)
 
-    def first_photo(self):
+    def first_photo(self) -> Optional[Photo]:
         if self.musiciangearphoto_set.count() > 0:
             return self.musiciangearphoto_set.all()[0].photo
         else:
             return None
 
-    def type_display(self):
+    def type_display(self) -> str:
         return "Musician Gear"
 
-    def add_link_form(self):
+    def add_link_form(self) -> Type[ModelForm]:
         class LinkForm(ModelForm):
             class Meta:
                 model = Link
@@ -45,7 +50,7 @@ class MusicianGear(models.Model):
 
         return LinkForm
 
-    def add_photo_form(self):
+    def add_photo_form(self) -> Type[ModelForm]:
         class PhotoForm(ModelForm):
             class Meta:
                 model = Photo

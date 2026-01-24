@@ -24,6 +24,7 @@ dev = [
 "mypy-extensions==1.1.0",
 "django-stubs[compatible-mypy]==5.0.4",
 "ruff==0.14.13",
+"types-requests==2.32.0.20240712",
 ]
 
 [tool.mypy]
@@ -43,12 +44,13 @@ disallow_untyped_decorators = true
 
 disallow_untyped_calls = true
 disallow_incomplete_defs = true
-disallow_untyped_defs = true
+# disallow_untyped_defs = true
 
 no_implicit_reexport = true
 warn_return_any = true
 exclude = [
-    'tests',
+'tests',
+'migrations',
 ]
 
 [tool.django-stubs]

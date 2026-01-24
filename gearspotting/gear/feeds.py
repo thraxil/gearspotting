@@ -1,4 +1,5 @@
 from django.contrib.syndication.views import Feed
+from django.db.models.query import QuerySet
 from django.utils.feedgenerator import Atom1Feed
 
 from .models import Gear
@@ -10,5 +11,5 @@ class GearFeed(Feed):
     description = ""
     feed_type = Atom1Feed
 
-    def items(self):
+    def items(self) -> QuerySet[Gear]:
         return Gear.objects.order_by("-added")[:20]

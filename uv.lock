@@ -183,6 +183,7 @@ dev = [
     { name = "mypy" },
     { name = "mypy-extensions" },
     { name = "ruff" },
+    { name = "types-requests" },
     { name = "typing-extensions" },
 ]
 
@@ -207,6 +208,7 @@ dev = [
     { name = "mypy", specifier = "==1.11.1" },
     { name = "mypy-extensions", specifier = "==1.1.0" },
     { name = "ruff", specifier = "==0.14.13" },
+    { name = "types-requests", specifier = "==2.32.0.20240712" },
     { name = "typing-extensions", specifier = "==4.15.0" },
 ]
 
@@ -368,6 +370,18 @@ source = { registry = "https://pypi.org/simple" }
 sdist = { url = "https://files.pythonhosted.org/packages/7e/69/3c51b36d04da19b92f9e815be12753125bd8bc247ba0470a982e6979e71c/types_pyyaml-6.0.12.20250915.tar.gz", hash = "sha256:0f8b54a528c303f0e6f7165687dd33fafa81c807fcac23f632b63aa624ced1d3", size = 17522, upload-time = "2025-09-15T03:01:00.728Z" }
 wheels = [
     { url = "https://files.pythonhosted.org/packages/bd/e0/1eed384f02555dde685fff1a1ac805c1c7dcb6dd019c916fe659b1c1f9ec/types_pyyaml-6.0.12.20250915-py3-none-any.whl", hash = "sha256:e7d4d9e064e89a3b3cae120b4990cd370874d2bf12fa5f46c97018dd5d3c9ab6", size = 20338, upload-time = "2025-09-15T03:00:59.218Z" },
+]
+
+[[package]]
+name = "types-requests"
+version = "2.32.0.20240712"
+source = { registry = "https://pypi.org/simple" }
+dependencies = [
+    { name = "urllib3" },
+]
+sdist = { url = "https://files.pythonhosted.org/packages/5e/9e/7663eb27c33568b8fc20ccdaf2a1ce53a9530c42a7cceb9f552a6ff4a1d8/types-requests-2.32.0.20240712.tar.gz", hash = "sha256:90c079ff05e549f6bf50e02e910210b98b8ff1ebdd18e19c873cd237737c1358", size = 17896, upload-time = "2024-07-12T02:27:34.065Z" }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/30/4d/cbed87a6912fbd9259ce23a5d4aa1de9816edf75eec6ed9a757c00906c8e/types_requests-2.32.0.20240712-py3-none-any.whl", hash = "sha256:f754283e152c752e46e70942fa2a146b5bc70393522257bb85bd1ef7e019dcc3", size = 15816, upload-time = "2024-07-12T02:27:32.392Z" },
 ]
 
 [[package]]

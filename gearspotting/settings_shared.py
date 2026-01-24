@@ -111,6 +111,7 @@ INSTALLED_APPS = [
     "gearspotting.profile",
     "gearspotting.blog",
     "gearspotting.tag",
+    "gearspotting.utils",
 ]
 
 STATIC_URL = "/static/"

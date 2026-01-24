@@ -1,8 +1,6 @@
-from django.contrib.contenttypes.admin import (
-    GenericTabularInline,
-    generic_inlineformset_factory,
-)
+from django.contrib.contenttypes.admin import GenericTabularInline
 from django.contrib.contenttypes.fields import GenericForeignKey
+from django.contrib.contenttypes.forms import generic_inlineformset_factory
 from django.contrib.contenttypes.models import ContentType
 from django.db import models
 from django.forms import ModelForm
@@ -29,7 +27,11 @@ class LinkInline(GenericTabularInline):
 class LinkForm(ModelForm):
     class Meta:
         model = Link
-        exclude = []
+        exclude: list[str] = []
 
 
-LinkFormset = generic_inlineformset_factory(Link, extra=1)
+from django.forms.models import BaseModelFormSet
+
+LinkFormset: type[BaseModelFormSet] = generic_inlineformset_factory(
+    Link, extra=1
+)

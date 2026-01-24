@@ -1,5 +1,7 @@
-from django.contrib.contenttypes.admin import generic_inlineformset_factory
+from typing import Any
+
 from django.contrib.contenttypes.fields import GenericRelation
+from django.contrib.contenttypes.forms import generic_inlineformset_factory
 from django.db import models
 from django.forms import ModelForm
 from django.forms.models import inlineformset_factory
@@ -18,6 +20,6 @@ class Tag(models.Model):
     def __str__(self) -> str:
         return self.name
 
-    def save(self, *args, **kwargs):
+    def save(self, *args: Any, **kwargs: Any) -> None:
         self.slug = slugify(self.name)[:256]
         super().save(*args, **kwargs)

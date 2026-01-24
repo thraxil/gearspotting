@@ -1,20 +1,25 @@
-from django.contrib.contenttypes.admin import generic_inlineformset_factory
+from typing import Any, Dict, Type
+
+from django.contrib.contenttypes.forms import generic_inlineformset_factory
+from django.forms import ModelForm
 from django.forms.models import inlineformset_factory
-from django.http import HttpResponseRedirect
+from django.http import HttpRequest, HttpResponse, HttpResponseRedirect
 from django.shortcuts import get_object_or_404, render
 from django.views.generic.base import TemplateView, View
 from django.views.generic.detail import DetailView
 
+from gearspotting.link.models import Link
+from gearspotting.photo.models import Photo
 from gearspotting.tag.models import Tag
 from gearspotting.utils.views import AddSomethingView, EditSomethingView
 
-from .models import Link, Musician, Photo
+from .models import Musician
 
 
 class MusicianDetailView(DetailView):
     model = Musician
 
-    def get_context_data(self, **kwargs):
+    def get_context_data(self, **kwargs: Any) -> Dict[str, Any]:
         data = super().get_context_data(**kwargs)
         data["tags"] = self.object.musiciantag_set.all().prefetch_related(
             "tag"
@@ -33,7 +38,8 @@ class MusicianDetailView(DetailView):
 class MusicianTagView(TemplateView):
     template_name = "musician/musician_tag_list.html"
 
-    def get_context_data(self, tag=""):
+    def get_context_data(self, **kwargs: Any) -> Dict[str, Any]:
+        tag = kwargs.get("tag", "")
         t = get_object_or_404(Tag, slug=tag)
         musicians = t.musiciantag_set.all().prefetch_related("musician")
         return dict(tag=tag, musicians=musicians)
@@ -42,7 +48,7 @@ class MusicianTagView(TemplateView):
 class TagsView(TemplateView):
     template_name = "musician/tags.html"
 
-    def get_context_data(self):
+    def get_context_data(self, **kwargs: Any) -> Dict[str, Any]:
         tags = (
             Tag.objects.filter(musiciantag__isnull=False)
             .distinct()
@@ -56,7 +62,7 @@ class AddLinkView(AddSomethingView):
     model = Musician
     context_obj_name = "musician"
 
-    def get_form(self, musician):
+    def get_form(self, musician: Musician) -> Type[ModelForm]:
         return musician.add_link_form()
 
 
@@ -65,7 +71,7 @@ class AddPhotoView(AddSomethingView):
     model = Musician
     context_obj_name = "musician"
 
-    def get_form(self, musician):
+    def get_form(self, musician: Musician) -> Type[ModelForm]:
         return musician.add_photo_form()
 
 
@@ -73,14 +79,14 @@ class AddGearView(View):
     template_name = "musician/add_gear.html"
     model = Musician
 
-    def get(self, request, slug):
+    def get(self, request: HttpRequest, slug: str) -> HttpResponse:
         musician = get_object_or_404(self.model, slug=slug)
         form = musician.add_gear_form()()
         return render(
             request, self.template_name, {"form": form, "musician": musician}
         )
 
-    def post(self, request, slug):
+    def post(self, request: HttpRequest, slug: str) -> HttpResponse:
         musician = get_object_or_404(self.model, slug=slug)
         Form = musician.add_gear_form()
         form = Form(request.POST)
@@ -97,21 +103,21 @@ class AddGearView(View):
 class EditLinksView(EditSomethingView):
     model = Musician
 
-    def get_formset(self):
+    def get_formset(self) -> Any:
         return generic_inlineformset_factory(Link, extra=1)
 
 
 class EditPhotosView(EditSomethingView):
     model = Musician
 
-    def get_formset(self):
+    def get_formset(self) -> Any:
         return generic_inlineformset_factory(Photo, extra=1)
 
 
 class EditGearView(EditSomethingView):
     model = Musician
 
-    def get_formset(self):
-        from musiciangear.models import MusicianGear
+    def get_formset(self) -> Any:
+        from gearspotting.musiciangear.models import MusicianGear
 
         return inlineformset_factory(Musician, MusicianGear, extra=1)

@@ -1,5 +1,7 @@
-from django.contrib.contenttypes.admin import generic_inlineformset_factory
+from typing import TYPE_CHECKING, Any, Optional, Type
+
 from django.contrib.contenttypes.fields import GenericRelation
+from django.contrib.contenttypes.forms import generic_inlineformset_factory
 from django.db import models
 from django.forms import ModelForm
 from django.template.defaultfilters import slugify
@@ -8,6 +10,9 @@ from gearspotting.link.models import Link
 from gearspotting.manufacturer.models import Manufacturer
 from gearspotting.photo.models import Photo
 from gearspotting.tag.models import Tag
+
+if TYPE_CHECKING:
+    from django.forms.models import BaseInlineFormSet
 
 
 class Gear(models.Model):
@@ -26,30 +31,30 @@ class Gear(models.Model):
             "name",
         ]
 
-    def get_absolute_url(self):
-        return "/gear/%s/" % self.slug
+    def get_absolute_url(self) -> str:
+        return f"/gear/{self.slug}/"
 
-    def __unicode__(self):
-        return self.manufacturer.name + ": " + self.name
+    def __str__(self) -> str:
+        return f"{self.manufacturer.name}: {self.name}"
 
     def links_formset(self):
-        LinkFormset = generic_inlineformset_factory(Link, extra=1)
+        LinkFormset = generic_inlineformset_factory(Link, extra=1)  # type: ignore
         return LinkFormset(instance=self)
 
-    def save(self, *args, **kwargs):
+    def save(self, *args: Any, **kwargs: Any) -> None:
         self.slug = slugify(self.manufacturer.name + "-" + self.name)[:256]
-        super(Gear, self).save(*args, **kwargs)
+        super().save(*args, **kwargs)
 
-    def first_photo(self):
+    def first_photo(self) -> Optional[Photo]:
         if self.gearphoto_set.count() > 0:
             return self.gearphoto_set.all()[0].photo
         else:
             return None
 
-    def type_display(self):
+    def type_display(self) -> str:
         return "Gear"
 
-    def add_link_form(self):
+    def add_link_form(self) -> Type[ModelForm]:
         class LinkForm(ModelForm):
             class Meta:
                 model = Link
@@ -57,7 +62,7 @@ class Gear(models.Model):
 
         return LinkForm
 
-    def add_photo_form(self):
+    def add_photo_form(self) -> Type[ModelForm]:
         class PhotoForm(ModelForm):
             class Meta:
                 model = Photo
@@ -79,4 +84,4 @@ class GearTag(models.Model):
 class AddGearForm(ModelForm):
     class Meta:
         model = Gear
-        exclude = ("manufacturer",)
+        exclude: list[str] = ["manufacturer"]

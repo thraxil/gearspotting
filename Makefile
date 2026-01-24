@@ -36,7 +36,7 @@ ruff-check:
 	uv run -- ruff check --select I --fix $(APP)
 
 mypy:
-	# uv run -- mypy $(APP)
+	uv run -- mypy $(APP)
 
 libyear:
 	uvx --from pylibyear libyear toml pyproject.toml

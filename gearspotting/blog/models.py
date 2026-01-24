@@ -21,22 +21,16 @@ class Post(models.Model):
     class Meta:
         ordering = ("-published",)
 
-    def __unicode__(self):
+    def __str__(self) -> str:
         return self.title
 
-    def get_absolute_url(self):
-        return "/blog/%04d/%02d/%02d/%s/%s/" % (
-            self.published.year,
-            self.published.month,
-            self.published.day,
-            self.author.username,
-            self.slug,
-        )
+    def get_absolute_url(self) -> str:
+        return f"/blog/{self.published.year:04d}/{self.published.month:02d}/{self.published.day:02d}/{self.author.username}/{self.slug}/"
 
-    def linked_body(self):
+    def linked_body(self) -> str:
         return link_text(self.body)
 
-    def render_body(self):
+    def render_body(self) -> None:
         self.body_html = markdown.markdown(self.linked_body())
         self.save()
 
@@ -51,7 +45,7 @@ class PostMusician(models.Model):
     musician = models.ForeignKey(Musician, on_delete=models.CASCADE)
 
 
-def link_text(text):
+def link_text(text: str) -> str:
     """goes through the text, finding references
     to manufacturers, gear, or musicians, and links
     to their pages.
@@ -71,22 +65,12 @@ def link_text(text):
             if parts[0].lower() == "gear":
                 manufacturer_name = parts[1]
                 gear_name = parts[2]
-                part = """<a href="/gear/%s/">%s %s</a>""" % (
-                    slugify(gear_name),
-                    manufacturer_name,
-                    gear_name,
-                )
+                part = f'<a href="/gear/{slugify(gear_name)}/">{manufacturer_name} {gear_name}</a>'
             if parts[0].lower() == "manufacturer":
                 manufacturer_name = parts[1]
-                part = """<a href="/manufacturer/%s/">%s</a>""" % (
-                    slugify(manufacturer_name),
-                    manufacturer_name,
-                )
+                part = f'<a href="/manufacturer/{slugify(manufacturer_name)}/">{manufacturer_name}</a>'
             if parts[0].lower() == "musician":
                 musician_name = parts[1]
-                part = """<a href="/musician/%s/">%s</a>""" % (
-                    slugify(musician_name),
-                    musician_name,
-                )
+                part = f'<a href="/musician/{slugify(musician_name)}/">{musician_name}</a>'
         results.append(part)
     return "".join(results)
