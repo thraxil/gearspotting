@@ -13,7 +13,9 @@ class MainViewsTestCase(TestCase):
             "testuser", "test@example.com", "testpassword"
         )
         self.manufacturer = Manufacturer.objects.create(name="Fender")
-        self.gear = Gear.objects.create(name="Stratocaster", manufacturer=self.manufacturer)
+        self.gear = Gear.objects.create(
+            name="Stratocaster", manufacturer=self.manufacturer
+        )
         self.musician = Musician.objects.create(name="Jimi Hendrix")
         self.post = Post.objects.create(
             author=self.user, title="Test Post", body="Test body"

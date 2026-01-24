@@ -1,4 +1,4 @@
-from unittest.mock import patch, Mock
+from unittest.mock import Mock, patch
 
 from django.contrib.auth.models import User
 from django.test import TestCase
@@ -28,8 +28,12 @@ class PhotoViewsTestCase(TestCase):
     @patch("gearspotting.photo.views.requests")
     def test_import_photo_view_post(self, mock_requests):
         self.client.login(username="testuser", password="testpassword")
-        mock_requests.get.return_value.iter_content.return_value = [b"test image data"]
-        mock_requests.post.return_value.json.return_value = {"hash": "test_hash"}
+        mock_requests.get.return_value.iter_content.return_value = [
+            b"test image data"
+        ]
+        mock_requests.post.return_value.json.return_value = {
+            "hash": "test_hash"
+        }
 
         response = self.client.post(
             "/photos/import/",

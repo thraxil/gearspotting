@@ -16,20 +16,26 @@ class ManufacturerViewsTestCase(TestCase):
     def test_list_view(self):
         response = self.client.get("/manufacturer/")
         self.assertEqual(response.status_code, 200)
-        self.assertTemplateUsed(response, "manufacturer/manufacturer_list.html")
+        self.assertTemplateUsed(
+            response, "manufacturer/manufacturer_list.html"
+        )
         self.assertIn(self.manufacturer, response.context["object_list"])
 
     def test_detail_view(self):
         response = self.client.get(self.manufacturer.get_absolute_url())
         self.assertEqual(response.status_code, 200)
-        self.assertTemplateUsed(response, "manufacturer/manufacturer_detail.html")
+        self.assertTemplateUsed(
+            response, "manufacturer/manufacturer_detail.html"
+        )
         self.assertEqual(response.context["object"], self.manufacturer)
 
     def test_create_view(self):
         self.client.login(username="testuser", password="testpassword")
         response = self.client.get("/manufacturer/create/")
         self.assertEqual(response.status_code, 200)
-        response = self.client.post("/manufacturer/create/", {"name": "Gibson"})
+        response = self.client.post(
+            "/manufacturer/create/", {"name": "Gibson"}
+        )
         self.assertEqual(response.status_code, 302)
         self.assertTrue(Manufacturer.objects.filter(name="Gibson").exists())
 
@@ -57,7 +63,9 @@ class ManufacturerViewsTestCase(TestCase):
         url = f"/manufacturer/{self.manufacturer.slug}/delete/"
         response = self.client.post(url)
         self.assertRedirects(response, "/manufacturer/")
-        self.assertFalse(Manufacturer.objects.filter(pk=self.manufacturer.pk).exists())
+        self.assertFalse(
+            Manufacturer.objects.filter(pk=self.manufacturer.pk).exists()
+        )
 
     def test_add_gear_view_post(self):
         self.client.login(username="testuser", password="testpassword")

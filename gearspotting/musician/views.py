@@ -76,7 +76,9 @@ class AddGearView(View):
     def get(self, request, slug):
         musician = get_object_or_404(self.model, slug=slug)
         form = musician.add_gear_form()()
-        return render(request, self.template_name, {"form": form, "musician": musician})
+        return render(
+            request, self.template_name, {"form": form, "musician": musician}
+        )
 
     def post(self, request, slug):
         musician = get_object_or_404(self.model, slug=slug)
@@ -87,7 +89,9 @@ class AddGearView(View):
             musiciangear.musician = musician
             musiciangear.save()
             return HttpResponseRedirect(musician.get_absolute_url())
-        return render(request, self.template_name, {"form": form, "musician": musician})
+        return render(
+            request, self.template_name, {"form": form, "musician": musician}
+        )
 
 
 class EditLinksView(EditSomethingView):

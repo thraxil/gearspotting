@@ -25,7 +25,9 @@ class AddGearView(View):
         manufacturer = get_object_or_404(self.model, slug=slug)
         form = manufacturer.add_gear_form()()
         return render(
-            request, self.template_name, {"form": form, "manufacturer": manufacturer}
+            request,
+            self.template_name,
+            {"form": form, "manufacturer": manufacturer},
         )
 
     def post(self, request, slug):
@@ -38,7 +40,9 @@ class AddGearView(View):
             gear.save()
             return HttpResponseRedirect(manufacturer.get_absolute_url())
         return render(
-            request, self.template_name, {"form": form, "manufacturer": manufacturer}
+            request,
+            self.template_name,
+            {"form": form, "manufacturer": manufacturer},
         )
 
 

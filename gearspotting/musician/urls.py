@@ -25,7 +25,10 @@ urlpatterns = [
         r"^(?P<slug>[^/]+)/update/?$",
         UpdateView.as_view(form_class=MusicianForm, model=Musician),
     ),
-    re_path(r"^(?P<slug>[^/]+)/delete/?$", DeleteView.as_view(model=Musician, success_url="/musician/")),
+    re_path(
+        r"^(?P<slug>[^/]+)/delete/?$",
+        DeleteView.as_view(model=Musician, success_url="/musician/"),
+    ),
     re_path(
         r"^tag/(?P<tag>[^/]+)/$",
         MusicianTagView.as_view(),

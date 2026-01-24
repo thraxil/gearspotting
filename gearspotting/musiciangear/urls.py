@@ -13,10 +13,17 @@ from gearspotting.musiciangear.views import (
 
 urlpatterns = [
     re_path(r"^$", ListView.as_view(model=MusicianGear)),
-    re_path(r"^create/?$", CreateView.as_view(model=MusicianGear, fields=["musician", "gear", "description"])),
+    re_path(
+        r"^create/?$",
+        CreateView.as_view(
+            model=MusicianGear, fields=["musician", "gear", "description"]
+        ),
+    ),
     re_path(
         r"^(?P<pk>\d+)/update/?$",
-        UpdateView.as_view(model=MusicianGear, fields=["musician", "gear", "description"]),
+        UpdateView.as_view(
+            model=MusicianGear, fields=["musician", "gear", "description"]
+        ),
     ),
     re_path(
         r"^(?P<pk>\d+)/delete/?$",

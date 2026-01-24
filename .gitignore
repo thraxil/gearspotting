@@ -8,3 +8,4 @@ wheelhouse
 .tox
 .direnv
 .aider*
+.env

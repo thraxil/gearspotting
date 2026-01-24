@@ -13,7 +13,9 @@ class MusicianGearViewsTestCase(TestCase):
             "testuser", "test@example.com", "testpassword"
         )
         self.manufacturer = Manufacturer.objects.create(name="Fender")
-        self.gear = Gear.objects.create(name="Stratocaster", manufacturer=self.manufacturer)
+        self.gear = Gear.objects.create(
+            name="Stratocaster", manufacturer=self.manufacturer
+        )
         self.musician = Musician.objects.create(name="Jimi Hendrix")
         self.musiciangear = MusicianGear.objects.create(
             musician=self.musician, gear=self.gear
@@ -22,13 +24,17 @@ class MusicianGearViewsTestCase(TestCase):
     def test_list_view(self):
         response = self.client.get("/musiciangear/")
         self.assertEqual(response.status_code, 200)
-        self.assertTemplateUsed(response, "musiciangear/musiciangear_list.html")
+        self.assertTemplateUsed(
+            response, "musiciangear/musiciangear_list.html"
+        )
         self.assertIn(self.musiciangear, response.context["object_list"])
 
     def test_detail_view(self):
         response = self.client.get(self.musiciangear.get_absolute_url())
         self.assertEqual(response.status_code, 200)
-        self.assertTemplateUsed(response, "musiciangear/musiciangear_detail.html")
+        self.assertTemplateUsed(
+            response, "musiciangear/musiciangear_detail.html"
+        )
         self.assertEqual(response.context["object"], self.musiciangear)
 
     def test_create_view(self):
@@ -37,10 +43,16 @@ class MusicianGearViewsTestCase(TestCase):
         self.assertEqual(response.status_code, 200)
         response = self.client.post(
             "/musiciangear/create/",
-            {"musician": self.musician.id, "gear": self.gear.id, "description": "test"},
+            {
+                "musician": self.musician.id,
+                "gear": self.gear.id,
+                "description": "test",
+            },
         )
         self.assertEqual(response.status_code, 302)
-        self.assertTrue(MusicianGear.objects.filter(description="test").exists())
+        self.assertTrue(
+            MusicianGear.objects.filter(description="test").exists()
+        )
 
     def test_update_view(self):
         self.client.login(username="testuser", password="testpassword")
@@ -62,7 +74,9 @@ class MusicianGearViewsTestCase(TestCase):
         url = f"/musiciangear/{self.musiciangear.id}/delete/"
         response = self.client.post(url)
         self.assertRedirects(response, "/musiciangear/")
-        self.assertFalse(MusicianGear.objects.filter(pk=self.musiciangear.pk).exists())
+        self.assertFalse(
+            MusicianGear.objects.filter(pk=self.musiciangear.pk).exists()
+        )
 
     def test_add_link_view(self):
         self.client.login(username="testuser", password="testpassword")

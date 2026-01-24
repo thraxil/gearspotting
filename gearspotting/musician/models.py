@@ -57,6 +57,7 @@ class Musician(models.Model):
             class Meta:
                 model = Photo
                 exclude = ("content_object", "content_type", "object_id")
+
         return PhotoForm
 
     def save(self, *args, **kwargs):

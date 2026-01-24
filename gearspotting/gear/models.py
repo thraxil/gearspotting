@@ -66,7 +66,6 @@ class Gear(models.Model):
         return PhotoForm
 
 
-
 class GearPhoto(models.Model):
     gear = models.ForeignKey(Gear, on_delete=models.CASCADE)
     photo = models.ForeignKey(Photo, on_delete=models.CASCADE)

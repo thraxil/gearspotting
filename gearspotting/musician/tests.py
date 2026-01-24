@@ -2,10 +2,10 @@ from django.contrib.auth.models import User
 from django.test import TestCase
 from django.urls import reverse
 
-from gearspotting.musician.models import Musician, MusicianTag
-from gearspotting.tag.models import Tag
 from gearspotting.gear.models import Gear
 from gearspotting.manufacturer.models import Manufacturer
+from gearspotting.musician.models import Musician, MusicianTag
+from gearspotting.tag.models import Tag
 
 
 class MusicianViewsTestCase(TestCase):
@@ -17,7 +17,9 @@ class MusicianViewsTestCase(TestCase):
         self.tag = Tag.objects.create(name="guitarist")
         MusicianTag.objects.create(musician=self.musician, tag=self.tag)
         self.manufacturer = Manufacturer.objects.create(name="Fender")
-        self.gear = Gear.objects.create(name="Stratocaster", manufacturer=self.manufacturer)
+        self.gear = Gear.objects.create(
+            name="Stratocaster", manufacturer=self.manufacturer
+        )
 
     def test_list_view(self):
         response = self.client.get("/musician/")
@@ -35,7 +37,9 @@ class MusicianViewsTestCase(TestCase):
         self.client.login(username="testuser", password="testpassword")
         response = self.client.get("/musician/create/")
         self.assertEqual(response.status_code, 200)
-        response = self.client.post("/musician/create/", {"name": "Jimmy Page"})
+        response = self.client.post(
+            "/musician/create/", {"name": "Jimmy Page"}
+        )
         self.assertEqual(response.status_code, 302)
         self.assertTrue(Musician.objects.filter(name="Jimmy Page").exists())
 

@@ -36,12 +36,16 @@ class BlogViewsTest(TestCase):
 
     def test_add_post_view_post_unauthenticated_fails(self):
         with self.assertRaises(ValueError):
-            self.client.post("/blog/post/", {"title": "New Title", "body": "New Body"})
+            self.client.post(
+                "/blog/post/", {"title": "New Title", "body": "New Body"}
+            )
         self.assertEqual(Post.objects.count(), 1)
 
     def test_add_post_view_post_empty_body(self):
         self.client.login(username="testuser", password="testpassword")
-        response = self.client.post("/blog/post/", {"title": "New Title", "body": ""})
+        response = self.client.post(
+            "/blog/post/", {"title": "New Title", "body": ""}
+        )
         self.assertRedirects(response, "/blog/post/")
         self.assertEqual(Post.objects.count(), 1)
 

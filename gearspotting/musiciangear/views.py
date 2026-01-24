@@ -16,7 +16,9 @@ class AddLinkView(View):
         musiciangear = get_object_or_404(self.model, pk=pk)
         form = musiciangear.add_link_form()()
         return render(
-            request, self.template_name, {"form": form, "musiciangear": musiciangear}
+            request,
+            self.template_name,
+            {"form": form, "musiciangear": musiciangear},
         )
 
     def post(self, request, pk):
@@ -29,7 +31,9 @@ class AddLinkView(View):
             link.save()
             return HttpResponseRedirect(musiciangear.get_absolute_url())
         return render(
-            request, self.template_name, {"form": form, "musiciangear": musiciangear}
+            request,
+            self.template_name,
+            {"form": form, "musiciangear": musiciangear},
         )
 
 
@@ -41,7 +45,9 @@ class AddPhotoView(View):
         musiciangear = get_object_or_404(self.model, pk=pk)
         form = musiciangear.add_photo_form()()
         return render(
-            request, self.template_name, {"form": form, "musiciangear": musiciangear}
+            request,
+            self.template_name,
+            {"form": form, "musiciangear": musiciangear},
         )
 
     def post(self, request, pk):
@@ -55,7 +61,9 @@ class AddPhotoView(View):
             musiciangear.photos.add(photo)
             return HttpResponseRedirect(musiciangear.get_absolute_url())
         return render(
-            request, self.template_name, {"form": form, "musiciangear": musiciangear}
+            request,
+            self.template_name,
+            {"form": form, "musiciangear": musiciangear},
         )
 
 

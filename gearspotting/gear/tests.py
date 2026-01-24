@@ -15,7 +15,9 @@ class GearViewsTestCase(TestCase):
             "testuser", "test@example.com", "testpassword"
         )
         self.manufacturer = Manufacturer.objects.create(name="Fender")
-        self.gear = Gear.objects.create(name="Stratocaster", manufacturer=self.manufacturer)
+        self.gear = Gear.objects.create(
+            name="Stratocaster", manufacturer=self.manufacturer
+        )
         self.tag = Tag.objects.create(name="guitar")
         GearTag.objects.create(gear=self.gear, tag=self.tag)
 
@@ -64,7 +66,12 @@ class GearViewsTestCase(TestCase):
         self.client.login(username="testuser", password="testpassword")
         url = reverse("gear_update", kwargs={"slug": self.gear.slug})
         response = self.client.post(
-            url, {"name": "Stratocaster Updated", "manufacturer": self.manufacturer.id, "description": "Updated"}
+            url,
+            {
+                "name": "Stratocaster Updated",
+                "manufacturer": self.manufacturer.id,
+                "description": "Updated",
+            },
         )
         self.gear.refresh_from_db()
         self.assertRedirects(response, self.gear.get_absolute_url())
@@ -96,4 +103,3 @@ class GearViewsTestCase(TestCase):
         url = f"/gear/{self.gear.slug}/add_photo/"
         response = self.client.get(url)
         self.assertEqual(response.status_code, 200)
-
