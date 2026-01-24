@@ -36,6 +36,7 @@ if "test" in sys.argv:
             "ATOMIC_REQUESTS": True,
         }
     }
+    PASSWORD_HASHERS = ("django.contrib.auth.hashers.MD5PasswordHasher",)
 
 TEST_RUNNER = "django.test.runner.DiscoverRunner"
 
