@@ -35,6 +35,7 @@ ENV PATH="$VIRTUAL_ENV/bin:$PATH"
 
 COPY --from=builder ${VIRTUAL_ENV} ${VIRTUAL_ENV}
 COPY --from=builder ${APP_HOME} ${APP_HOME}
+COPY --from=builder /usr/local/bin/uv /usr/local/bin/uv
 
 ENV DJANGO_SETTINGS_MODULE gearspotting.settings_docker
 ENV COMPRESS true
