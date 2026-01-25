@@ -18,5 +18,5 @@ COPY . .
 ENV DJANGO_SETTINGS_MODULE gearspotting.settings_docker
 ENV COMPRESS true
 RUN uv run manage.py collectstatic --verbosity 2 --noinput
-ENTRYPOINT ["/usr/bin/env", "bash", "/app/entry-point.sh"]
+ENTRYPOINT ["python", "entry_point.py"]
 CMD ["run"]
