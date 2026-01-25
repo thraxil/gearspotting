@@ -1,4 +1,5 @@
-FROM python:3.12-slim@sha256:dc9e92fcdc085ad86dda976f4cfc58856dba33a438a16db37ff00151b285c8ca
+# syntax=docker/dockerfile:1
+FROM python:3.12-slim@sha256:dc9e92fcdc085ad86dda976f4cfc58856dba33a438a16db37ff00151b285c8ca as builder
 RUN apt-get update \
     && apt-get -y install libpq-dev gcc python3-dev
 
@@ -6,17 +7,36 @@ ENV APP_HOME /app
 WORKDIR $APP_HOME
 
 ENV PYTHONUNBUFFERED 1
-EXPOSE 8000
 ENV APP gearspotting
+ENV VIRTUAL_ENV=/opt/venv
+ENV PATH="$VIRTUAL_ENV/bin:$PATH"
 
 COPY --from=ghcr.io/astral-sh/uv@sha256:ecfea7316b266ba82a5e9efb052339ca410dd774dc01e134a30890e6b85c7cd1 /uv /usr/local/bin/uv
 COPY pyproject.toml .
 COPY uv.lock .
-RUN uv sync --locked
+RUN uv venv && uv sync --locked
 
 COPY . .
 ENV DJANGO_SETTINGS_MODULE gearspotting.settings_docker
 ENV COMPRESS true
 RUN uv run manage.py collectstatic --verbosity 2 --noinput
+
+
+FROM python:3.12-slim@sha256:dc9e92fcdc085ad86dda976f4cfc58856dba33a438a16db37ff00151b285c8ca
+RUN apt-get update && apt-get -y install libpq-dev && rm -rf /var/lib/apt/lists/*
+
+ENV APP_HOME /app
+WORKDIR $APP_HOME
+ENV PYTHONUNBUFFERED 1
+EXPOSE 8000
+ENV APP gearspotting
+ENV VIRTUAL_ENV=/opt/venv
+ENV PATH="$VIRTUAL_ENV/bin:$PATH"
+
+COPY --from=builder ${VIRTUAL_ENV} ${VIRTUAL_ENV}
+COPY --from=builder ${APP_HOME} ${APP_HOME}
+
+ENV DJANGO_SETTINGS_MODULE gearspotting.settings_docker
+ENV COMPRESS true
 ENTRYPOINT ["python", "entry_point.py"]
 CMD ["run"]
