@@ -14,7 +14,7 @@ ENV PATH="$VIRTUAL_ENV/bin:$PATH"
 COPY --from=ghcr.io/astral-sh/uv@sha256:ecfea7316b266ba82a5e9efb052339ca410dd774dc01e134a30890e6b85c7cd1 /uv /usr/local/bin/uv
 COPY pyproject.toml .
 COPY uv.lock .
-RUN uv venv && uv sync --locked
+RUN uv venv $VIRTUAL_ENV && uv sync --locked
 
 COPY . .
 ENV DJANGO_SETTINGS_MODULE gearspotting.settings_docker
