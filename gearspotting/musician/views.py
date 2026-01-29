@@ -19,19 +19,22 @@ from .models import Musician
 class MusicianDetailView(DetailView):
     model = Musician
 
-    def get_context_data(self, **kwargs: Any) -> Dict[str, Any]:
-        data = super().get_context_data(**kwargs)
-        data["tags"] = self.object.musiciantag_set.all().prefetch_related(
-            "tag"
-        )
-        data["gear"] = self.object.musiciangear_set.all().prefetch_related(
-            "gear",
-            "gear__manufacturer",
+    def get_queryset(self) -> Any:
+        return (
+            super()
+            .get_queryset()
+            .prefetch_related(
+                "musiciantag_set__tag",
+                "musiciangear_set__gear__manufacturer",
+                "musicianphoto_set__photo",
+            )
         )
 
-        data["photos"] = self.object.musicianphoto_set.all().prefetch_related(
-            "photo"
-        )
+    def get_context_data(self, **kwargs: Any) -> Dict[str, Any]:
+        data = super().get_context_data(**kwargs)
+        data["tags"] = self.object.musiciantag_set.all()
+        data["gear"] = self.object.musiciangear_set.all()
+        data["photos"] = self.object.musicianphoto_set.all()
         return data
 
 
