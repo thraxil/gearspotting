@@ -26,7 +26,10 @@ class MusicianDetailView(DetailView):
             .prefetch_related(
                 "musiciantag_set__tag",
                 "musiciangear_set__gear__manufacturer",
+                "musiciangear_set__gear__geartag_set__tag",
+                "musiciangear_set__musiciangearphoto_set__photo",
                 "musicianphoto_set__photo",
+                "links",
             )
         )
 

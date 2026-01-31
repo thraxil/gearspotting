@@ -12,7 +12,9 @@ class IndexView(TemplateView):
 
     def get_context_data(self, **kwargs: Any) -> Dict[str, Any]:
         return dict(
-            newest_gear=Gear.objects.all().order_by("-added")[:10],
+            newest_gear=Gear.objects.select_related("manufacturer").order_by(
+                "-added"
+            )[:10],
             newest_musicians=Musician.objects.all().order_by("-added")[:10],
             newest_posts=Post.objects.all()[:10],
         )
