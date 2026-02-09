@@ -9,7 +9,7 @@ dependencies = [
     "Django==6.0.1",
     "Markdown==3.10.1",
     "psycopg==3.3.2",
-    "gunicorn==25.0.1",
+    "gunicorn==25.0.3",
     "django-bootstrap-form==3.4",
     "django-smoketest==1.2.1",
     "sentry-sdk==2.51.0",
