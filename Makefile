@@ -39,7 +39,7 @@ mypy:
 	uv run -- mypy $(APP)
 
 libyear:
-	uvx --from pylibyear libyear toml pyproject.toml
+	uvx --from pylibyear==0.3.4 --with typing-extensions libyear toml pyproject.toml
 
 clean:
 	rm -rf .venv
