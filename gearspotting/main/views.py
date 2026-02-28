@@ -16,7 +16,7 @@ class IndexView(TemplateView):
                 "-added"
             )[:10],
             newest_musicians=Musician.objects.all().order_by("-added")[:10],
-            newest_posts=Post.objects.all()[:10],
+            newest_posts=Post.objects.select_related("author").all()[:10],
         )
 
 
