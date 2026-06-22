@@ -15,7 +15,7 @@ dependencies = [
     "sentry-sdk==2.62.0",
     "whitenoise==6.12.0",
     "requests==2.34.2",
-    "django-debug-toolbar==6.3.0",
+    "django-debug-toolbar==7.0.0",
     "types-markdown>=3.10.2.20260518",
 ]
 [dependency-groups]
