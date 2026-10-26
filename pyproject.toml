@@ -11,7 +11,7 @@ dependencies = [
     "psycopg==3.3.6",
     "gunicorn==26.2.0",
     "django-bootstrap-form==3.4",
-    "django-smoketest==1.2.1",
+    "django-smoketest==1.2.2",
     "sentry-sdk==2.73.0",
     "whitenoise==6.12.0",
     "requests==2.34.2",
